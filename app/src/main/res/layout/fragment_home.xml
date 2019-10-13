@@ -1,7 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.navigation.HomeFragment">
+    tools:context="com.example.android.calorietracker.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
@@ -15,6 +15,10 @@
             android:layout_height="wrap_content"
             android:text="Button"
             tools:layout_editor_absoluteX="81dp"
-            tools:layout_editor_absoluteY="112dp" />
+            tools:layout_editor_absoluteY="112dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
