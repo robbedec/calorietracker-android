@@ -42,6 +42,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Navigation
+    // Use double quotes for groovy string ($xxx version)
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
