@@ -26,7 +26,7 @@
             android:id="@+id/circularProgressbar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="240dp"
             android:layout_centerInParent="true"
             android:indeterminate="false"
             android:max="100"
@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/tv"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="240dp"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="25%"
@@ -50,10 +50,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250/1000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circularProgressbar" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintTop_toBottomOf="@+id/circularProgressbar"
             tools:layout_editor_absoluteX="112dp">
@@ -69,8 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -78,14 +86,14 @@
                             android:id="@+id/primary_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="16dp"
                             android:text="robbe"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/sub_text"
@@ -96,12 +104,12 @@
                             android:text="subtext"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorSecondaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/primary_text"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/primary_text" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_1"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -110,13 +118,13 @@
                             android:paddingEnd="8dp"
                             android:text="action1"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/sub_text"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/sub_text" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_2"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -125,8 +133,8 @@
                             android:paddingEnd="8dp"
                             android:text="action2"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="@+id/action_button_1"
-                            app:layout_constraintStart_toEndOf="@+id/action_button_1" />
+                            app:layout_constraintStart_toEndOf="@+id/action_button_1"
+                            app:layout_constraintTop_toTopOf="@+id/action_button_1" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -136,8 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -145,14 +152,14 @@
                             android:id="@+id/primary_text1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="16dp"
                             android:text="robbe"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/sub_text1"
@@ -163,12 +170,12 @@
                             android:text="subtext"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorSecondaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/primary_text1"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/primary_text1" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_3"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -177,13 +184,13 @@
                             android:paddingEnd="8dp"
                             android:text="action1"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/sub_text1"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/sub_text1" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_4"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -192,8 +199,8 @@
                             android:paddingEnd="8dp"
                             android:text="action2"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="@+id/action_button_3"
-                            app:layout_constraintStart_toEndOf="@+id/action_button_3" />
+                            app:layout_constraintStart_toEndOf="@+id/action_button_3"
+                            app:layout_constraintTop_toTopOf="@+id/action_button_3" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -203,8 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -212,14 +218,14 @@
                             android:id="@+id/primary_text3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
                             android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="16dp"
                             android:text="robbe"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/sub_text3"
@@ -230,12 +236,12 @@
                             android:text="subtext"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorSecondaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/primary_text3"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/primary_text3" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_5"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -244,13 +250,13 @@
                             android:paddingEnd="8dp"
                             android:text="action1"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toBottomOf="@+id/sub_text3"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/sub_text3" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:id="@+id/action_button_6"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -259,13 +265,14 @@
                             android:paddingEnd="8dp"
                             android:text="action2"
                             android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
-                            app:layout_constraintTop_toTopOf="@+id/action_button_5"
-                            app:layout_constraintStart_toEndOf="@+id/action_button_5" />
+                            app:layout_constraintStart_toEndOf="@+id/action_button_5"
+                            app:layout_constraintTop_toTopOf="@+id/action_button_5" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
         </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
