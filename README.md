@@ -17,7 +17,7 @@ Clone the repository
 git clone git@github.com:HoGentTIN/native-apps-groep-c-robbedec.git
 ```
 
-Open the project in Android Studio an build
+Open the project in Android Studio and build
 
 ## Running tests
 
@@ -25,6 +25,7 @@ Open the project in Android Studio an build
 
 * [Gradle](https://gradle.org) - Dependency Management
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - Persistence library for onboard database
+* [Timber](https://github.com/JakeWharton/timber) - Logging tool
 
 ## Contributing
 
