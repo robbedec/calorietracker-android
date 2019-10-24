@@ -1,4 +1,4 @@
-package com.example.android.calorietracker
+package com.example.android.calorietracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.example.android.calorietracker.R
 import com.example.android.calorietracker.databinding.ActivityMainBinding
 import timber.log.Timber
 
@@ -20,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         // One time initializations, layout inflation
         super.onCreate(savedInstanceState)
 
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this,
+            R.layout.activity_main
+        )
         drawerLayout = binding.drawerLayout
 
         val navController = this.findNavController(R.id.myNavHostFragment)
