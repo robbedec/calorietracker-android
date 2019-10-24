@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.calorietracker.ui.fragments.HomeFragment">
 
+    <data>
+        <variable
+            name="homeViewModal"
+            type="com.example.android.calorietracker.ui.viewModels.HomeViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
         android:layout_width="match_parent"
@@ -23,14 +29,14 @@
 
 
         <ProgressBar
-            android:id="@+id/circularProgressbar"
+            android:id="@+id/circle_progressbar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:layout_centerInParent="true"
             android:indeterminate="false"
-            android:max="100"
-            android:progress="25"
+            android:max="@{homeViewModal.goal}"
+            android:progress="@{homeViewModal.currentCalories}"
             android:progressDrawable="@drawable/circular"
             android:secondaryProgress="100"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +44,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/percentage_text"
             android:layout_width="250dp"
             android:layout_height="240dp"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="25%"
+            android:text="@{@string/percentage_format(homeViewModal.percentage)}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,20 +57,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/progress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="250/1000"
+            android:text="@{@string/divide_format(homeViewModal.currentCalories, homeViewModal.goal)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/circularProgressbar" />
+            app:layout_constraintTop_toBottomOf="@id/circle_progressbar" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/circularProgressbar"
+            app:layout_constraintTop_toBottomOf="@+id/circle_progressbar"
             tools:layout_editor_absoluteX="112dp">
 
             <LinearLayout
