@@ -2,7 +2,6 @@ package com.example.android.calorietracker.ui.fragments
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import timber.log.Timber
-import java.security.AccessController
 
 class HomeFragment : Fragment() {
 

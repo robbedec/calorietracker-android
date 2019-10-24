@@ -1,13 +1,11 @@
 package com.example.android.calorietracker.ui.viewModels
 
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import timber.log.Timber
-import java.security.AccessController.getContext
 
 class HomeViewModel : ViewModel() {
 
