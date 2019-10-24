@@ -1,11 +1,13 @@
 package com.example.android.calorietracker.ui.viewModels
 
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import timber.log.Timber
+import java.security.AccessController.getContext
 
 class HomeViewModel : ViewModel() {
 
@@ -28,12 +30,15 @@ class HomeViewModel : ViewModel() {
     val percentage: LiveData<Int>
         get() = _percentage
 
+    val dialogList: Array<String>
+
     val addFromState = SingleLiveEvent<BaseCommand>()
 
     init {
         Timber.i("HomeViewModel created")
         _currentCalories.value = 250
         goal = MutableLiveData(500)
+        dialogList = arrayOf("Search online", "Manually", "From favorites")
 
         calcPercentage()
     }
@@ -50,7 +55,13 @@ class HomeViewModel : ViewModel() {
     /*
      * Method that gets called when a user wants to add calories to the counter
      */
-    fun addCalories() {
+    fun addCalories(checkedId: Int) {
+        Timber.i("Value: %d", checkedId)
 
+        when (checkedId) {
+            0 -> addFromState.value = BaseCommand.ApiSearch("Search with api")
+            1 -> addFromState.value = BaseCommand.Favorites("Select from favorites")
+            2 -> addFromState.value = BaseCommand.Manual("Add calories manual")
+        }
     }
 }
