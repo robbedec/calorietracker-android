@@ -3,6 +3,8 @@ package com.example.android.calorietracker.ui.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.calorietracker.utils.BaseCommand
+import com.example.android.calorietracker.utils.SingleLiveEvent
 import timber.log.Timber
 
 class HomeViewModel : ViewModel() {
@@ -26,6 +28,7 @@ class HomeViewModel : ViewModel() {
     val percentage: LiveData<Int>
         get() = _percentage
 
+    val addFromState = SingleLiveEvent<BaseCommand>()
 
     init {
         Timber.i("HomeViewModel created")
@@ -42,5 +45,12 @@ class HomeViewModel : ViewModel() {
 
     private fun calcPercentage() {
         _percentage.value = (_currentCalories.value!! * 100.0f / goal.value!!).toInt()
+    }
+
+    /*
+     * Method that gets called when a user wants to add calories to the counter
+     */
+    fun addCalories() {
+
     }
 }

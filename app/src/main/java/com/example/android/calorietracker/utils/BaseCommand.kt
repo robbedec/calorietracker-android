@@ -1,19 +1,19 @@
 package com.example.android.calorietracker.utils
 
+// The String parameter in each signature is only for logging purposes
 sealed class BaseCommand {
-    // TODO: update to project needs
 
     /**
-     * When the user inputs an error
+     * When the user wants to search from the api
      */
-    class Error(val errorString : String) : BaseCommand()
+    class ApiSearch(val errorString : String) : BaseCommand()
 
     /**
-     * When the user answers three questions correct
+     * When the user inputs from a textfield / label
      */
-    class Finish(val finishString : String): BaseCommand()
+    class Manual(val finishString : String): BaseCommand()
     /**
-     * When the user inputs correct
+     * When the user inputs from favorites
      */
-    class Correct(val correctString: String): BaseCommand()
+    class Favorites(val correctString: String): BaseCommand()
 }
