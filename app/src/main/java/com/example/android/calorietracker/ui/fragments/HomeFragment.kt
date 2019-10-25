@@ -11,9 +11,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
+import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.utils.BaseCommand
+import com.example.android.calorietracker.utils.HomeViewModelFactory
 import timber.log.Timber
 
 class HomeFragment : Fragment() {
@@ -27,10 +29,14 @@ class HomeFragment : Fragment() {
             R.layout.fragment_home, container, false)
 
         // Request the ViewModal
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val dataSource = CalorieDatabase.getInstance(application).eatingDayDao
+        val viewModelFactory = HomeViewModelFactory(dataSource, application)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+
         binding.homeViewModal = viewModel
 
-        // Specify a lifecycle owner to define the scope of the LiveData object
+        // Specify a lifecycle owner to define the scope of the LiveData object, binding can observe live data changes
         binding.lifecycleOwner = this
 
         binding.addButton.setOnClickListener {

@@ -6,6 +6,8 @@ import java.util.*
 /*
  * Convert java.util.date to Long
  * This can be stored in the database
+ *
+ * TODO: alternative @ www.github.com/JakeWharton/ThreeTenABP
  */
 class DateConverter {
 

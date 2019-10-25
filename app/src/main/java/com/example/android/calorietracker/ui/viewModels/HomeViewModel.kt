@@ -1,13 +1,17 @@
 package com.example.android.calorietracker.ui.viewModels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.calorietracker.data.room.CalorieDatabase
+import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import timber.log.Timber
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val database: EatingDayDao, application: Application) : AndroidViewModel(application) {
 
     /*
      * The current amount of calories
