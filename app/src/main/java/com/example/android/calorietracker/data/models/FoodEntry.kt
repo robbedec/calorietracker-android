@@ -10,11 +10,11 @@ import androidx.room.PrimaryKey
  */
 
 @Entity(
-    tableName = "food_entry_table",
+    tableName = "food_entry_table"/*,
     foreignKeys = arrayOf(ForeignKey(entity = EatingDay::class,
         parentColumns = arrayOf("dayId"),
         childColumns = arrayOf("ownerId"),
-        onDelete = ForeignKey.CASCADE)))
+        onDelete = ForeignKey.CASCADE))*/)
 data class FoodEntry (
 
     @PrimaryKey(autoGenerate = true)
@@ -26,5 +26,5 @@ data class FoodEntry (
     @ColumnInfo(name = "food_amount_calories")
     val entryCalories: Int = 0,
 
-    val ownerId: Long
+    val ownerId: Long = 0L
 )
