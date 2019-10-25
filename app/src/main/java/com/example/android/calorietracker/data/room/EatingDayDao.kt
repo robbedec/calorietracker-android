@@ -3,12 +3,17 @@ package com.example.android.calorietracker.data.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.android.calorietracker.data.models.EatingDay
+import com.example.android.calorietracker.data.models.EatingDayWithEntries
+import com.example.android.calorietracker.data.models.FoodEntry
 
 @Dao
 interface EatingDayDao {
 
     @Insert
     fun insert(entry: EatingDay)
+
+    /*@Insert
+    fun insertFoodEntry(entry: FoodEntry)*/
 
     @Update
     fun update(entry: EatingDay)
@@ -38,7 +43,8 @@ interface EatingDayDao {
     /*
      * Returns the latest record in the table
      * Nullable in case there are no records in the table (after clearing table ...)
+     * Includes all entries for that day
      */
     @Query("SELECT * FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
-    fun getToday(): EatingDay?
+    fun getToday(): EatingDayWithEntries?
 }

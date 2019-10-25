@@ -21,10 +21,10 @@ data class FoodEntry (
     var entryId: Long = 0L,
 
     @ColumnInfo(name = "food_name")
-    val entryName: String = "name",
+    var entryName: String = "name",
 
     @ColumnInfo(name = "food_amount_calories")
-    val entryCalories: Int = 0,
+    var entryCalories: Int = 0,
 
-    val ownerId: Long = 0L
+    var ownerId: Long = 0L
 )
