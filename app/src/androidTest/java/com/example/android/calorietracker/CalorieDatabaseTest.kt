@@ -27,7 +27,7 @@ import java.io.IOException
  */
 
 @RunWith(AndroidJUnit4::class)
-class SleepDatabaseTest {
+class CalorieDatabaseTest {
 
     private lateinit var eatingDao: EatingDayDao
     private lateinit var foodDao: FoodEntryDao
@@ -62,10 +62,6 @@ class SleepDatabaseTest {
         foodDao.insert(entry)
 
         val testDay = eatingDao.getToday()
-        assertEquals(testDay?.amountCal, 0)
-
-        val testEntry = foodDao.get(1)
-        assertEquals(testEntry.entryCalories, 0)
-        assertEquals(testEntry.entryName, "name")
+        assertEquals(testDay?.eatingDay!!.amountCal, 0)
     }
 }
