@@ -81,6 +81,9 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
+    /*
+     * Fetch the current day from the database or create a new one
+     */
     private suspend fun getTodayFromDatabase(): EatingDayWithEntries? {
         return withContext(Dispatchers.IO) {
             var day = database.getToday()
@@ -113,13 +116,14 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
-   /* private suspend fun insertFoodEntry(day: FoodEntry) {
+    private suspend fun insertFoodEntry(day: FoodEntry) {
         withContext(Dispatchers.IO) {
             database.insertFoodEntry(day)
         }
     }
 
     private fun addEntry(name: String, amount: Int){
+        // TODO: Create method that receives new entry details with safeArgs and update the currentDay (Udacity-Lesson6-15-Exercise: Couroutines for Long running operations -> video 1 6:33
         uiScope.launch {
             val updatedDay = currentDay.value ?: return@launch
 
@@ -130,9 +134,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
             insertFoodEntry(newEntry)
         }
-    }*/
-
-    // TODO: Create method that receives new entry details with safeArgs and update the currentDay (Udacity-Lesson6-15-Exercise: Couroutines for Long running operations -> video 1 6:33
+    }
 
     /*
      * Calculate the ratio between currentCalories and the goals
@@ -150,10 +152,10 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
         when (checkedId) {
             0 -> addFromState.value = BaseCommand.ApiSearch("Search with api")
-            1 -> addFromState.value = BaseCommand.Favorites("Select from favorites")
+            1 -> addFromState.value = BaseCommand.Favorites("Add calories manual")
             2 -> {
-                addFromState.value = BaseCommand.Manual("Add calories manual")
-                //addEntry("Banaan", 20)
+                addFromState.value = BaseCommand.Manual("Select from favorites")
+                addEntry("Banaan", 20)
             }
         }
     }

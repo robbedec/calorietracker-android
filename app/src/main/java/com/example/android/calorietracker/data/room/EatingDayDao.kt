@@ -12,8 +12,8 @@ interface EatingDayDao {
     @Insert
     fun insert(entry: EatingDay)
 
-    /*@Insert
-    fun insertFoodEntry(entry: FoodEntry)*/
+    @Insert
+    fun insertFoodEntry(entry: FoodEntry)
 
     @Update
     fun update(entry: EatingDay)
