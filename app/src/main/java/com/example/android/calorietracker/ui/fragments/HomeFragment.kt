@@ -30,7 +30,8 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.homeViewModal = viewModel
 
-        binding.setLifecycleOwner(this)
+        // Specify a lifecycle owner to define the scope of the LiveData object
+        binding.lifecycleOwner = this
 
         binding.addButton.setOnClickListener {
             val listItems = viewModel.dialogList

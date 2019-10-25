@@ -28,13 +28,16 @@ class HomeViewModel : ViewModel() {
     val percentage: LiveData<Int>
         get() = _percentage
 
+    /*
+     * The options that are shown in de "add calories from" dialog
+     */
     val dialogList: Array<String>
 
     val addFromState = SingleLiveEvent<BaseCommand>()
 
     init {
         Timber.i("HomeViewModel created")
-        _currentCalories.value = 250
+        _currentCalories.value = 300
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
