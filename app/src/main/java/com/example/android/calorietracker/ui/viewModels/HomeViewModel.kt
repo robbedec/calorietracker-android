@@ -1,15 +1,11 @@
 package com.example.android.calorietracker.ui.viewModels
 
 import android.app.Application
-import android.provider.SyncStateContract.Helpers.insert
-import android.text.Spanned
 import android.text.format.DateUtils
 import androidx.lifecycle.*
-import androidx.room.Database
 import com.example.android.calorietracker.data.models.EatingDay
 import com.example.android.calorietracker.data.models.EatingDayWithEntries
 import com.example.android.calorietracker.data.models.FoodEntry
-import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
@@ -55,7 +51,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private var currentDay = MutableLiveData<EatingDayWithEntries?>()
 
     // TODO: only get entries from this day
-    private var entries = database.getFoodEntries()
+    private var entries = database.getFoodEntries(1)
 
     val formatted = Transformations.map(entries) {entries ->
         formatEntries(entries, application.resources)
@@ -87,6 +83,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private fun initializeCurrentDay() {
         uiScope.launch {
             currentDay.value = getTodayFromDatabase()
+            entries = database.getFoodEntries(currentDay.value!!.eatingDay!!.dayId)
         }
     }
 
@@ -147,6 +144,17 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     }
 
     /*
+     * Removes all the entries from this day
+     */
+    private fun clearEntries() {
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                database.clearEntries(currentDay.value!!.eatingDay!!.dayId)
+            }
+        }
+    }
+
+    /*
      * Calculate the ratio between currentCalories and the goals
      * Is show in the middle of the circular progress bar
      */
@@ -162,9 +170,12 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
         when (checkedId) {
             0 -> addFromState.value = BaseCommand.ApiSearch("Search with api")
-            1 -> addFromState.value = BaseCommand.Favorites("Add calories manual")
+            1 -> {
+                addFromState.value = BaseCommand.Manual("Add calories manual")
+                clearEntries()
+            }
             2 -> {
-                addFromState.value = BaseCommand.Manual("Select from favorites")
+                addFromState.value = BaseCommand.Favorites("Select from favorites")
                 addEntry("Banaan", 20)
             }
         }
