@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="percentage_format">%d%%</string>
     <string name="divide_format">%d / %d</string>
+
+    <string name="card_title"><![CDATA[<b>Name:</b>]]></string>
+    <string name="card_amount"><![CDATA[<b>Amount:</b>]]></string>
 </resources>

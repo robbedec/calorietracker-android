@@ -2,11 +2,10 @@ package com.example.android.calorietracker.ui.viewModels
 
 import android.app.Application
 import android.provider.SyncStateContract.Helpers.insert
+import android.text.Spanned
 import android.text.format.DateUtils
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import androidx.room.Database
 import com.example.android.calorietracker.data.models.EatingDay
 import com.example.android.calorietracker.data.models.EatingDayWithEntries
 import com.example.android.calorietracker.data.models.FoodEntry
@@ -14,6 +13,7 @@ import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
+import com.example.android.calorietracker.utils.formatEntries
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -52,11 +52,20 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val currentDay = MutableLiveData<EatingDayWithEntries?>()
+    private var currentDay = MutableLiveData<EatingDayWithEntries?>()
+
+    // TODO: only get entries from this day
+    private var entries = database.getFoodEntries()
+
+    val formatted = Transformations.map(entries) {entries ->
+        formatEntries(entries, application.resources)
+    }
 
     init {
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
+
+
         _currentCalories.value = 300
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
@@ -104,6 +113,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
                 Timber.i("Created from datecheck")
             }
+
             // Return the correct day
             Timber.i("Returned $day")
             day
