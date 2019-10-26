@@ -16,6 +16,7 @@ import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.HomeViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 class HomeFragment : Fragment() {
@@ -72,6 +73,17 @@ class HomeFragment : Fragment() {
                 is BaseCommand.Favorites -> {
                     // TODO: navigate
                 }
+            }
+        })
+
+        viewModel.showSnackbarEvent.observe(this, Observer {
+            if(it) {
+                Snackbar.make(
+                    activity!!.findViewById(android.R.id.content),
+                    getString(R.string.cleared_message),
+                    Snackbar.LENGTH_LONG
+                ).show()
+                viewModel.doneShowingSnackbar()
             }
         })
 

@@ -53,6 +53,14 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     // TODO: only get entries from this day
     private var entries = database.getFoodEntries(1)
 
+    /*
+     * Decide when to show SnackbarEvent at the bottom of the screen
+     * Mostly when clearing the current day of data entries
+     */
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val showSnackbarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
+
     val formatted = Transformations.map(entries) {entries ->
         formatEntries(entries, application.resources)
     }
@@ -148,6 +156,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      */
     private fun clearEntries() {
         uiScope.launch {
+            _showSnackbarEvent.value = true
             withContext(Dispatchers.IO) {
                 database.clearEntries(currentDay.value!!.eatingDay!!.dayId)
             }
@@ -179,5 +188,9 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
                 addEntry("Banaan", 20)
             }
         }
+    }
+
+    fun doneShowingSnackbar() {
+        _showSnackbarEvent.value = false
     }
 }
