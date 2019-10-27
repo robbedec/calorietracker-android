@@ -1,26 +1,85 @@
 package com.example.android.calorietracker.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.databinding.RowFoodEntryBinding
+import kotlinx.android.synthetic.main.row_food_entry.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.ClassCastException
 
-class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder>(FoodEntryDiffCallback()) {
 
-    override fun onBindViewHolder(holder: FoodEntryHolder, position: Int) {
-       /*
-        * Make sure that you change view specific properties that aren't updated for each new element (e.g. the foreground of the primary_text)
-        * The recyclerView won't reset properties that aren't explicitly called
-        */
+/**
+ * Used to tell the [RecyclerView] which items it can reuse to load new data in
+ */
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
 
-        holder.bind(getItem(position)!!, clickListener)
+class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(FoodEntryDiffCallback()) {
+
+    private val adapterScore = CoroutineScope(Dispatchers.Default)
+
+    /**
+     * Called when [RecyclerView] needs to show an item
+     *
+     * The [ViewHolder] may be recycled, so make sure that this sets any properties that may have been set previously
+     * The [RecyclerView] won't reset properties that aren't explicitly called
+     */
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder) {
+            is FoodEntryHolder -> {
+                val entryItem = getItem(position) as DataItem.FoodEntryItem
+                holder.bind(entryItem.foodEntry, clickListener)
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodEntryHolder {
-        return FoodEntryHolder.from(parent)
+    /**
+     * Called when RecyclerView needs a new [ViewHolder]
+     *
+     * The ViewHolder holds a view for the [RecyclerView] and provides additional information
+     * such as the place on screen and where it was last drawn during scrolling
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
+        return when(viewType) {
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> FoodEntryHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType ${viewType}")
+        }
+    }
+
+    /*
+     * Return the type of the current item
+     */
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItem.FoodEntryItem -> ITEM_VIEW_TYPE_ITEM
+        }
+    }
+
+    /*
+     * Add header to the front of the list
+     */
+    fun addHeaderAndSubmitList(list: List<FoodEntry>?) {
+        adapterScore.launch {
+            val items = when(list) {
+                null -> listOf(DataItem.Header)
+                else -> listOf(DataItem.Header) + list.map { DataItem.FoodEntryItem(it) }
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
     }
 
     /*
@@ -29,7 +88,7 @@ class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<FoodE
      *
      * binding.root returns the constrained layout from the layout file to the ViewHolder
      */
-    class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : ViewHolder(binding.root) {
+    class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: FoodEntry, clickListener: FoodEntryListener) {
             binding.foodEntry = item
@@ -45,23 +104,33 @@ class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<FoodE
             }
         }
     }
+
+    class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.list_food_entry_header, parent, false)
+                return TextViewHolder(view)
+            }
+        }
+    }
 }
 
-class FoodEntryDiffCallback : DiffUtil.ItemCallback<FoodEntry>() {
+class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     /*
      * Check when an entry is reloaded in de recyclerView
      * With these methods the recyclerView won't update all the items but just those that contain a new listItem
      */
-    override fun areItemsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
-        return oldItem.entryId == newItem.entryId
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
     /*
      * Uses de generated equals method of a data class
      * Compares all the fields of the oldItem with those of the newItem
      */
-    override fun areContentsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        return oldItem.equals(newItem)
     }
 }
 
@@ -71,5 +140,16 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<FoodEntry>() {
  */
 class FoodEntryListener(val clickListener: (foodEntryId: Long) -> Unit) {
     fun onClick(entry: FoodEntry) = clickListener(entry.entryId)
+}
+
+sealed class DataItem {
+    data class FoodEntryItem(val foodEntry: FoodEntry): DataItem() {
+        override val id = foodEntry.entryId
+    }
+    object Header: DataItem() {
+        override val id = Long.MIN_VALUE
+    }
+
+    abstract val id: Long
 }
 

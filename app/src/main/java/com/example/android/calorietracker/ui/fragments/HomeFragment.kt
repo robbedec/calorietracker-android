@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {
                 // Default listAdapter method
-                adapter.submitList(it)
+                adapter.addHeaderAndSubmitList(it)
             }
         })
 
