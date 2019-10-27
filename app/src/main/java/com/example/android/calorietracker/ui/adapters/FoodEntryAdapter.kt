@@ -3,23 +3,15 @@ package com.example.android.calorietracker.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.models.FoodEntry
 import kotlinx.android.synthetic.main.row_food_entry.view.*
 import timber.log.Timber
 
-class FoodEntryAdapter : RecyclerView.Adapter<FoodEntryAdapter.FoodEntryHolder>() {
-    var data = listOf<FoodEntry>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount(): Int {
-        return data.size
-    }
+class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder>(FoodEntryDiffCallback()) {
 
     override fun onBindViewHolder(holder: FoodEntryHolder, position: Int) {
        /*
@@ -27,7 +19,8 @@ class FoodEntryAdapter : RecyclerView.Adapter<FoodEntryAdapter.FoodEntryHolder>(
         * The recyclerView won't reset properties that aren't explicitly called
         */
 
-        val item = data[position]
+        // Default ListAdapter method
+        val item = getItem(position)
 
         holder.name.text = item.entryName
         holder.amount.text = item.entryCalories.toString()
@@ -60,7 +53,24 @@ class FoodEntryAdapter : RecyclerView.Adapter<FoodEntryAdapter.FoodEntryHolder>(
             }
         }
     }
+}
 
+class FoodEntryDiffCallback : DiffUtil.ItemCallback<FoodEntry>() {
+    /*
+     * Check when an entry is reloaded in de recyclerView
+     * With these methods the recyclerView won't update all the items but just those that contain a new listItem
+     */
+    override fun areItemsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
+        return oldItem.entryId == newItem.entryId
+    }
+
+    /*
+     * Uses de generated equals method of a data class
+     * Compares all the fields of the oldItem with those of the newItem
+     */
+    override fun areContentsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
+        return oldItem == newItem
+    }
 
 }
 

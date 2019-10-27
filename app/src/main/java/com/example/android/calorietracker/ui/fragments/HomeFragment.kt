@@ -69,7 +69,8 @@ class HomeFragment : Fragment() {
          */
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                // Default listAdapter method
+                adapter.submitList(it)
             }
         })
 
