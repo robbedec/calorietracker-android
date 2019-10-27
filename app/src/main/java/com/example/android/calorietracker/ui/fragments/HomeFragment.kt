@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
         val adapter = FoodEntryAdapter()
         binding.entryList.adapter = adapter
 
-
         // Specify a lifecycle owner to define the scope of the LiveData object, binding can observe live data changes
         binding.lifecycleOwner = this
 

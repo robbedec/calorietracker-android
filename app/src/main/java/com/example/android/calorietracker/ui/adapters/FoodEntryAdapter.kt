@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.databinding.RowFoodEntryBinding
-import timber.log.Timber
 
 class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder>(FoodEntryDiffCallback()) {
 
@@ -21,14 +20,6 @@ class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder
         val item = getItem(position)
 
         holder.bind(item)
-
-
-        /*
-         * Navigate to entry overview -> give the item in the current card as a parameter
-         */
-        /*holder.view.setOnClickListener {
-            Timber.i("Item from recycler clicked!")
-        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodEntryHolder {
@@ -44,8 +35,6 @@ class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder
     class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : ViewHolder(binding.root) {
 
         fun bind(item: FoodEntry) {
-            //binding.primaryText.text = item.entryName
-            //binding.subText.text = item.entryCalories.toString()
             binding.foodEntry = item
             binding.executePendingBindings()
         }
@@ -76,6 +65,5 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<FoodEntry>() {
     override fun areContentsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
         return oldItem == newItem
     }
-
 }
 

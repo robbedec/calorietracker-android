@@ -44,7 +44,6 @@ abstract class CalorieDatabase : RoomDatabase() {
 
                     INSTANCE = instance
                 }
-
                 return instance
             }
         }

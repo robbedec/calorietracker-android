@@ -71,7 +71,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
 
-
+        //TODO: connect chart to the data
         _currentCalories.value = 300
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
