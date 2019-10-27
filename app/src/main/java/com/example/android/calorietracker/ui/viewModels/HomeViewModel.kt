@@ -18,9 +18,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     /*
      * The current amount of calories
      */
-    private val _currentCalories = MutableLiveData<Int>()
-    val currentCalories: LiveData<Int>
-        get() = _currentCalories
+    var currentCalories = database.getAmountCalories()
 
     /*
      * The maximum amount of calories (the goal that the user wants to reach
@@ -80,7 +78,8 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         initializeCurrentDay()
 
         //TODO: connect chart to the data
-        _currentCalories.value = 300
+        //_currentCalories.value = 300
+
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
@@ -178,7 +177,8 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      * Is show in the middle of the circular progress bar
      */
     private fun calcPercentage() {
-        _percentage.value = (_currentCalories.value!! * 100.0f / goal.value!!).toInt()
+        //_percentage.value = (currentCalories.value!! * 100.0f / goal.value!!).toInt()
+        _percentage.value = 10
     }
 
     /*

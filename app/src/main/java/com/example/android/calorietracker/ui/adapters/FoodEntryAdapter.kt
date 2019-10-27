@@ -24,14 +24,14 @@ import java.lang.ClassCastException
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(FoodEntryDiffCallback()) {
+class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(FoodEntryDiffCallback()) {
 
     private val adapterScore = CoroutineScope(Dispatchers.Default)
 
     /**
      * Called when [RecyclerView] needs to show an item
      *
-     * The [ViewHolder] may be recycled, so make sure that this sets any properties that may have been set previously
+     * The [RecyclerView.ViewHolder] may be recycled, so make sure that this sets any properties that may have been set previously
      * The [RecyclerView] won't reset properties that aren't explicitly called
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -44,7 +44,7 @@ class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<DataI
     }
 
     /**
-     * Called when RecyclerView needs a new [ViewHolder]
+     * Called when RecyclerView needs a new [RecyclerView.ViewHolder]
      *
      * The ViewHolder holds a view for the [RecyclerView] and provides additional information
      * such as the place on screen and where it was last drawn during scrolling
@@ -53,7 +53,7 @@ class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<DataI
         return when(viewType) {
             ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
             ITEM_VIEW_TYPE_ITEM -> FoodEntryHolder.from(parent)
-            else -> throw ClassCastException("Unknown viewType ${viewType}")
+            else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
 

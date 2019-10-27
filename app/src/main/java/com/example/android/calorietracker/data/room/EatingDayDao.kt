@@ -55,4 +55,7 @@ interface EatingDayDao {
 
     @Query("SELECT * FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
     fun getFoodEntries(): LiveData<List<FoodEntry>>
+
+    @Query("SELECT SUM(food_amount_calories) FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
+    fun getAmountCalories(): LiveData<Int>
 }

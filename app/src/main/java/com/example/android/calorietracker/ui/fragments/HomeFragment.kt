@@ -115,7 +115,6 @@ class HomeFragment : Fragment() {
                 // this.findNavController().navigate(...
                 viewModel.onFoodEntryNavigated()
                 Timber.i("Navigating to overview for foodEntry with id: %s", entry.toString())
-
             }
         })
 
