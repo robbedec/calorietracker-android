@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
             }
             // Set the neutral/cancel button click listener
             mBuilder.setNeutralButton("Cancel") { dialog, _ ->
-                // Do something when click the neutral button
+                // Do something when the neutral button is clicked
                 dialog.cancel()
             }
 
@@ -107,6 +107,4 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-
-
 }
