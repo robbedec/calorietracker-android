@@ -67,6 +67,14 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         formatEntries(entries, application.resources)
     }
 
+    /*
+     * Navigation trigger
+     * Contains the foodEntryId of the item you want to place in the overview
+     */
+    private val _navigateToFoodEntryOverview = MutableLiveData<Long>()
+    val navigateToFoodEntryOverview
+        get() = _navigateToFoodEntryOverview
+
     init {
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
@@ -194,5 +202,16 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = false
+    }
+
+    fun onFoodEntryClicked(id: Long) {
+        _navigateToFoodEntryOverview.value = id
+    }
+
+    /*
+     * Reset to null to prevent bugs when configuration changes happen
+     */
+    fun onFoodEntryNavigated() {
+        _navigateToFoodEntryOverview.value = null
     }
 }

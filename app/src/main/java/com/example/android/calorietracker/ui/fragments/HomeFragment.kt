@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.adapters.FoodEntryAdapter
+import com.example.android.calorietracker.ui.adapters.FoodEntryListener
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.HomeViewModelFactory
@@ -38,8 +40,10 @@ class HomeFragment : Fragment() {
 
         binding.homeViewModal = viewModel
 
-        // Fill the recyclerview
-        val adapter = FoodEntryAdapter()
+        // Fill the recyclerview and trigger navigation when an item is clicked
+        val adapter = FoodEntryAdapter(FoodEntryListener {
+            foodEntryId -> viewModel.onFoodEntryClicked(foodEntryId)
+        })
         binding.entryList.adapter = adapter
 
         // Specify a lifecycle owner to define the scope of the LiveData object, binding can observe live data changes
@@ -102,6 +106,16 @@ class HomeFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 ).show()
                 viewModel.doneShowingSnackbar()
+            }
+        })
+
+        viewModel.navigateToFoodEntryOverview.observe(this, Observer { entry ->
+            entry?.let {
+                // TODO: navigate to entry overview
+                // this.findNavController().navigate(...
+                viewModel.onFoodEntryNavigated()
+                Timber.i("Navigating to overview for foodEntry with id: %s", entry.toString())
+
             }
         })
 

@@ -6,12 +6,16 @@
         <variable
             name="foodEntry"
             type="com.example.android.calorietracker.data.models.FoodEntry" />
+        <variable
+            name="clickListener"
+            type="com.example.android.calorietracker.ui.adapters.FoodEntryListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:onClick="@{() -> clickListener.onClick(foodEntry)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"

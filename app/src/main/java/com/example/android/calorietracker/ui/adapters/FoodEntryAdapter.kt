@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.databinding.RowFoodEntryBinding
 
-class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder>(FoodEntryDiffCallback()) {
+class FoodEntryAdapter(val clickListener: FoodEntryListener) : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder>(FoodEntryDiffCallback()) {
 
     override fun onBindViewHolder(holder: FoodEntryHolder, position: Int) {
        /*
@@ -16,10 +16,7 @@ class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder
         * The recyclerView won't reset properties that aren't explicitly called
         */
 
-        // Default ListAdapter method
-        val item = getItem(position)
-
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodEntryHolder {
@@ -34,8 +31,9 @@ class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder
      */
     class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : ViewHolder(binding.root) {
 
-        fun bind(item: FoodEntry) {
+        fun bind(item: FoodEntry, clickListener: FoodEntryListener) {
             binding.foodEntry = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -65,5 +63,13 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<FoodEntry>() {
     override fun areContentsTheSame(oldItem: FoodEntry, newItem: FoodEntry): Boolean {
         return oldItem == newItem
     }
+}
+
+/*
+ * Defining a click listener class, this method doesn't require you to store a full object reference
+ * Use the id to make a database call when you need the object information
+ */
+class FoodEntryListener(val clickListener: (foodEntryId: Long) -> Unit) {
+    fun onClick(entry: FoodEntry) = clickListener(entry.entryId)
 }
 
