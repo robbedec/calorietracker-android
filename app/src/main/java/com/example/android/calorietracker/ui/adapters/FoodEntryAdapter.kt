@@ -44,8 +44,10 @@ class FoodEntryAdapter : ListAdapter<FoodEntry, FoodEntryAdapter.FoodEntryHolder
     class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : ViewHolder(binding.root) {
 
         fun bind(item: FoodEntry) {
-            binding.primaryText.text = item.entryName
-            binding.subText.text = item.entryCalories.toString()
+            //binding.primaryText.text = item.entryName
+            //binding.subText.text = item.entryCalories.toString()
+            binding.foodEntry = item
+            binding.executePendingBindings()
         }
 
         companion object {

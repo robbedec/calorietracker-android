@@ -27,7 +27,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:entryName="@{foodEntry}"/>
 
             <TextView
                 android:id="@+id/sub_text"
@@ -39,7 +40,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorSecondaryTextDefaultMaterialLight"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/primary_text" />
+                app:layout_constraintTop_toBottomOf="@+id/primary_text"
+                app:amountCalories="@{foodEntry}"/>
 
             <Button
                 android:id="@+id/edit_button"
