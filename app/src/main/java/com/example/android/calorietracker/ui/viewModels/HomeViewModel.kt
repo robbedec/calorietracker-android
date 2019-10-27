@@ -51,7 +51,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private var currentDay = MutableLiveData<EatingDayWithEntries?>()
 
     // TODO: only get entries from this day
-    private var entries = database.getFoodEntries(1)
+    private var entries = database.getFoodEntries()
 
     /*
      * Decide when to show SnackbarEvent at the bottom of the screen
@@ -91,7 +91,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private fun initializeCurrentDay() {
         uiScope.launch {
             currentDay.value = getTodayFromDatabase()
-            entries = database.getFoodEntries(currentDay.value!!.eatingDay!!.dayId)
+            entries = database.getFoodEntries()
         }
     }
 

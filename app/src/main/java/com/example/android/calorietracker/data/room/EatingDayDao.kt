@@ -52,6 +52,6 @@ interface EatingDayDao {
     @Query("SELECT * FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
     fun getToday(): EatingDayWithEntries?
 
-    @Query("SELECT * FROM food_entry_table WHERE ownerId = :key ORDER BY entryId DESC")
-    fun getFoodEntries(key: Long): LiveData<List<FoodEntry>>
+    @Query("SELECT * FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
+    fun getFoodEntries(): LiveData<List<FoodEntry>>
 }
