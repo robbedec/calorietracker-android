@@ -26,6 +26,7 @@ Open the project in Android Studio and build
 * [Gradle](https://gradle.org) - Dependency Management
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - Persistence library for onboard database
 * [Timber](https://github.com/JakeWharton/timber) - Logging tool
+* [Retrofit](https://github.com/square/retrofit) - Http client
 
 ## Contributing
 
