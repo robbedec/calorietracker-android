@@ -49,6 +49,7 @@ interface EatingDayDao {
      * Nullable in case there are no records in the table (after clearing table ...)
      * Includes all entries for that day
      */
+    @Transaction
     @Query("SELECT * FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
     fun getToday(): EatingDayWithEntries?
 
