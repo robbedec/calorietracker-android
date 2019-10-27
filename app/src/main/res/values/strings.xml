@@ -11,4 +11,6 @@
 
     <!-- Toast to play on snackbar events -->
     <string name="cleared_message">Removed all entries from today!</string>
+    <string name="edit_text">Edit</string>
+    <string name="remove_text">remove</string>
 </resources>

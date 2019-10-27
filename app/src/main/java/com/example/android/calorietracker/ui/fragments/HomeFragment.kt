@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
+import com.example.android.calorietracker.ui.adapters.FoodEntryAdapter
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.HomeViewModelFactory
@@ -37,6 +38,11 @@ class HomeFragment : Fragment() {
 
         binding.homeViewModal = viewModel
 
+        // Fill the recyclerview
+        val adapter = FoodEntryAdapter()
+        binding.entryList.adapter = adapter
+
+
         // Specify a lifecycle owner to define the scope of the LiveData object, binding can observe live data changes
         binding.lifecycleOwner = this
 
@@ -59,6 +65,15 @@ class HomeFragment : Fragment() {
         }
 
         /*
+         * Update the recyclerview when the contents of the viewmodel list changes
+         */
+        viewModel.entries.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
+
+        /*
          * Observe state and navigate to the right screen
          */
         viewModel.addFromState.observe(this, Observer {
@@ -76,6 +91,9 @@ class HomeFragment : Fragment() {
             }
         })
 
+        /*
+         * Show snackbar when the entries get cleared
+         */
         viewModel.showSnackbarEvent.observe(this, Observer {
             if(it) {
                 Snackbar.make(

@@ -50,8 +50,10 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
     private var currentDay = MutableLiveData<EatingDayWithEntries?>()
 
-    // TODO: only get entries from this day
-    private var entries = database.getFoodEntries()
+    /*
+     * List of entries of the current day that get auto updated
+     */
+    var entries = database.getFoodEntries()
 
     /*
      * Decide when to show SnackbarEvent at the bottom of the screen
