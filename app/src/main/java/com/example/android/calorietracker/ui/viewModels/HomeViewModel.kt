@@ -19,6 +19,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      * The current amount of calories
      */
     var currentCalories = database.getAmountCalories()
+    //var currentCalories = if (database.getAmountCalories().value != null) database.getAmountCalories() else MutableLiveData(0)
 
     /*
      * The maximum amount of calories (the goal that the user wants to reach
@@ -28,7 +29,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     /*
      * The ratio between current amount of calories and the maximum amount
      */
-    private val _percentage = MutableLiveData<Int>()
+    private val _percentage = MediatorLiveData<Int>()
     val percentage: LiveData<Int>
         get() = _percentage
 
@@ -77,13 +78,25 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
 
-        //TODO: connect chart to the data
-        //_currentCalories.value = 300
-
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
-        calcPercentage()
+        /*
+         * Check for updates in the liveData and adapt the value
+         * Calculates the ratio between currentCalories and the goals
+         * Is show in the middle of the circular progress bar
+         */
+        _percentage.addSource(currentCalories) { res ->
+            if(currentCalories.value != null) {
+                _percentage.value = (res * 100.0f / goal.value!!).toInt()
+            } else {
+                _percentage.value = 0
+            }
+        }
+        /*
+        _percentage.addSource(goal) { res ->
+            _percentage.value = (currentCalories.value!! * 100.0f / res).toInt()
+        }*/
     }
 
     /*
@@ -170,15 +183,6 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
                 database.clearEntries(currentDay.value!!.eatingDay!!.dayId)
             }
         }
-    }
-
-    /*
-     * Calculate the ratio between currentCalories and the goals
-     * Is show in the middle of the circular progress bar
-     */
-    private fun calcPercentage() {
-        //_percentage.value = (currentCalories.value!! * 100.0f / goal.value!!).toInt()
-        _percentage.value = 10
     }
 
     /*
