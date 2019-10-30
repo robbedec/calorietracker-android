@@ -1,6 +1,7 @@
 package com.example.android.calorietracker.ui.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
+import com.example.android.calorietracker.ui.SearchableActivity
 import com.example.android.calorietracker.ui.adapters.FoodEntryAdapter
 import com.example.android.calorietracker.ui.adapters.FoodEntryListener
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
@@ -84,6 +86,8 @@ class HomeFragment : Fragment() {
             when(it) {
                 is BaseCommand.ApiSearch -> {
                     // TODO: navigate
+                    val intent = Intent(activity, SearchableActivity::class.java)
+                    activity!!.startActivity(intent)
                     Timber.i("Value change observed!")
                 }
                 is BaseCommand.Manual -> {

@@ -188,7 +188,10 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         Timber.i("Value: %d", checkedId)
 
         when (checkedId) {
-            0 -> addFromState.value = BaseCommand.ApiSearch("Search with api")
+            0 -> {
+                addFromState.value = BaseCommand.ApiSearch("Search with api")
+
+            }
             1 -> {
                 addFromState.value = BaseCommand.Manual("Add calories manual")
                 clearEntries()
