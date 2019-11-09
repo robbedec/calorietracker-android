@@ -15,8 +15,11 @@ data class EatingDay(
     var dayId: Long = 0L,
 
     @ColumnInfo(name = "start_date")
-    val date: Date = Calendar.getInstance().time,
+    var date: Date = Calendar.getInstance().time,
 
     @ColumnInfo(name = "amount_calories")
-    val amountCal: Int = 0
+    val amountCal: Int = 0,
+
+    @ColumnInfo(name = "limit_calories")
+    val limitCal: Int = 5000
 )

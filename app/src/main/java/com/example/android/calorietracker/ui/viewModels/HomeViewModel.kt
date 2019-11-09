@@ -2,6 +2,7 @@ package com.example.android.calorietracker.ui.viewModels
 
 import android.app.Application
 import android.text.format.DateUtils
+import android.view.animation.Transformation
 import androidx.lifecycle.*
 import com.example.android.calorietracker.data.models.EatingDay
 import com.example.android.calorietracker.data.models.EatingDayWithEntries
@@ -10,8 +11,10 @@ import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import com.example.android.calorietracker.utils.formatAmount
+import com.example.android.calorietracker.utils.formatGoal
 import kotlinx.coroutines.*
 import timber.log.Timber
+import java.util.*
 
 class HomeViewModel(val database: EatingDayDao, application: Application) : AndroidViewModel(application) {
 
@@ -25,7 +28,9 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     /**
      * The maximum amount of calories (the goal that the user wants to reach
      */
-    val goal: MutableLiveData<Int>
+    val goal: LiveData<Int> = Transformations.map(database.getLimitCalories()) {
+        formatGoal(it ?: 5000)
+    }
 
     /**
      * The ratio between current amount of calories and the maximum amount
@@ -75,25 +80,27 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
 
-        goal = MutableLiveData(500)
+        //goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
         /**
-         * Check for updates in the liveData and adapt the value
+         * Check for updates in the liveData and adapt the value, provide default values
+         * for calculations before the real data is loaded from the database
+         *
          * Calculates the ratio between currentCalories and the goals
-         * Is show in the middle of the circular progress bar
+         * Is shown in the middle of the circular progress bar
          */
         _percentage.addSource(currentCalories) { res ->
             if(currentCalories.value != null) {
-                _percentage.value = (res * 100.0f / goal.value!!).toInt()
+                _percentage.value = (res * 100.0f / (goal.value ?: 5000)).toInt()
             } else {
                 _percentage.value = 0
             }
         }
-        /*
+
         _percentage.addSource(goal) { res ->
-            _percentage.value = (currentCalories.value!! * 100.0f / res).toInt()
-        }*/
+            _percentage.value = ((currentCalories.value ?: 0) * 100.0f / (res ?: 5000)).toInt()
+        }
     }
 
     /**
@@ -123,18 +130,24 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
             if(day == null) {
                 uiScope.launch {
                     val newDay = EatingDay()
-                    //newDay.entries = ArrayList()
+                    newDay.date = Calendar.getInstance().time
+
                     insert(newDay)
+
+                    day = getTodayFromDatabase()
                     currentDay.value = getTodayFromDatabase()
 
+                    Timber.i("$day")
                     Timber.i("Created from day == null")
                 }
             }
-            // Check if the latest date in the database is from today
-            if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
+            else if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
+                // Check if the latest date in the database is from today
+
                 uiScope.launch {
                     val newDay = EatingDay()
-                    //newDay.entries = ArrayList()
+                    newDay.date = Calendar.getInstance().time
+
                     insert(newDay)
                     currentDay.value = getTodayFromDatabase()
 
@@ -182,6 +195,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
             _showSnackbarEvent.value = true
             withContext(Dispatchers.IO) {
                 database.clearEntries(currentDay.value!!.eatingDay!!.dayId)
+                //database.clear()
             }
         }
     }
@@ -195,7 +209,6 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         when (checkedId) {
             0 -> {
                 addFromState.value = BaseCommand.ApiSearch("Search with api")
-
             }
             1 -> {
                 addFromState.value = BaseCommand.Manual("Add calories manual")
@@ -203,7 +216,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
             }
             2 -> {
                 addFromState.value = BaseCommand.Favorites("Select from favorites")
-                addEntry("Banaan", 20)
+                addEntry("Banaan", 500)
             }
         }
     }

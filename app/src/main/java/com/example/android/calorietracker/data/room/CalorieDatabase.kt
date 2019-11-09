@@ -13,18 +13,18 @@ import com.example.android.calorietracker.data.models.FoodEntry
  *
  * Contains a static method that returns an instance for the provided context
  */
-@Database(entities = [EatingDay::class, FoodEntry::class], version = 1, exportSchema = false)
+@Database(entities = [EatingDay::class, FoodEntry::class], version = 2, exportSchema = false)
 abstract class CalorieDatabase : RoomDatabase() {
 
     abstract val eatingDayDao: EatingDayDao
     abstract val foodEntryDao: FoodEntryDao
 
-    /*
+    /**
      * Allows clients to access methods to create or get the database without instantiating the class
      */
     companion object {
 
-        /*
+        /**
          * @Volatile: value will never be cached, in other words: always up to date
          * Used for multithreading
          */

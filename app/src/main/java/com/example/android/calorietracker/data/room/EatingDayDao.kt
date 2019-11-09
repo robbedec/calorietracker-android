@@ -23,6 +23,12 @@ interface EatingDayDao {
     fun delete(entry: EatingDay)
 
     /**
+     * Remove entry by id
+     */
+    //@Delete
+    //fun deleteEntryWithId()
+
+    /**
      * Get day by id
      */
     @Query("SELECT * FROM daily_eating_table WHERE dayId = :key")
@@ -58,4 +64,7 @@ interface EatingDayDao {
 
     @Query("SELECT SUM(food_amount_calories) FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
     fun getAmountCalories(): LiveData<Int>
+
+    @Query("SELECT limit_calories FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
+    fun getLimitCalories(): LiveData<Int>
 }

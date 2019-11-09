@@ -74,7 +74,6 @@ class HomeFragment : Fragment() {
          */
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {
-                // Default listAdapter method
                 adapter.addHeaderAndSubmitList(it)
             }
         })
@@ -85,10 +84,9 @@ class HomeFragment : Fragment() {
         viewModel.addFromState.observe(this, Observer {
             when(it) {
                 is BaseCommand.ApiSearch -> {
-                    // TODO: navigate
+                    // Navigate to Search activity
                     val intent = Intent(activity, SearchableActivity::class.java)
                     activity!!.startActivity(intent)
-                    Timber.i("Value change observed!")
                 }
                 is BaseCommand.Manual -> {
                     // TODO: navigate
