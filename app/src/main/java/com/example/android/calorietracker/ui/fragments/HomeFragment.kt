@@ -69,8 +69,8 @@ class HomeFragment : Fragment() {
             mDialog.show()
         }
 
-        /*
-         * Update the recyclerview when the contents of the viewmodel list changes
+        /**
+         * Update the [RecyclerView] when the contents of the viewmodel list changes
          */
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        /*
+        /**
          * Observe state and navigate to the right screen
          */
         viewModel.addFromState.observe(this, Observer {
@@ -99,7 +99,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        /*
+        /**
          * Show snackbar when the entries get cleared
          */
         viewModel.showSnackbarEvent.observe(this, Observer {

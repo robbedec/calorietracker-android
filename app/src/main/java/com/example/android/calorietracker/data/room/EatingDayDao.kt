@@ -22,13 +22,13 @@ interface EatingDayDao {
     @Delete
     fun delete(entry: EatingDay)
 
-    /*
+    /**
      * Get day by id
      */
     @Query("SELECT * FROM daily_eating_table WHERE dayId = :key")
     fun get(key: Long): EatingDay
 
-    /*
+    /**
      * Remove all records from the table
      */
     @Query("DELETE FROM daily_eating_table")
@@ -37,14 +37,14 @@ interface EatingDayDao {
     @Query("DELETE FROM food_entry_table WHERE ownerId = :key")
     fun clearEntries(key: Long)
 
-    /*
+    /**
      * Get all day records from the table
      * Automatically updates the live data when changes are recorded in the database
      */
     @Query("SELECT * FROM daily_eating_table ORDER BY dayId DESC")
     fun getAllEntries(): LiveData<List<EatingDay>>
 
-    /*
+    /**
      * Returns the latest record in the table
      * Nullable in case there are no records in the table (after clearing table ...)
      * Includes all entries for that day

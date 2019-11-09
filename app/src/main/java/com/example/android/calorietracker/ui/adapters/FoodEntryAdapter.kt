@@ -1,6 +1,5 @@
 package com.example.android.calorietracker.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.databinding.RowFoodEntryBinding
-import kotlinx.android.synthetic.main.row_food_entry.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +55,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
         }
     }
 
-    /*
+    /**
      * Return the type of the current item
      */
     override fun getItemViewType(position: Int): Int {
@@ -67,7 +65,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
         }
     }
 
-    /*
+    /**
      * Add header to the front of the list
      */
     fun addHeaderAndSubmitList(list: List<FoodEntry>?) {
@@ -82,7 +80,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
         }
     }
 
-    /*
+    /**
      * Make private because it should not be called outside this class
      * Contains all logic to manage views = separation of concerns
      *
@@ -117,7 +115,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
 }
 
 class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-    /*
+    /**
      * Check when an entry is reloaded in de recyclerView
      * With these methods the recyclerView won't update all the items but just those that contain a new listItem
      */
@@ -125,7 +123,7 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
         return oldItem.id == newItem.id
     }
 
-    /*
+    /**
      * Uses de generated equals method of a data class
      * Compares all the fields of the oldItem with those of the newItem
      */
@@ -134,7 +132,7 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     }
 }
 
-/*
+/**
  * Defining a click listener class, this method doesn't require you to store a full object reference
  * Use the id to make a database call when you need the object information
  */

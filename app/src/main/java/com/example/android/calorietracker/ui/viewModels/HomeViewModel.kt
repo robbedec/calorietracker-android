@@ -9,38 +9,39 @@ import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
-import com.example.android.calorietracker.utils.formatEntries
+import com.example.android.calorietracker.utils.formatAmount
 import kotlinx.coroutines.*
 import timber.log.Timber
 
 class HomeViewModel(val database: EatingDayDao, application: Application) : AndroidViewModel(application) {
 
-    /*
+    /**
      * The current amount of calories
      */
-    var currentCalories = database.getAmountCalories()
-    //var currentCalories = if (database.getAmountCalories().value != null) database.getAmountCalories() else MutableLiveData(0)
+    var currentCalories: LiveData<Int> = Transformations.map(database.getAmountCalories()) {
+        formatAmount(it ?: 0)
+    }
 
-    /*
+    /**
      * The maximum amount of calories (the goal that the user wants to reach
      */
     val goal: MutableLiveData<Int>
 
-    /*
+    /**
      * The ratio between current amount of calories and the maximum amount
      */
     private val _percentage = MediatorLiveData<Int>()
     val percentage: LiveData<Int>
-        get() = _percentage
+    get() = _percentage
 
-    /*
+    /**
      * The options that are shown in de "add calories from" dialog
      */
     val dialogList: Array<String>
 
     val addFromState = SingleLiveEvent<BaseCommand>()
 
-    /*
+    /**
      * Used to stop every operation triggered by the ViewModel when it gets destroyed
      * Coroutine jobs will run on the main scope / thread
      */
@@ -49,30 +50,26 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
     private var currentDay = MutableLiveData<EatingDayWithEntries?>()
 
-    /*
+    /**
      * List of entries of the current day that get auto updated
      */
     var entries = database.getFoodEntries()
 
-    /*
+    /**
      * Decide when to show SnackbarEvent at the bottom of the screen
      * Mostly when clearing the current day of data entries
      */
     private var _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackbarEvent: LiveData<Boolean>
-        get() = _showSnackbarEvent
+    get() = _showSnackbarEvent
 
-    val formatted = Transformations.map(entries) {entries ->
-        formatEntries(entries, application.resources)
-    }
-
-    /*
+    /**
      * Navigation trigger
      * Contains the foodEntryId of the item you want to place in the overview
      */
     private val _navigateToFoodEntryOverview = MutableLiveData<Long>()
     val navigateToFoodEntryOverview
-        get() = _navigateToFoodEntryOverview
+    get() = _navigateToFoodEntryOverview
 
     init {
         Timber.i("HomeViewModel created")
@@ -81,7 +78,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
-        /*
+        /**
          * Check for updates in the liveData and adapt the value
          * Calculates the ratio between currentCalories and the goals
          * Is show in the middle of the circular progress bar
@@ -99,7 +96,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }*/
     }
 
-    /*
+    /**
      * ViewModal is destroyed and all current jobs will be cancelled
      */
     override fun onCleared() {
@@ -107,7 +104,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         viewModelJob.cancel()
     }
 
-    /*
+    /**
      * Init currentDay without blocking the ui thread while waiting for the result
      */
     private fun initializeCurrentDay() {
@@ -117,7 +114,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
-    /*
+    /**
      * Fetch the current day from the database or create a new one
      */
     private suspend fun getTodayFromDatabase(): EatingDayWithEntries? {
@@ -177,7 +174,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
-    /*
+    /**
      * Removes all the entries from this day
      */
     private fun clearEntries() {
@@ -189,7 +186,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
-    /*
+    /**
      * Method that gets called when a user wants to add calories to the counter
      */
     fun addCalories(checkedId: Int) {
@@ -219,7 +216,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         _navigateToFoodEntryOverview.value = id
     }
 
-    /*
+    /**
      * Reset to null to prevent bugs when configuration changes happen
      */
     fun onFoodEntryNavigated() {
