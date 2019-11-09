@@ -124,21 +124,25 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         return withContext(Dispatchers.IO) {
             var day = database.getToday()
             if(day == null) {
-                val newDay = EatingDay()
-                //newDay.entries = ArrayList()
-                insert(newDay)
-                currentDay.value = getTodayFromDatabase()
+                uiScope.launch {
+                    val newDay = EatingDay()
+                    //newDay.entries = ArrayList()
+                    insert(newDay)
+                    currentDay.value = getTodayFromDatabase()
 
-                Timber.i("Created from day == null")
+                    Timber.i("Created from day == null")
+                }
             }
             // Check if the latest date in the database is from today
             if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
-                val newDay = EatingDay()
-                //newDay.entries = ArrayList()
-                insert(newDay)
-                currentDay.value = getTodayFromDatabase()
+                uiScope.launch {
+                    val newDay = EatingDay()
+                    //newDay.entries = ArrayList()
+                    insert(newDay)
+                    currentDay.value = getTodayFromDatabase()
 
-                Timber.i("Created from datecheck")
+                    Timber.i("Created from datecheck")
+                }
             }
 
             // Return the correct day
