@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.android.calorietracker.data.models.EatingDay
 import com.example.android.calorietracker.data.models.FoodEntry
 
-/*
+/**
  * Version needs to increment each time the database schema changes, this creates a versioning system to log schema changes
  * To disable versioning use: exportSchema = false
  *

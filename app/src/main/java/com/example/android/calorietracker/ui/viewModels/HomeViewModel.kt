@@ -80,11 +80,10 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         Timber.i("HomeViewModel created")
         initializeCurrentDay()
 
-        //goal = MutableLiveData(500)
         dialogList = arrayOf("Search online", "Manually", "From favorites")
 
         /**
-         * Check for updates in the liveData and adapt the value, provide default values
+         * Check for updates in the liveData and adapt the value of the [MediatorLiveData], provide default values
          * for calculations before the real data is loaded from the database
          *
          * Calculates the ratio between currentCalories and the goals
