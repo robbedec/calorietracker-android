@@ -11,23 +11,29 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/result_text"
-            android:layout_width="match_parent"
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/result_list"
-            android:text="@{searchViewModal.response}" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:calorieTrackerApiStatus="@{searchViewModal.status}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/result_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:resultListData="@{searchViewModal.searchResult.branded}"
             tools:layout_editor_absoluteX="112dp" />

@@ -11,12 +11,16 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+enum class CalorieTrackerApiStatus { LOADING, ERROR, DONE }
 
+/**
+ * The [ViewModel] that is attached to [SearchFragment]
+ */
 class SearchViewModel() : ViewModel() {
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
+    private val _status = MutableLiveData<CalorieTrackerApiStatus>()
+    val status: LiveData<CalorieTrackerApiStatus>
+        get() = _status
 
     private val _searchResult = MutableLiveData<CategoryProperty>()
     val searchResult: LiveData<CategoryProperty>
@@ -35,11 +39,18 @@ class SearchViewModel() : ViewModel() {
             // Let coroutines manage concurrency on the main thread
             var getResultsDeferred = CalorieTrackerApi.retrofitService.getResults()
             try {
+                _status.value = CalorieTrackerApiStatus.LOADING
+
+                // This will run on a thread managed by Retrofit
                 var result = getResultsDeferred.await() // Await is non blocking
-                _response.value = "Succes: ${result.branded?.get(0)?.name} and amount: ${result.branded?.get(0)?.amountCal}"
+                _status.value = CalorieTrackerApiStatus.DONE
                 _searchResult.value = result
+
             } catch (t: Throwable) {
-                _response.value = "Failure: " + t.message
+                _status.value = CalorieTrackerApiStatus.ERROR
+
+                // Clear the RecyclerView when an error occurs
+                _searchResult.value = CategoryProperty(ArrayList())
                 Timber.i("robbe-failure: ${t.message}")
             }
         }

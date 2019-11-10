@@ -34,11 +34,11 @@ class SearchResultAdapter : ListAdapter<FoodProperty, SearchResultAdapter.FoodPr
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultAdapter.FoodPropertyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodPropertyViewHolder {
         return FoodPropertyViewHolder(RowSearchResultBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: SearchResultAdapter.FoodPropertyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FoodPropertyViewHolder, position: Int) {
         val foodProperty = getItem(position)
         holder.bind(foodProperty)
     }
