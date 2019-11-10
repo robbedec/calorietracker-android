@@ -13,6 +13,8 @@ buildscript {
         retrofit_version = "2.5.0"
         retrofit_coroutines_adapter_version = "0.9.2"
         glide_version = "4.8.0"
+        dokka_version = "0.10.0"
+        runtime_version = "1.1.0"
     }
     repositories {
         google()
@@ -23,6 +25,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

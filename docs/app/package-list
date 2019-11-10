@@ -1,0 +1,14 @@
+$dokka.format:markdown
+$dokka.linkExtension:md
+$dokka.location:com.example.android.calorietracker.utils$setAmountCalories(android.widget.TextView, com.example.android.calorietracker.data.models.FoodEntry)com.example.android.calorietracker.utils/android.widget.-text-view/set-amount-calories.md
+$dokka.location:com.example.android.calorietracker.utils$setEntryName(android.widget.TextView, com.example.android.calorietracker.data.models.FoodEntry)com.example.android.calorietracker.utils/android.widget.-text-view/set-entry-name.md
+com.example.android.calorietracker
+com.example.android.calorietracker.data.models
+com.example.android.calorietracker.data.models.enums
+com.example.android.calorietracker.data.network
+com.example.android.calorietracker.data.room
+com.example.android.calorietracker.ui
+com.example.android.calorietracker.ui.adapters
+com.example.android.calorietracker.ui.fragments
+com.example.android.calorietracker.ui.viewModels
+com.example.android.calorietracker.utils

@@ -1,0 +1,19 @@
+[app](../../index.md) / [com.example.android.calorietracker](../index.md) / [PusherApplication](./index.md)
+
+# PusherApplication
+
+`class PusherApplication : `[`Application`](https://developer.android.com/reference/android/app/Application.html)
+
+A base class that holds application wide logic.
+
+**Author**
+Robbe Decorte
+
+### Constructors
+
+| [&lt;init&gt;](-init-.md) | A base class that holds application wide logic.`PusherApplication()` |
+
+### Functions
+
+| [onCreate](on-create.md) | `fun onCreate(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+
