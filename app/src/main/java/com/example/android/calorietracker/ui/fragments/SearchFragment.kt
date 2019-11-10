@@ -69,13 +69,21 @@ class SearchFragment : Fragment() {
         var searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchQuery.value = query
-                viewModel.getResult()
+                if(query!!.isNotEmpty() && query!!.isNotBlank()){
+                    viewModel.searchQuery.value = query
+                } else {
+                    viewModel.searchQuery.value = ""
+                }
                 Timber.i(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText!!.isNotEmpty() && newText!!.isNotBlank()){
+                    viewModel.searchQuery.value = newText
+                } else {
+                    viewModel.searchQuery.value = ""
+                }
                 Timber.i(newText)
                 return false
             }

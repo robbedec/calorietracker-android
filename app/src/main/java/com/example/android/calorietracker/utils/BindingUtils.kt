@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.data.models.FoodProperty
+import com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
-import com.example.android.calorietracker.ui.viewModels.CalorieTrackerApiStatus
 
 /**
  * Using [BindingAdapter] to fill a [RecyclerView] will automatically observe [LiveData]

@@ -1,9 +1,11 @@
 package com.example.android.calorietracker.ui.viewModels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.calorietracker.data.models.CategoryProperty
+import com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,21 +13,32 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-enum class CalorieTrackerApiStatus { LOADING, ERROR, DONE }
 
 /**
  * The [ViewModel] that is attached to [SearchFragment]
  */
-class SearchViewModel() : ViewModel() {
+class SearchViewModel : ViewModel() {
 
+
+    /**
+     * The current status of the Api request
+     * LOADING - ERROR - DONE
+     */
     private val _status = MutableLiveData<CalorieTrackerApiStatus>()
     val status: LiveData<CalorieTrackerApiStatus>
         get() = _status
 
-    private val _searchResult = MutableLiveData<CategoryProperty>()
+    /**
+     * The api result
+     * Based on searchQuery and updates automatically when the searchQuery changes
+     */
+    private val _searchResult = MediatorLiveData<CategoryProperty>()
     val searchResult: LiveData<CategoryProperty>
         get() = _searchResult
 
+    /**
+     * The current value that the user wants to search for
+     */
     var searchQuery = MutableLiveData<String>()
 
     private var viewModelJob = Job()
@@ -33,14 +46,22 @@ class SearchViewModel() : ViewModel() {
 
     init {
 
-        //getResult()
+        /**
+         * Update the result list when the searchQuery changes
+         */
+        _searchResult.addSource(searchQuery) {
+            if(searchQuery.value!!.isNotEmpty()){
+                getResult()
+            } else {
+                _searchResult.value = CategoryProperty(ArrayList())
+            }
+        }
     }
 
-    fun getResult() {
-
+    private fun getResult() {
         coroutineScope.launch {
             // Let coroutines manage concurrency on the main thread
-            var getResultsDeferred = CalorieTrackerApi.retrofitService.getResultsAsync(searchQuery.value!!, false, false)
+            val getResultsDeferred = CalorieTrackerApi.retrofitService.getResultsAsync(searchQuery.value!!, false, false)
             try {
                 _status.value = CalorieTrackerApiStatus.LOADING
 
