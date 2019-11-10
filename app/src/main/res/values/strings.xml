@@ -16,4 +16,5 @@
     <string name="header_text">Todays log</string>
     <string name="search_hint">Search</string>
     <string name="app_label">Calorie Tracker</string>
+    <string name="add_calories_text">add calories</string>
 </resources>

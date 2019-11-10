@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
+import com.example.android.calorietracker.ui.viewModels.SearchViewModel
 import java.lang.IllegalArgumentException
 
 class HomeViewModelFactory(private val dataSource: EatingDayDao, private val application: Application) : ViewModelProvider.Factory {
@@ -13,6 +14,9 @@ class HomeViewModelFactory(private val dataSource: EatingDayDao, private val app
         if(modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(dataSource, application) as T
         }
+        /*if(modelClass.isAssignableFrom(SearchViewModel::class.java)) {
+            return SearchViewModel(dataSource, application) as T
+        }*/
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

@@ -10,7 +10,7 @@
             type="com.example.android.calorietracker.ui.viewModels.SearchViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,6 +18,19 @@
             android:id="@+id/result_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/result_list"
             android:text="@{searchViewModal.response}" />
-    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/result_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_text"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:resultListData="@{searchViewModal.searchResult.branded}"
+            tools:layout_editor_absoluteX="112dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

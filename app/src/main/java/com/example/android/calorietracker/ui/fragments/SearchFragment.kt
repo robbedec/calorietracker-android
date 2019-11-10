@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.databinding.FragmentSearchBinding
+import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
 import com.example.android.calorietracker.ui.viewModels.SearchViewModel
 
 class SearchFragment : Fragment() {
@@ -27,6 +28,9 @@ class SearchFragment : Fragment() {
         val binding = FragmentSearchBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.searchViewModal = viewModel
+
+        // Initialize the SearchResultAdapter
+        binding.resultList.adapter = SearchResultAdapter()
 
         return binding.root
     }
