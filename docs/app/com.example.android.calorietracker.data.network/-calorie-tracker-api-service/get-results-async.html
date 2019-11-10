@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CalorieTrackerApiService.getResultsAsync - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.example.android.calorietracker.data.network</a>&nbsp;/&nbsp;<a href="index.html">CalorieTrackerApiService</a>&nbsp;/&nbsp;<a href="./get-results-async.html">getResultsAsync</a><br/>
+<br/>
+<h1>getResultsAsync</h1>
+<a name="com.example.android.calorietracker.data.network.CalorieTrackerApiService$getResultsAsync(kotlin.String, kotlin.Boolean, kotlin.Boolean)"></a>
+<code><span class="identifier">@Headers</span><span class="symbol">(</span>["x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0"]<span class="symbol">)</span> <span class="identifier">@GET</span><span class="symbol">(</span>"search/instant"<span class="symbol">)</span> <span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getResultsAsync</span><span class="symbol">(</span><span class="identifier">@Query</span><span class="symbol">(</span>"query"<span class="symbol">)</span> <span class="identifier" id="com.example.android.calorietracker.data.network.CalorieTrackerApiService$getResultsAsync(kotlin.String, kotlin.Boolean, kotlin.Boolean)/query">query</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier">@Query</span><span class="symbol">(</span>"common"<span class="symbol">)</span> <span class="identifier" id="com.example.android.calorietracker.data.network.CalorieTrackerApiService$getResultsAsync(kotlin.String, kotlin.Boolean, kotlin.Boolean)/includeCommon">includeCommon</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier">@Query</span><span class="symbol">(</span>"self"<span class="symbol">)</span> <span class="identifier" id="com.example.android.calorietracker.data.network.CalorieTrackerApiService$getResultsAsync(kotlin.String, kotlin.Boolean, kotlin.Boolean)/includeSelf">includeSelf</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Deferred</span><span class="symbol">&lt;</span><a href="../../com.example.android.calorietracker.data.models/-category-property/index.html"><span class="identifier">CategoryProperty</span></a><span class="symbol">&gt;</span></code>
+<p>Request a collection of data based on a search query.</p>
+<h3>Parameters</h3>
+<p><a name="query"></a>
+<code>query</code> - the string that should be searched for.</p>
+<p><a name="includeCommon"></a>
+<code>includeCommon</code> - should the category 'common' be included in the response.</p>
+<p><a name="includeSelf"></a>
+<code>includeSelf</code> - 
+<p>should the category 'self' be included in the response.</p>
+
+
+<p><a href="#">Deferred</a> has an await suspend function that waits for the result without blocking the UI.
+Can throw HTTP errors when processing the request</p>
+</p>
+<p><strong>Author</strong><br/>
+Robbe Decorte</p>
+</BODY>
+</HTML>

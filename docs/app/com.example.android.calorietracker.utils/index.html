@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.example.android.calorietracker.utils - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.example.android.calorietracker.utils</a><br/>
+<br/>
+<h2>Package com.example.android.calorietracker.utils</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-base-command/index.html">BaseCommand</a></h4>
+</td>
+<td>
+<p>Used to translate user intentions when adding entries.
+In this application we differentiate adding from the API, manual input and from favorites.</p>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">BaseCommand</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-date-converter/index.html">DateConverter</a></h4>
+</td>
+<td>
+<p>Convert java.util.date to Long so it can be stored in the database.</p>
+<code><span class="keyword">class </span><span class="identifier">DateConverter</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-home-view-model-factory/index.html">HomeViewModelFactory</a></h4>
+</td>
+<td>
+<p>Create a <a href="#">ViewModel</a> and check if it needs to use a database instance.
+A <a href="#">ViewModel</a> can only be created with a no-argument constructor, we use a ViewModel Factory initializing with arguments.</p>
+<code><span class="keyword">class </span><span class="identifier">HomeViewModelFactory</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Factory</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-single-live-event/index.html">SingleLiveEvent</a></h4>
+</td>
+<td>
+<p>A lifecycle-aware observable that sends only new updates after subscription, used for events like
+navigation and Snackbar messages.</p>
+<code><span class="keyword">class </span><span class="identifier">SingleLiveEvent</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="android.widget.-text-view/index.html">android.widget.TextView</a></h4>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="bind-recycler-view.html">bindRecyclerView</a></h4>
+</td>
+<td>
+<p>Bind the list of search results to a <a href="#">RecyclerView</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">bindRecyclerView</span><span class="symbol">(</span><span class="identifier" id="com.example.android.calorietracker.utils$bindRecyclerView(androidx.recyclerview.widget.RecyclerView, kotlin.collections.List((com.example.android.calorietracker.data.models.FoodProperty)))/recyclerView">recyclerView</span><span class="symbol">:</span>&nbsp;<span class="identifier">RecyclerView</span><span class="symbol">, </span><span class="identifier" id="com.example.android.calorietracker.utils$bindRecyclerView(androidx.recyclerview.widget.RecyclerView, kotlin.collections.List((com.example.android.calorietracker.data.models.FoodProperty)))/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../com.example.android.calorietracker.data.models/-food-property/index.html"><span class="identifier">FoodProperty</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="bind-status.html">bindStatus</a></h4>
+</td>
+<td>
+<p>Visualize the API status.</p>
+<code><span class="keyword">fun </span><span class="identifier">bindStatus</span><span class="symbol">(</span><span class="identifier" id="com.example.android.calorietracker.utils$bindStatus(android.widget.ImageView, com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus)/statusImageView">statusImageView</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a><span class="symbol">, </span><span class="identifier" id="com.example.android.calorietracker.utils$bindStatus(android.widget.ImageView, com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus)/status">status</span><span class="symbol">:</span>&nbsp;<a href="../com.example.android.calorietracker.data.models.enums/-calorie-tracker-api-status/index.html"><span class="identifier">CalorieTrackerApiStatus</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="format-amount.html">formatAmount</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">formatAmount</span><span class="symbol">(</span><span class="identifier" id="com.example.android.calorietracker.utils$formatAmount(kotlin.Int)/amount">amount</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="format-goal.html">formatGoal</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">formatGoal</span><span class="symbol">(</span><span class="identifier" id="com.example.android.calorietracker.utils$formatGoal(kotlin.Int)/goal">goal</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
