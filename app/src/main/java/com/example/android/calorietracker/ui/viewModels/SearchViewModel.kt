@@ -26,18 +26,21 @@ class SearchViewModel() : ViewModel() {
     val searchResult: LiveData<CategoryProperty>
         get() = _searchResult
 
+    var searchQuery = MutableLiveData<String>()
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getResult()
+
+        //getResult()
     }
 
-    private fun getResult() {
+    fun getResult() {
 
         coroutineScope.launch {
             // Let coroutines manage concurrency on the main thread
-            var getResultsDeferred = CalorieTrackerApi.retrofitService.getResults()
+            var getResultsDeferred = CalorieTrackerApi.retrofitService.getResultsAsync(searchQuery.value!!, false, false)
             try {
                 _status.value = CalorieTrackerApiStatus.LOADING
 

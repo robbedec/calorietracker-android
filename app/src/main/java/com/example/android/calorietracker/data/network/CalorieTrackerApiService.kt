@@ -10,6 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://trackapi.nutritionix.com/v2/"
 
@@ -30,9 +32,8 @@ interface CalorieTrackerApiService {
      * Throws an exception when an error occurs
      */
     @Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
-    @GET("search/instant?query=banana&common=false&self=false") // -> the api endpoint you want to use
-    fun getResults():
-            Deferred<CategoryProperty>
+    @GET("search/instant") // -> the api endpoint you want to use
+    fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean): Deferred<CategoryProperty>
 }
 
 object CalorieTrackerApi {

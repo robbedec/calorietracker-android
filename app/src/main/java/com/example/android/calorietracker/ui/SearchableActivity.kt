@@ -28,9 +28,10 @@ class SearchableActivity : AppCompatActivity() {
                 //doMySearch(query)
             }
         }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the options menu from XML
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main_search, menu)
@@ -52,5 +53,5 @@ class SearchableActivity : AppCompatActivity() {
             }
         })
         return true
-    }
+    }*/
 }
