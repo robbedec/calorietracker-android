@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -16,23 +17,33 @@ class SearchViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
     init {
         getResult()
     }
 
     private fun getResult() {
-        CalorieTrackerApi.retrofitService.getResults().enqueue(object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
+
+        coroutineScope.launch {
+            // Let coroutines manage concurrency on the main thread
+            var getResultsDeferred = CalorieTrackerApi.retrofitService.getResults()
+            try {
+                var result = getResultsDeferred.await() // Await is non blocking
+                _response.value = "Succes: ${result.branded?.get(0)?.name} and amount: ${result.branded?.get(0)?.amountCal}"
+            } catch (t: Throwable) {
                 _response.value = "Failure: " + t.message
                 Timber.i("robbe-failure: ${t.message}")
             }
+        }
+    }
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
-                Timber.i("robbe-succ: ${response.body()}")
-            }
-
-        })
-        _response.value = "Set the api response here"
+    /**
+     * Stop loading data when the [ViewModel] is destroyed
+     */
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
