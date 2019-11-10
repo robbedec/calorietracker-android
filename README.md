@@ -21,14 +21,27 @@ Open the project in Android Studio and build
 
 ## Running tests
 
+## Documentation
+
+Generate documentation by executing the following command in the root of the project or run the
+dokka gradle task in Android Studio.
+
+```
+./gradlew dokka
+```
+
+This will generate the docs/ folder in the root of the project. This folder contains
+the dokka generated Markdown (in github-flavored-markdown).
+
+
 ## Built with
 
 * [Gradle](https://gradle.org) - Dependency Management
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - Persistence library for onboard database
 * [Timber](https://github.com/JakeWharton/timber) - Logging tool
 * [Retrofit](https://github.com/square/retrofit) - Http client
-
-## Contributing
+* [Moshi](https://github.com/square/moshi) - JSON parser
+* [Nutritionix](https://www.nutritionix.com/) - public API and food database
 
 ## Authors
 
