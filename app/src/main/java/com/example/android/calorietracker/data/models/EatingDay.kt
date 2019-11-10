@@ -7,6 +7,17 @@ import androidx.room.TypeConverters
 import com.example.android.calorietracker.utils.DateConverter
 import java.util.*
 
+/**
+ * Represents a single day that can be stored and retrieved from the Room database.
+ *
+ * @property dayId the unique identifier.
+ * @property date the date when the entity was created.
+ * @property amountCal the amount of calories that the user has registered.
+ * @property limitCal number of calories that the user wants to eat in a day.
+ * @constructor Creates an [EatingDay] with default properties or with the details provided in the constructor.
+ *
+ * @author Robbe Decorte
+ */
 @Entity(tableName = "daily_eating_table")
 @TypeConverters(DateConverter::class)
 data class EatingDay(

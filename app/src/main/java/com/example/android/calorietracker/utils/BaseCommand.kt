@@ -1,19 +1,18 @@
 package com.example.android.calorietracker.utils
 
-// The String parameter in each signature is only for logging purposes
+/**
+ * Used to translate user intentions when adding entries.
+ * In this application we differentiate adding from the API, manual input and from favorites.
+ *
+ * The String parameter in each signature is only for logging purposes.
+ *
+ * @author Robbe Decorte
+ */
 sealed class BaseCommand {
 
-    /**
-     * When the user wants to search from the api
-     */
     class ApiSearch(val errorString : String) : BaseCommand()
 
-    /**
-     * When the user inputs from a textfield / label
-     */
     class Manual(val finishString : String): BaseCommand()
-    /**
-     * When the user inputs from favorites
-     */
+
     class Favorites(val correctString: String): BaseCommand()
 }

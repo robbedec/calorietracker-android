@@ -28,14 +28,26 @@ private val retrofit = Retrofit.Builder()
 interface CalorieTrackerApiService {
 
     /**
-     * [Deferred] has an await suspend function that waits for the result without blocking the UI
-     * Throws an exception when an error occurs
+     * Request a collection of data based on a search query.
+     *
+     * @param query the string that should be searched for.
+     * @param includeCommon should the category 'common' be included in the response.
+     * @param includeSelf should the category 'self' be included in the response.
+     *
+     * [Deferred] has an await suspend function that waits for the result without blocking the UI.
+     * Can throw HTTP errors when processing the request
+     *
+     * @author Robbe Decorte
      */
     @Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
     @GET("search/instant") // -> the api endpoint you want to use
     fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean): Deferred<CategoryProperty>
 }
 
+/**
+ * [Retrofit] instance to make API calls.
+ * This instance is a singleton
+ */
 object CalorieTrackerApi {
     val retrofitService: CalorieTrackerApiService by lazy {
         retrofit.create(CalorieTrackerApiService::class.java)

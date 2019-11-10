@@ -8,10 +8,12 @@ import com.example.android.calorietracker.data.models.EatingDay
 import com.example.android.calorietracker.data.models.FoodEntry
 
 /**
- * Version needs to increment each time the database schema changes, this creates a versioning system to log schema changes
- * To disable versioning use: exportSchema = false
+ * Version needs to increment each time the database schema changes, this creates a versioning system to log schema changes.
+ * To disable versioning use: exportSchema = false.
  *
- * Contains a static method that returns an instance for the provided context
+ * Contains a static method that returns an instance for the provided context.
+ *
+ * @author Robbe Decorte
  */
 @Database(entities = [EatingDay::class, FoodEntry::class], version = 2, exportSchema = false)
 abstract class CalorieDatabase : RoomDatabase() {
@@ -19,18 +21,23 @@ abstract class CalorieDatabase : RoomDatabase() {
     abstract val eatingDayDao: EatingDayDao
     abstract val foodEntryDao: FoodEntryDao
 
-    /**
-     * Allows clients to access methods to create or get the database without instantiating the class
-     */
+
+    // Allows clients to access methods to create or get the database without instantiating the class
     companion object {
 
-        /**
-         * @Volatile: value will never be cached, in other words: always up to date
-         * Used for multithreading
-         */
+
+        // @Volatile: value will never be cached, in other words: always up to date
+        // Used for multithreading
         @Volatile
         private var INSTANCE: CalorieDatabase? = null
 
+        /**
+         * Claims exclusive access to the context and provides an instance (singleton) of the database.
+         * Initialize the singleton if the current value of the instance is null.
+         *
+         * @param context contains global information about the application.
+         * @return an instance of the database.
+         */
         fun getInstance(context: Context): CalorieDatabase {
 
             // Multithreading lock, this = access to the context
