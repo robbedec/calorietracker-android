@@ -4,6 +4,7 @@
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [MainActivity](-main-activity/index.md) | `class MainActivity : AppCompatActivity` |
 | [SearchableActivity](-searchable-activity/index.md) | `class SearchableActivity : AppCompatActivity` |
-

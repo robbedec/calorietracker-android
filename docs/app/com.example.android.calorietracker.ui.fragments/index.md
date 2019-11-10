@@ -4,6 +4,7 @@
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [HomeFragment](-home-fragment/index.md) | `class HomeFragment : Fragment` |
 | [SearchFragment](-search-fragment/index.md) | `class SearchFragment : Fragment` |
-

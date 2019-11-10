@@ -11,9 +11,12 @@ Robbe Decorte
 
 ### Constructors
 
+| Name | Summary |
+|---|---|
 | [&lt;init&gt;](-init-.md) | A base class that holds application wide logic.`PusherApplication()` |
 
 ### Functions
 
+| Name | Summary |
+|---|---|
 | [onCreate](on-create.md) | `fun onCreate(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-

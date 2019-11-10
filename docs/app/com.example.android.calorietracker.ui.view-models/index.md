@@ -4,6 +4,7 @@
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [HomeViewModel](-home-view-model/index.md) | `class HomeViewModel : AndroidViewModel` |
 | [SearchViewModel](-search-view-model/index.md) | The [ViewModel](#) that is attached to [SearchFragment](#)`class SearchViewModel : ViewModel` |
-

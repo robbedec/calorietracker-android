@@ -4,6 +4,7 @@
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [CalorieTrackerApi](-calorie-tracker-api/index.md) | [Retrofit](#) instance to make API calls. This instance is a singleton`object CalorieTrackerApi` |
 | [CalorieTrackerApiService](-calorie-tracker-api-service/index.md) | `interface CalorieTrackerApiService` |
-

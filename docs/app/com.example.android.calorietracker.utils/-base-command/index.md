@@ -14,7 +14,8 @@ Robbe Decorte
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [ApiSearch](-api-search/index.md) | `class ApiSearch : `[`BaseCommand`](./index.md) |
 | [Favorites](-favorites/index.md) | `class Favorites : `[`BaseCommand`](./index.md) |
 | [Manual](-manual/index.md) | `class Manual : `[`BaseCommand`](./index.md) |
-

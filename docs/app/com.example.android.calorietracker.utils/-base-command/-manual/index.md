@@ -6,9 +6,12 @@
 
 ### Constructors
 
+| Name | Summary |
+|---|---|
 | [&lt;init&gt;](-init-.md) | `Manual(finishString: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 
+| Name | Summary |
+|---|---|
 | [finishString](finish-string.md) | `val finishString: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-

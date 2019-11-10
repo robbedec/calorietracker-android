@@ -9,5 +9,6 @@ This instance is a singleton
 
 ### Properties
 
+| Name | Summary |
+|---|---|
 | [retrofitService](retrofit-service.md) | `val retrofitService: `[`CalorieTrackerApiService`](../-calorie-tracker-api-service/index.md) |
-

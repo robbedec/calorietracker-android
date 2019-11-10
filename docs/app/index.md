@@ -2,6 +2,8 @@
 
 ### Packages
 
+| Name | Summary |
+|---|---|
 | [com.example.android.calorietracker](com.example.android.calorietracker/index.md) |  |
 | [com.example.android.calorietracker.data.models](com.example.android.calorietracker.data.models/index.md) |  |
 | [com.example.android.calorietracker.data.models.enums](com.example.android.calorietracker.data.models.enums/index.md) |  |

@@ -6,9 +6,12 @@
 
 ### Constructors
 
+| Name | Summary |
+|---|---|
 | [&lt;init&gt;](-init-.md) | `Favorites(correctString: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 
+| Name | Summary |
+|---|---|
 | [correctString](correct-string.md) | `val correctString: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-

@@ -11,6 +11,8 @@ Robbe Decorte
 
 ### Functions
 
+| Name | Summary |
+|---|---|
 | [clear](clear.md) | Remove all records from [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) table`abstract fun clear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [clearEntries](clear-entries.md) | Remove all food entries from the database`abstract fun clearEntries(key: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [delete](delete.md) | `abstract fun delete(entry: `[`EatingDay`](../../com.example.android.calorietracker.data.models/-eating-day/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>`abstract fun delete(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
@@ -23,4 +25,3 @@ Robbe Decorte
 | [insert](insert.md) | `abstract fun insert(entry: `[`EatingDay`](../../com.example.android.calorietracker.data.models/-eating-day/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [insertFoodEntry](insert-food-entry.md) | `abstract fun insertFoodEntry(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [update](update.md) | `abstract fun update(entry: `[`EatingDay`](../../com.example.android.calorietracker.data.models/-eating-day/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>`abstract fun update(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-

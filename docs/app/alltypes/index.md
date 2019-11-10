@@ -2,6 +2,8 @@
 
 ### All Types
 
+| Name | Summary |
+|---|---|
 |
 
 ##### [com.example.android.calorietracker.utils.BaseCommand](../com.example.android.calorietracker.utils/-base-command/index.md)

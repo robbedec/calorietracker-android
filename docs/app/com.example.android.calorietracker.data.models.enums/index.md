@@ -4,5 +4,6 @@
 
 ### Types
 
+| Name | Summary |
+|---|---|
 | [CalorieTrackerApiStatus](-calorie-tracker-api-status/index.md) | Representation of the API status.`enum class CalorieTrackerApiStatus` |
-
