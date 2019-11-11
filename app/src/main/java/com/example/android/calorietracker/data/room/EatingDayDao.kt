@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.android.calorietracker.data.room.entities.EatingDayEntity
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
-import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
-import com.example.android.calorietracker.domain.FoodEntry
 
 /**
  * Collection of database queries.
