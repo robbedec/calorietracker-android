@@ -44,7 +44,8 @@ class HomeFragment : Fragment() {
 
         // Fill the recyclerview and trigger navigation when an item is clicked
         val adapter = FoodEntryAdapter(FoodEntryListener {
-            foodEntryId -> viewModel.onFoodEntryClicked(foodEntryId)
+                //foodEntryId -> viewModel.onFoodEntryClicked(foodEntryId, action)
+            foodEntryId: Long, action: Int ->  viewModel.onFoodEntryClicked(foodEntryId, action)
         })
         binding.entryList.adapter = adapter
 

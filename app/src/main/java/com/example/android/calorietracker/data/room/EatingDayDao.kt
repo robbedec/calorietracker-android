@@ -5,6 +5,7 @@ import androidx.room.*
 import com.example.android.calorietracker.data.room.entities.EatingDayEntity
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
 import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.domain.FoodEntry
 
 /**
  * Collection of database queries.
@@ -96,4 +97,13 @@ interface EatingDayDao {
      */
     @Query("SELECT limit_calories FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
     fun getLimitCalories(): LiveData<Int>
+
+    /**
+     * Get a [FoodEntry] by it's id.
+     *
+     * @param key The id of the item.
+     * @return a [FoodEntry].
+     */
+    @Query("SELECT * FROM food_entry_table WHERE entryId = :key")
+    fun getFoodEntry(key: Long): FoodEntryEntity
 }

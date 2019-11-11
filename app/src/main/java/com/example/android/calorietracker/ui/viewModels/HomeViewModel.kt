@@ -185,6 +185,15 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
+    private fun removeEntry(entryId: Long) {
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                val entry = database.getFoodEntry(entryId)
+                database.delete(entry)
+            }
+        }
+    }
+
     /**
      * Removes all the entries from this day
      */
@@ -223,8 +232,18 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         _showSnackbarEvent.value = false
     }
 
-    fun onFoodEntryClicked(id: Long) {
+    /**
+     * Handles the click events from a [FoodEntry].
+     *
+     * @param id The id of the entry that was clicked.
+     * @param action Decides which action to trigger.
+     */
+    fun onFoodEntryClicked(id: Long, action: Int) {
         _navigateToFoodEntryOverview.value = id
+        when(action) {
+            0 -> Timber.i("Card with id $id clicked and action $action")
+            1 -> removeEntry(id)
+        }
     }
 
     /**

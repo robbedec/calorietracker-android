@@ -136,8 +136,8 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
  * Defining a click listener class, this method doesn't require you to store a full object reference
  * Use the id to make a database call when you need the object information
  */
-class FoodEntryListener(val clickListener: (foodEntryId: Long) -> Unit) {
-    fun onClick(entry: FoodEntryEntity) = clickListener(entry.entryId)
+class FoodEntryListener(val clickListener: (foodEntryId: Long, action: Int) -> Unit) {
+    fun onClick(entry: FoodEntryEntity, action: Int) = clickListener(entry.entryId, action)
 }
 
 sealed class DataItem {
