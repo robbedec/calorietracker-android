@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -44,7 +43,6 @@ class HomeFragment : Fragment() {
 
         // Fill the recyclerview and trigger navigation when an item is clicked
         val adapter = FoodEntryAdapter(FoodEntryListener {
-                //foodEntryId -> viewModel.onFoodEntryClicked(foodEntryId, action)
             foodEntryId: Long, action: Int ->  viewModel.onFoodEntryClicked(foodEntryId, action)
         })
         binding.entryList.adapter = adapter

@@ -3,6 +3,8 @@ package com.example.android.calorietracker.ui.viewModels
 import android.app.Application
 import android.text.format.DateUtils
 import androidx.lifecycle.*
+import com.example.android.calorietracker.data.FoodRepository
+import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.data.room.entities.EatingDayEntity
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
@@ -17,10 +19,12 @@ import java.util.*
 
 class HomeViewModel(val database: EatingDayDao, application: Application) : AndroidViewModel(application) {
 
+    private val repository = FoodRepository(CalorieDatabase.getInstance(application))
+
     /**
      * The current amount of calories
      */
-    var currentCalories: LiveData<Int> = Transformations.map(database.getAmountCalories()) {
+    var currentCalories: LiveData<Int> = Transformations.map(repository.getAmountCalories()) {
         formatAmount(it ?: 0)
     }
 
@@ -57,7 +61,8 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     /**
      * List of entries of the current day that get auto updated
      */
-    var entries = database.getFoodEntries()
+    //var entries = database.getFoodEntries()
+    var entries = repository.getFoodEntries()
 
     /**
      * Decide when to show SnackbarEvent at the bottom of the screen
@@ -76,7 +81,6 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     get() = _navigateToFoodEntryOverview
 
     init {
-        Timber.i("HomeViewModel created")
         initializeCurrentDay()
 
         dialogList = arrayOf("Search online", "Manually", "From favorites")
@@ -114,60 +118,8 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      */
     private fun initializeCurrentDay() {
         uiScope.launch {
-            currentDay.value = getTodayFromDatabase()
-            entries = database.getFoodEntries()
-        }
-    }
-
-    /**
-     * Fetch the current day from the database or create a new one
-     */
-    private suspend fun getTodayFromDatabase(): EatingDayWithEntries? {
-        return withContext(Dispatchers.IO) {
-            var day = database.getToday()
-            if(day == null) {
-                uiScope.launch {
-                    val newDay = EatingDayEntity()
-                    newDay.date = Calendar.getInstance().time
-
-                    insert(newDay)
-
-                    day = getTodayFromDatabase()
-                    currentDay.value = getTodayFromDatabase()
-
-                    Timber.i("$day")
-                    Timber.i("Created from day == null")
-                }
-            }
-            else if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
-                // Check if the latest date in the database is from today
-
-                uiScope.launch {
-                    val newDay = EatingDayEntity()
-                    newDay.date = Calendar.getInstance().time
-
-                    insert(newDay)
-                    currentDay.value = getTodayFromDatabase()
-
-                    Timber.i("Created from datecheck")
-                }
-            }
-
-            // Return the correct day
-            Timber.i("Returned $day")
-            day
-        }
-    }
-
-    private suspend fun insert(day: EatingDayEntity) {
-        withContext(Dispatchers.IO) {
-            database.insert(day)
-        }
-    }
-
-    private suspend fun insertFoodEntry(day: FoodEntryEntity) {
-        withContext(Dispatchers.IO) {
-            database.insertFoodEntry(day)
+            currentDay.value = repository.getToday()
+            entries = repository.getFoodEntries()
         }
     }
 
@@ -181,16 +133,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
             newEntry.entryName = name
             newEntry.entryCalories = amount
 
-            insertFoodEntry(newEntry)
-        }
-    }
-
-    private fun removeEntry(entryId: Long) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                val entry = database.getFoodEntry(entryId)
-                database.delete(entry)
-            }
+            repository.insertFoodEntry(newEntry)
         }
     }
 
@@ -200,10 +143,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     private fun clearEntries() {
         uiScope.launch {
             _showSnackbarEvent.value = true
-            withContext(Dispatchers.IO) {
-                database.clearEntries(currentDay.value!!.eatingDay!!.dayId)
-                //database.clear()
-            }
+            repository.clearEntries()
         }
     }
 
@@ -242,7 +182,11 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         _navigateToFoodEntryOverview.value = id
         when(action) {
             0 -> Timber.i("Card with id $id clicked and action $action")
-            1 -> removeEntry(id)
+            1 -> {
+                uiScope.launch {
+                    repository.removeEntry(id)
+                }
+            }
         }
     }
 

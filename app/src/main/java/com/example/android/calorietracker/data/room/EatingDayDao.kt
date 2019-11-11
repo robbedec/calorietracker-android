@@ -18,20 +18,11 @@ interface EatingDayDao {
     @Insert
     fun insert(entry: EatingDayEntity)
 
-    @Insert
-    fun insertFoodEntry(entry: FoodEntryEntity)
-
     @Update
     fun update(entry: EatingDayEntity)
 
-    @Update
-    fun update(entry: FoodEntryEntity)
-
     @Delete
     fun delete(entry: EatingDayEntity)
-
-    @Delete
-    fun delete(entry: FoodEntryEntity)
 
     /**
      * Get [EatingDayEntity] by id.
@@ -76,34 +67,10 @@ interface EatingDayDao {
     fun getToday(): EatingDayWithEntries?
 
     /**
-     *
-     * @return a [LiveData] object that holds a list of [FoodEntryEntity] from the last (current) [EatingDayEntity] in de database.
-     */
-    @Query("SELECT * FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
-    fun getFoodEntries(): LiveData<List<FoodEntryEntity>>
-
-    /**
-     * Gets the amount of calories registered from the last [EatingDayEntity] in the database.
-     *
-     * @return a [LiveData] object that holds the total intake.
-     */
-    @Query("SELECT SUM(food_amount_calories) FROM food_entry_table WHERE ownerId = (SELECT dayId FROM daily_eating_table ORDER BY dayId DESC LIMIT 1) ORDER BY entryId DESC")
-    fun getAmountCalories(): LiveData<Int>
-
-    /**
      * Gets the calorie intake limit from the last [EatingDayEntity] in the database.
      *
      * @return a [LiveData] object that holds the calorie limit.
      */
     @Query("SELECT limit_calories FROM daily_eating_table ORDER BY dayId DESC LIMIT 1")
     fun getLimitCalories(): LiveData<Int>
-
-    /**
-     * Get a [FoodEntry] by it's id.
-     *
-     * @param key The id of the item.
-     * @return a [FoodEntry].
-     */
-    @Query("SELECT * FROM food_entry_table WHERE entryId = :key")
-    fun getFoodEntry(key: Long): FoodEntryEntity
 }
