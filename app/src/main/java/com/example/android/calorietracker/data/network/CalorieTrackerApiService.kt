@@ -1,6 +1,6 @@
 package com.example.android.calorietracker.data.network
 
-import com.example.android.calorietracker.data.models.CategoryProperty
+import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -2,4 +2,4 @@
 
 # getAllEntries
 
-`abstract fun getAllEntries(): LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>`
+`abstract fun getAllEntries(): LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>`

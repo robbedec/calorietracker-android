@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.calorietracker.data.models.FoodProperty
+import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.databinding.RowSearchResultBinding
 
 class SearchResultAdapter : ListAdapter<FoodProperty, SearchResultAdapter.FoodPropertyViewHolder>(DiffCallback) {

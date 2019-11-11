@@ -2,8 +2,8 @@
 
 # getFoodEntries
 
-`abstract fun getFoodEntries(): LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>`
+`abstract fun getFoodEntries(): LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>`
 
 **Return**
-a [LiveData](#) object that holds a list of [FoodEntry](../../com.example.android.calorietracker.data.models/-food-entry/index.md) from the last (current) [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) in de database.
+a [LiveData](#) object that holds a list of [FoodEntryEntity](../../com.example.android.calorietracker.data.models/-food-entry/index.md) from the last (current) [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) in de database.
 

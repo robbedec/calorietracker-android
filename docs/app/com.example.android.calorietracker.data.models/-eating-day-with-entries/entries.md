@@ -2,10 +2,10 @@
 
 # entries
 
-`var entries: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntry`](../-food-entry/index.md)`>`
+`var entries: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntryEntity`](../-food-entry/index.md)`>`
 
-a [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) of [FoodEntry](../-food-entry/index.md) from the embedded [EatingDay](../-eating-day/index.md).
+a [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) of [FoodEntryEntity](../-food-entry/index.md) from the embedded [EatingDay](../-eating-day/index.md).
 
 ### Property
 
-`entries` - a [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) of [FoodEntry](../-food-entry/index.md) from the embedded [EatingDay](../-eating-day/index.md).
+`entries` - a [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) of [FoodEntryEntity](../-food-entry/index.md) from the embedded [EatingDay](../-eating-day/index.md).

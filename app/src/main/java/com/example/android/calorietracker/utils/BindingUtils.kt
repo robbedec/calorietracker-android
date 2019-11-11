@@ -6,9 +6,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.data.models.FoodEntry
-import com.example.android.calorietracker.data.models.FoodProperty
-import com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus
+import com.example.android.calorietracker.data.network.dto.FoodProperty
+import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
 
 /**
@@ -19,24 +19,24 @@ import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
  */
 
 /**
- * Bind the name of a [FoodEntry] to a [TextView].
+ * Bind the name of a [FoodEntryEntity] to a [TextView].
  *
  * @param item contains the name you want to bind.
  */
 @BindingAdapter("entryName")
-fun TextView.setEntryName(item: FoodEntry?) {
+fun TextView.setEntryName(item: FoodEntryEntity?) {
     item?.let {
         text = item.entryName
     }
 }
 
 /**
- * Bind the amount of calories of a [FoodEntry] to a [TextView].
+ * Bind the amount of calories of a [FoodEntryEntity] to a [TextView].
  *
  * @param item contains the amount you want to bind.
  */
 @BindingAdapter("amountCalories")
-fun TextView.setAmountCalories(item: FoodEntry?) {
+fun TextView.setAmountCalories(item: FoodEntryEntity?) {
     item?.let {
         text = item.entryCalories.toString()
     }

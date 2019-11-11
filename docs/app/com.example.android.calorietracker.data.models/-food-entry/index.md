@@ -1,16 +1,16 @@
-[app](../../index.md) / [com.example.android.calorietracker.data.models](../index.md) / [FoodEntry](./index.md)
+[app](../../index.md) / [com.example.android.calorietracker.data.models](../index.md) / [FoodEntryEntity](./index.md)
 
-# FoodEntry
+# FoodEntryEntity
 
-`data class FoodEntry`
+`data class FoodEntryEntity`
 
-Represents a [FoodEntry](./index.md) that can be retrieved or pulled from the Room database.
+Represents a [FoodEntryEntity](./index.md) that can be retrieved or pulled from the Room database.
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Creates an [FoodEntry](./index.md) with default properties or with the details provided in the constructor.`FoodEntry(entryId: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = 0L, entryName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "name", entryCalories: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0, ownerId: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = 0L)` |
+| [&lt;init&gt;](-init-.md) | Creates an [FoodEntryEntity](./index.md) with default properties or with the details provided in the constructor.`FoodEntryEntity(entryId: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = 0L, entryName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "name", entryCalories: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0, ownerId: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = 0L)` |
 
 ### Properties
 

@@ -2,4 +2,4 @@
 
 # delete
 
-`abstract fun delete(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun delete(entry: `[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

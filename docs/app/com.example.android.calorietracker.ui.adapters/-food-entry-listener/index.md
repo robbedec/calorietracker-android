@@ -23,4 +23,4 @@ Use the id to make a database call when you need the object information
 
 | Name | Summary |
 |---|---|
-| [onClick](on-click.md) | `fun onClick(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onClick](on-click.md) | `fun onClick(entry: `[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

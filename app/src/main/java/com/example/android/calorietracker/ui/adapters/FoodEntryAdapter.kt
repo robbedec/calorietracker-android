@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.data.models.FoodEntry
+import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
 import com.example.android.calorietracker.databinding.RowFoodEntryBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -68,7 +68,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
     /**
      * Add header to the front of the list
      */
-    fun addHeaderAndSubmitList(list: List<FoodEntry>?) {
+    fun addHeaderAndSubmitList(list: List<FoodEntryEntity>?) {
         adapterScore.launch {
             val items = when(list) {
                 null -> listOf(DataItem.Header)
@@ -88,7 +88,7 @@ class FoodEntryAdapter(private val clickListener: FoodEntryListener) : ListAdapt
      */
     class FoodEntryHolder private constructor(val binding: RowFoodEntryBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: FoodEntry, clickListener: FoodEntryListener) {
+        fun bind(item: FoodEntryEntity, clickListener: FoodEntryListener) {
             binding.foodEntry = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -137,11 +137,11 @@ class FoodEntryDiffCallback : DiffUtil.ItemCallback<DataItem>() {
  * Use the id to make a database call when you need the object information
  */
 class FoodEntryListener(val clickListener: (foodEntryId: Long) -> Unit) {
-    fun onClick(entry: FoodEntry) = clickListener(entry.entryId)
+    fun onClick(entry: FoodEntryEntity) = clickListener(entry.entryId)
 }
 
 sealed class DataItem {
-    data class FoodEntryItem(val foodEntry: FoodEntry): DataItem() {
+    data class FoodEntryItem(val foodEntry: FoodEntryEntity): DataItem() {
         override val id = foodEntry.entryId
     }
     object Header: DataItem() {

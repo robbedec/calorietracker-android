@@ -2,12 +2,11 @@ package com.example.android.calorietracker.ui.viewModels
 
 import android.app.Application
 import android.text.format.DateUtils
-import android.view.animation.Transformation
 import androidx.lifecycle.*
-import com.example.android.calorietracker.data.models.EatingDay
-import com.example.android.calorietracker.data.models.EatingDayWithEntries
-import com.example.android.calorietracker.data.models.FoodEntry
 import com.example.android.calorietracker.data.room.EatingDayDao
+import com.example.android.calorietracker.data.room.entities.EatingDayEntity
+import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
+import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import com.example.android.calorietracker.utils.formatAmount
@@ -128,7 +127,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
             var day = database.getToday()
             if(day == null) {
                 uiScope.launch {
-                    val newDay = EatingDay()
+                    val newDay = EatingDayEntity()
                     newDay.date = Calendar.getInstance().time
 
                     insert(newDay)
@@ -144,7 +143,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
                 // Check if the latest date in the database is from today
 
                 uiScope.launch {
-                    val newDay = EatingDay()
+                    val newDay = EatingDayEntity()
                     newDay.date = Calendar.getInstance().time
 
                     insert(newDay)
@@ -160,13 +159,13 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         }
     }
 
-    private suspend fun insert(day: EatingDay) {
+    private suspend fun insert(day: EatingDayEntity) {
         withContext(Dispatchers.IO) {
             database.insert(day)
         }
     }
 
-    private suspend fun insertFoodEntry(day: FoodEntry) {
+    private suspend fun insertFoodEntry(day: FoodEntryEntity) {
         withContext(Dispatchers.IO) {
             database.insertFoodEntry(day)
         }
@@ -177,7 +176,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         uiScope.launch {
             val updatedDay = currentDay.value ?: return@launch
 
-            var newEntry = FoodEntry()
+            var newEntry = FoodEntryEntity()
             newEntry.ownerId = updatedDay.eatingDay!!.dayId
             newEntry.entryName = name
             newEntry.entryCalories = amount

@@ -82,9 +82,9 @@ Database entity that embeds an [EatingDay](../com.example.android.calorietracker
 
 |
 
-##### [com.example.android.calorietracker.data.models.FoodEntry](../com.example.android.calorietracker.data.models/-food-entry/index.md)
+##### [com.example.android.calorietracker.data.models.FoodEntryEntity](../com.example.android.calorietracker.data.models/-food-entry/index.md)
 
-Represents a [FoodEntry](../com.example.android.calorietracker.data.models/-food-entry/index.md) that can be retrieved or pulled from the Room database.
+Represents a [FoodEntryEntity](../com.example.android.calorietracker.data.models/-food-entry/index.md) that can be retrieved or pulled from the Room database.
 
 
 |

@@ -1,4 +1,4 @@
-[app](../../index.md) / [com.example.android.calorietracker.data.models](../index.md) / [FoodEntry](index.md) / [entryId](./entry-id.md)
+[app](../../index.md) / [com.example.android.calorietracker.data.models](../index.md) / [FoodEntryEntity](index.md) / [entryId](./entry-id.md)
 
 # entryId
 

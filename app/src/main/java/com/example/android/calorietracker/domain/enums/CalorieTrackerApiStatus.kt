@@ -1,4 +1,4 @@
-package com.example.android.calorietracker.data.models.enums
+package com.example.android.calorietracker.domain.enums
 
 /**
  * Representation of the API status.

@@ -1,5 +1,5 @@
-[app](../../../index.md) / [com.example.android.calorietracker.ui.adapters](../../index.md) / [DataItem](../index.md) / [FoodEntryItem](index.md) / [foodEntry](./food-entry.md)
+[app](../../../index.md) / [com.example.android.calorietracker.ui.adapters](../../index.md) / [DataItem](../index.md) / [FoodEntryItem](index.md) / [foodEntryEntity](./food-entry.md)
 
-# foodEntry
+# foodEntryEntity
 
-`val foodEntry: `[`FoodEntry`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)
+`val foodEntryEntity: `[`FoodEntryEntity`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)

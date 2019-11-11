@@ -1,4 +1,4 @@
-package com.example.android.calorietracker.data.models
+package com.example.android.calorietracker.data.network.dto
 
 /**
  * Class that holds the different categories of [FoodProperty].

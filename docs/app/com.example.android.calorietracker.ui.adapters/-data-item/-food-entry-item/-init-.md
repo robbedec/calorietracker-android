@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`FoodEntryItem(foodEntry: `[`FoodEntry`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)`)`
+`FoodEntryItem(foodEntryEntity: `[`FoodEntryEntity`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)`)`

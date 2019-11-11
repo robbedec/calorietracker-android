@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.calorietracker.data.models.CategoryProperty
-import com.example.android.calorietracker.data.models.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
+import com.example.android.calorietracker.data.network.dto.CategoryProperty
+import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

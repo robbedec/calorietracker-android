@@ -18,7 +18,7 @@
 | [currentCalories](current-calories.md) | The current amount of calories`var currentCalories: LiveData<`[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`>` |
 | [database](database.md) | `val database: `[`EatingDayDao`](../../com.example.android.calorietracker.data.room/-eating-day-dao/index.md) |
 | [dialogList](dialog-list.md) | The options that are shown in de "add calories from" dialog`val dialogList: `[`Array`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>` |
-| [entries](entries.md) | List of entries of the current day that get auto updated`var entries: LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntry`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>` |
+| [entries](entries.md) | List of entries of the current day that get auto updated`var entries: LiveData<`[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`>>` |
 | [goal](goal.md) | The maximum amount of calories (the goal that the user wants to reach`val goal: LiveData<`[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`>` |
 | [navigateToFoodEntryOverview](navigate-to-food-entry-overview.md) | `val navigateToFoodEntryOverview: MutableLiveData<`[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`>` |
 | [percentage](percentage.md) | `val percentage: LiveData<`[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`>` |
