@@ -11,8 +11,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.data.room.FoodEntryDao
-import com.example.android.calorietracker.data.models.EatingDay
-import com.example.android.calorietracker.data.models.FoodEntry
+import com.example.android.calorietracker.data.room.entities.EatingDayEntity
+import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
 import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -54,9 +54,9 @@ class CalorieDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetNight() {
-        val day = EatingDay()
-        val entry = FoodEntry()
+    fun insertAndGetDay() {
+        val day = EatingDayEntity()
+        val entry = FoodEntryEntity()
 
         eatingDao.insert(day)
         foodDao.insert(entry)

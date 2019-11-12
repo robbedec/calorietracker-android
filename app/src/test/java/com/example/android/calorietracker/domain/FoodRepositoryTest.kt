@@ -7,6 +7,7 @@ import io.mockk.clearAllMocks
 import io.mockk.mockk
 import org.junit.After
 import org.junit.Before
+import org.junit.Test
 
 class FoodRepositoryTest {
     private lateinit var repository: FoodRepository
@@ -23,4 +24,5 @@ class FoodRepositoryTest {
     fun tearDown() {
         clearAllMocks()
     }
+
 }
