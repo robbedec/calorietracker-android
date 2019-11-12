@@ -41,19 +41,24 @@ class DefaultTextValuesTest {
         onView(withId(R.id.percentage_text)).check(matches(withText(defaultPercentage)))
     }
 
+    @Test
+    fun testSnackbarShowOnClearingEntries() {
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText(R.string.cleared_message)))
+    }
+
 
     @Test
     fun testTextValuesAfterNewEntry() {
         val percentage = "30%"
 
         // Wait for the snackbar to stop showing
-        SystemClock.sleep(5000)
+        SystemClock.sleep(3100)
 
         for(x in 0..2) {
             onView(withId(R.id.add_button)).perform(click())
             onView(withText("From favorites")).inRoot(RootMatchers.isDialog()).perform(click())
         }
-
 
         onView(withId(R.id.percentage_text)).check(matches(withText(percentage)))
     }
