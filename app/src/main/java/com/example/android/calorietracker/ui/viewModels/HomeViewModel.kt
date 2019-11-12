@@ -49,13 +49,6 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
     val addFromState = SingleLiveEvent<BaseCommand>()
 
-    /**
-     * Used to stop every operation triggered by the ViewModel when it gets destroyed
-     * Coroutine jobs will run on the main scope / thread
-     */
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
     private var currentDay = MutableLiveData<EatingDayWithEntries?>()
 
     /**
@@ -110,14 +103,14 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      */
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 
     /**
      * Init currentDay without blocking the ui thread while waiting for the result
      */
     private fun initializeCurrentDay() {
-        uiScope.launch {
+        viewModelScope.launch {
             currentDay.value = repository.getToday()
             entries = repository.getFoodEntries()
         }
@@ -125,7 +118,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
 
     private fun addEntry(name: String, amount: Int){
         // TODO: Create method that receives new entry details with safeArgs and update the currentDay (Udacity-Lesson6-15-Exercise: Couroutines for Long running operations -> video 1 6:33
-        uiScope.launch {
+        viewModelScope.launch {
             val updatedDay = currentDay.value ?: return@launch
 
             var newEntry = FoodEntryEntity()
@@ -141,7 +134,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
      * Removes all the entries from this day
      */
     private fun clearEntries() {
-        uiScope.launch {
+        viewModelScope.launch {
             _showSnackbarEvent.value = true
             repository.clearEntries()
         }
@@ -183,7 +176,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
         when(action) {
             0 -> Timber.i("Card with id $id clicked and action $action")
             1 -> {
-                uiScope.launch {
+                viewModelScope.launch {
                     repository.removeEntry(id)
                 }
             }

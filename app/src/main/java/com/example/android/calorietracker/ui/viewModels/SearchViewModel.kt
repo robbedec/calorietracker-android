@@ -1,16 +1,10 @@
 package com.example.android.calorietracker.ui.viewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 
@@ -41,9 +35,6 @@ class SearchViewModel : ViewModel() {
      */
     var searchQuery = MutableLiveData<String>()
 
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     init {
 
         /**
@@ -59,7 +50,7 @@ class SearchViewModel : ViewModel() {
     }
 
     private fun getResult() {
-        coroutineScope.launch {
+        viewModelScope.launch {
             // Let coroutines manage concurrency on the main thread
             val getResultsDeferred = CalorieTrackerApi.retrofitService.getResultsAsync(searchQuery.value!!, false, false)
             try {
@@ -85,6 +76,6 @@ class SearchViewModel : ViewModel() {
      */
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 }
