@@ -1,7 +1,9 @@
-package com.example.android.calorietracker.data
+package com.example.android.calorietracker.domain
 
+import android.net.ConnectivityManager
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
+import com.example.android.calorietracker.data.network.CalorieTrackerApiService
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.data.room.FoodEntryDao
@@ -17,7 +19,7 @@ import java.util.*
  *
  * @param database Intsance of the in memory database.
  */
-class FoodRepository(private val database: CalorieDatabase) {
+class FoodRepository(private val database: CalorieDatabase, private val apiService: CalorieTrackerApiService, private val connectivityManager: ConnectivityManager) {
 
     private var eatingDayDao: EatingDayDao = database.eatingDayDao
     private var foodEntryDao: FoodEntryDao = database.foodEntryDao
@@ -50,6 +52,10 @@ class FoodRepository(private val database: CalorieDatabase) {
             // Return the correct day
             day
         }
+    }
+
+    fun getLimitCalories(): LiveData<Int> {
+        return eatingDayDao.getLimitCalories()
     }
 
     /*

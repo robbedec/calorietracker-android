@@ -1,7 +1,9 @@
 package com.example.android.calorietracker.ui.fragments
 
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
+import com.example.android.calorietracker.domain.FoodRepository
+import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.SearchableActivity
@@ -35,8 +39,18 @@ class HomeFragment : Fragment() {
 
         // Request the ViewModal
         val application = requireNotNull(this.activity).application
-        val dataSource = CalorieDatabase.getInstance(application).eatingDayDao
-        val viewModelFactory = HomeViewModelFactory(dataSource, application)
+
+        val database = CalorieDatabase.getInstance(application)
+        val apiService = CalorieTrackerApi.retrofitService
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val viewModelFactory = HomeViewModelFactory(
+            FoodRepository(
+                database,
+                apiService,
+                connectivityManager
+            )
+        )
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
 
         binding.homeViewModal = viewModel

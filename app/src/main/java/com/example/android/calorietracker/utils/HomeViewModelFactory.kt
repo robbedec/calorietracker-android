@@ -1,11 +1,9 @@
 package com.example.android.calorietracker.utils
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.calorietracker.data.room.EatingDayDao
+import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
-import com.example.android.calorietracker.ui.viewModels.SearchViewModel
 import java.lang.IllegalArgumentException
 
 /**
@@ -17,11 +15,11 @@ import java.lang.IllegalArgumentException
  *
  * @author Robbe Decorte
  */
-class HomeViewModelFactory(private val dataSource: EatingDayDao, private val application: Application) : ViewModelProvider.Factory {
+class HomeViewModelFactory(private val foodRepository: FoodRepository) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(dataSource, application) as T
+            return HomeViewModel(foodRepository) as T
         }
         /*if(modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             return SearchViewModel(dataSource, application) as T

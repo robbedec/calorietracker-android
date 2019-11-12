@@ -1,12 +1,7 @@
 package com.example.android.calorietracker.ui.viewModels
 
-import android.app.Application
-import android.text.format.DateUtils
 import androidx.lifecycle.*
-import com.example.android.calorietracker.data.FoodRepository
-import com.example.android.calorietracker.data.room.CalorieDatabase
-import com.example.android.calorietracker.data.room.EatingDayDao
-import com.example.android.calorietracker.data.room.entities.EatingDayEntity
+import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
 import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
 import com.example.android.calorietracker.utils.BaseCommand
@@ -15,11 +10,8 @@ import com.example.android.calorietracker.utils.formatAmount
 import com.example.android.calorietracker.utils.formatGoal
 import kotlinx.coroutines.*
 import timber.log.Timber
-import java.util.*
 
-class HomeViewModel(val database: EatingDayDao, application: Application) : AndroidViewModel(application) {
-
-    private val repository = FoodRepository(CalorieDatabase.getInstance(application))
+class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
 
     /**
      * The current amount of calories
@@ -31,7 +23,7 @@ class HomeViewModel(val database: EatingDayDao, application: Application) : Andr
     /**
      * The maximum amount of calories (the goal that the user wants to reach
      */
-    val goal: LiveData<Int> = Transformations.map(database.getLimitCalories()) {
+    val goal: LiveData<Int> = Transformations.map(repository.getLimitCalories()) {
         formatGoal(it ?: 5000)
     }
 
