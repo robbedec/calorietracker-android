@@ -18,4 +18,5 @@
     <string name="search_hint">Search</string>
     <string name="app_label">Calorie Tracker</string>
     <string name="add_calories_text">add calories</string>
+    <string name="clear_entries_text">Clear today\'s log</string>
 </resources>

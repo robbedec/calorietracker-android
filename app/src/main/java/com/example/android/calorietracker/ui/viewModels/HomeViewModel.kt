@@ -125,7 +125,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     /**
      * Removes all the entries from this day
      */
-    private fun clearEntries() {
+    fun clearEntries() {
         viewModelScope.launch {
             _showSnackbarEvent.value = true
             repository.clearEntries()

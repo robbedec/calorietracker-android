@@ -5,10 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -27,15 +25,31 @@ import com.example.android.calorietracker.utils.BaseCommand
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
+/**
+ * Fragment shows the main page of the app.
+ *
+ * @author Robbe Decorte
+ */
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
 
+    /**
+     * Inflates the layout with Data Binding and sets the lifecycle owner to the [HomeFragment] to enable Data Binding and observe [LiveData].
+     * Sets up the [RecyclerView] with an adapter.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate xml in onCreateView
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_home, container, false)
+
+        setHasOptionsMenu(true)
 
         // Request the ViewModal
         val application = requireNotNull(this.activity).application
@@ -134,5 +148,29 @@ class HomeFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    /**
+     * Inflates the overflow menu
+     *
+     * @param menu [Menu] that contains the overflow menu.
+     * @param inflater The [MenuInflater].
+     */
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.overflow_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    /**
+     * Checks which item of the overflow menu was selected and triggers the action in [HomeViewModel].
+     *
+     * @param item The item that was clicked.
+     * @return true if the overflow menu should close after clicking an item.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.clear_entries_menu -> viewModel.clearEntries()
+        }
+        return true
     }
 }
