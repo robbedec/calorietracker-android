@@ -12,6 +12,7 @@ import com.example.android.calorietracker.domain.FoodEntry
  * @property entryName the display name of the entry.
  * @property entryCalories the amount of calories in the entry.
  * @property ownerId foreign key that points to the id of [EatingDayEntity] that it belongs to.
+ * @property apiId key to get information about the entry from the online API, defaults to an empty string.
  * @constructor Creates an [FoodEntryEntity] with default properties or with the details provided in the constructor.
  *
  * More information about foreign keys can be found [here](www.medium.com/@tonyowen/room-entity-annotations-379150e1ca82)

@@ -62,13 +62,13 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
                 var result = getResultsDeferred.await() // Await is non blocking
                 _status.value = CalorieTrackerApiStatus.DONE
                 _searchResult.value = result
-                Timber.i("succes: $result")
+                Timber.i("Request OK: $result")
             } catch (t: Throwable) {
                 _status.value = CalorieTrackerApiStatus.ERROR
 
                 // Clear the RecyclerView when an error occurs
                 _searchResult.value = CategoryProperty(ArrayList())
-                Timber.i("robbe-failure: ${t.message}")
+                Timber.i("Network error: ${t.message}")
             }
         }
     }
