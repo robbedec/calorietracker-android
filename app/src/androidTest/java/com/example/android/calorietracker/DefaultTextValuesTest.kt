@@ -2,12 +2,14 @@ package com.example.android.calorietracker
 
 import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.rule.ActivityTestRule
 import com.example.android.calorietracker.ui.MainActivity
 import org.junit.Before
@@ -28,8 +30,8 @@ class DefaultTextValuesTest {
 
     @Before
     fun setUp() {
-        onView(withId(R.id.add_button)).perform(click())
-        onView(withText("Manually")).inRoot(RootMatchers.isDialog()).perform(click())
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().targetContext)
+        onView(withText(R.string.clear_entries_text)).perform(click())
     }
 
     @Test
