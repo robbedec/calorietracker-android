@@ -1,6 +1,7 @@
 package com.example.android.calorietracker.data.network.dto
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Holds 1 category that can be retrieved from the API.
@@ -11,6 +12,7 @@ import com.squareup.moshi.Json
  *
  * @author Robbe Decorte
  */
+
 data class FoodProperty (
     @Json(name = "nix_item_id") val id: String,
     @Json(name= "food_name") val name: String,

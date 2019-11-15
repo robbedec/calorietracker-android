@@ -129,6 +129,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
         viewModelScope.launch {
             _showSnackbarEvent.value = true
             repository.clearEntries()
+            //repository.clearDays()
         }
     }
 

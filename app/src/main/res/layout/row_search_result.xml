@@ -7,10 +7,46 @@
         <variable
             name="property"
             type="com.example.android.calorietracker.data.network.dto.FoodProperty" />
+        <variable
+            name="clickListener"
+            type="com.example.android.calorietracker.ui.adapters.SearchEntryListener" />
     </data>
-    <TextView
-        android:id="@+id/result_title"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{property.name}" />
+        android:background="@drawable/row_search_result_border"
+        android:paddingTop="10dp"
+        android:paddingStart="2dp"
+        android:paddingBottom="10dp"
+        android:onClick="@{() -> clickListener.onClick(property)}">
+
+        <TextView
+            android:id="@+id/result_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{property.name}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/result_amount"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".80"/>
+
+        <TextView
+            android:id="@+id/result_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="right"
+            app:amountCal="@{property}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/result_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -48,6 +48,7 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
                     val newDay = EatingDayEntity()
                     newDay.date = Calendar.getInstance().time
                     insertEatingDay(newDay)
+                    day = getToday()
             }
             // Return the correct day
             day
@@ -56,6 +57,12 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
 
     fun getLimitCalories(): LiveData<Int> {
         return eatingDayDao.getLimitCalories()
+    }
+
+    suspend fun clearDays() {
+        withContext(Dispatchers.IO) {
+            eatingDayDao.clear()
+        }
     }
 
     /*

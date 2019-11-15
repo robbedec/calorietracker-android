@@ -1,16 +1,15 @@
 package com.example.android.calorietracker.data.network
 
+import androidx.annotation.Nullable
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.moshi.Moshi
+import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://trackapi.nutritionix.com/v2/"

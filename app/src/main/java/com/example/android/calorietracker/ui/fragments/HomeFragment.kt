@@ -22,8 +22,8 @@ import com.example.android.calorietracker.ui.SearchableActivity
 import com.example.android.calorietracker.ui.adapters.FoodEntryAdapter
 import com.example.android.calorietracker.ui.adapters.FoodEntryListener
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
+import com.example.android.calorietracker.utils.ApplicationViewModelFactory
 import com.example.android.calorietracker.utils.BaseCommand
-import com.example.android.calorietracker.utils.HomeViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         val apiService = CalorieTrackerApi.retrofitService
         val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val viewModelFactory = HomeViewModelFactory(
+        val viewModelFactory = ApplicationViewModelFactory(
             FoodRepository(
                 database,
                 apiService,

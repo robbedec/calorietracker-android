@@ -3,6 +3,8 @@ package com.example.android.calorietracker.ui.viewModels
 import androidx.lifecycle.*
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
+import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import kotlinx.coroutines.*
 import timber.log.Timber
@@ -11,7 +13,7 @@ import timber.log.Timber
 /**
  * The [ViewModel] that is attached to [SearchFragment]
  */
-class SearchViewModel : ViewModel() {
+class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() {
 
 
     /**
@@ -60,7 +62,7 @@ class SearchViewModel : ViewModel() {
                 var result = getResultsDeferred.await() // Await is non blocking
                 _status.value = CalorieTrackerApiStatus.DONE
                 _searchResult.value = result
-
+                Timber.i("succes: $result")
             } catch (t: Throwable) {
                 _status.value = CalorieTrackerApiStatus.ERROR
 
@@ -78,4 +80,10 @@ class SearchViewModel : ViewModel() {
         super.onCleared()
         viewModelScope.cancel()
     }
-}
+
+    fun onSearchEntryClicked(name: String, amountCal: Int) {
+        viewModelScope.launch {
+            foodRepository.insertFoodEntry(FoodEntryEntity(entryName = name, entryCalories = amountCal, ownerId = foodRepository.getToday()!!.eatingDay!!.dayId))
+        }
+    }
+ }
