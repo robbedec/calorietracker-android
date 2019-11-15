@@ -96,7 +96,11 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
         return foodEntryDao.getAmountCalories()
     }
 
-    fun getFoodEntry(key: Long): FoodEntryEntity {
-        return foodEntryDao.getFoodEntry(key)
+    suspend fun getFoodEntry(key: Long): FoodEntryEntity {
+        lateinit var entry: FoodEntryEntity
+        withContext(Dispatchers.IO) {
+            entry = foodEntryDao.getFoodEntry(key)
+        }
+        return entry
     }
 }

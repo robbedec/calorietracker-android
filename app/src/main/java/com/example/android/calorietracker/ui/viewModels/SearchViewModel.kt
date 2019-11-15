@@ -81,9 +81,9 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
         viewModelScope.cancel()
     }
 
-    fun onSearchEntryClicked(name: String, amountCal: Int) {
+    fun onSearchEntryClicked(id: String, name: String, amountCal: Int) {
         viewModelScope.launch {
-            foodRepository.insertFoodEntry(FoodEntryEntity(entryName = name, entryCalories = amountCal, ownerId = foodRepository.getToday()!!.eatingDay!!.dayId))
+            foodRepository.insertFoodEntry(FoodEntryEntity(entryName = name, entryCalories = amountCal, ownerId = foodRepository.getToday()!!.eatingDay!!.dayId, apiId = id))
         }
     }
  }

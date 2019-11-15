@@ -55,6 +55,6 @@ class SearchResultAdapter(private val clickListener: SearchEntryListener) : List
  * Defining a click listener class, this method doesn't require you to store a full object reference
  * Use the id to make a database call when you need the object information
  */
-class SearchEntryListener(val clickListener: (name: String, amountCal: Int) -> Unit) {
-    fun onClick(entry: FoodProperty) = clickListener(entry.name, entry.amountCal.roundToInt())
+class SearchEntryListener(val clickListener: (id: String, name: String, amountCal: Int) -> Unit) {
+    fun onClick(entry: FoodProperty) = clickListener(entry.id, entry.name, entry.amountCal.roundToInt())
 }

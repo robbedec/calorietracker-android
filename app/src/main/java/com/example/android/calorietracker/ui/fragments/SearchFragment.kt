@@ -54,9 +54,9 @@ class SearchFragment : Fragment() {
         binding.searchViewModal = viewModel
 
         val adapter = SearchResultAdapter(SearchEntryListener {
-                name: String, amountCal: Int ->
+                id: String, name: String, amountCal: Int ->
             run {
-                viewModel.onSearchEntryClicked(name, amountCal)
+                viewModel.onSearchEntryClicked(id, name, amountCal)
                 val intent = Intent(activity, MainActivity::class.java)
                 activity!!.startActivity(intent)
             }

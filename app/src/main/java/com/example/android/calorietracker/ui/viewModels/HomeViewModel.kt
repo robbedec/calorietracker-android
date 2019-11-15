@@ -167,7 +167,12 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     fun onFoodEntryClicked(id: Long, action: Int) {
         _navigateToFoodEntryOverview.value = id
         when(action) {
-            0 -> Timber.i("Card with id $id clicked and action $action")
+            0 -> {
+                viewModelScope.launch {
+                    val entry = repository.getFoodEntry(id)
+                    Timber.i("Card with id $id clicked: $entry")
+                }
+            }
             1 -> {
                 viewModelScope.launch {
                     repository.removeEntry(id)

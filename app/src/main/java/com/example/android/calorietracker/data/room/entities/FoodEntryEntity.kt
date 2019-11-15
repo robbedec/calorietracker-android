@@ -30,7 +30,9 @@ data class FoodEntryEntity (
     @ColumnInfo(name = "food_amount_calories")
     var entryCalories: Int = 0,
 
-    var ownerId: Long = 0L
+    var ownerId: Long = 0L,
+
+    var apiId: String = ""
 )
 
 /**
