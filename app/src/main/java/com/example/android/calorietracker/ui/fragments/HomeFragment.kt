@@ -9,8 +9,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
