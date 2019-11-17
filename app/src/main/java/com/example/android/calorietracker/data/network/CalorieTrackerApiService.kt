@@ -1,11 +1,15 @@
 package com.example.android.calorietracker.data.network
 
 import androidx.annotation.Nullable
+import com.example.android.calorietracker.PusherApplication
+import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -18,10 +22,18 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
+private val okHttpClientBuilder = OkHttpClient.Builder()
+    .addInterceptor {
+        val request = it.request()
+        val newRequest = request.newBuilder().addHeader("x-app-id", PusherApplication.context.getString(R.string.x_app_id)).addHeader("x-app-key", PusherApplication.context.getString(R.string.x_app_key))
+        it.proceed(newRequest.build())
+    }
+
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory()) // -> let's you use something else than the default Call class (in this case the coroutine Deferred
     .baseUrl(BASE_URL)
+    .client(okHttpClientBuilder.build())
     .build()
 
 interface CalorieTrackerApiService {
@@ -38,7 +50,7 @@ interface CalorieTrackerApiService {
      *
      * @author Robbe Decorte
      */
-    @Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
+    //@Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
     @GET("search/instant") // -> the api endpoint you want to use
     fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean): Deferred<CategoryProperty>
 }
@@ -52,3 +64,5 @@ object CalorieTrackerApi {
         retrofit.create(CalorieTrackerApiService::class.java)
     }
 }
+
+
