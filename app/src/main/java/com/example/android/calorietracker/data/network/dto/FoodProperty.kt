@@ -25,11 +25,3 @@ data class FoodProperty (
 ) {
     val weight: Double = _weight ?: 0.0
 }
-
-fun FoodProperty.asDatabaseEntity(): FoodEntry {
-    return FoodEntry(
-        entryName = name,
-        entryCalories = amountCal.toInt(),
-        apiId = id
-    )
-}

@@ -6,11 +6,11 @@ import com.example.android.calorietracker.data.network.CalorieTrackerApiService
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.data.network.dto.NutrientInfo
-import com.example.android.calorietracker.data.network.dto.asDatabaseEntity
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.data.room.FoodEntryDao
 import com.example.android.calorietracker.data.room.entities.*
+import com.example.android.calorietracker.utils.asDatabaseEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*

@@ -109,8 +109,8 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     }
 
     private fun addEntry(name: String, amount: Int){
-        // TODO: Create method that receives new entry details with safeArgs and update the currentDay (Udacity-Lesson6-15-Exercise: Couroutines for Long running operations -> video 1 6:33
         viewModelScope.launch {
+            // If updatedDay == null, return to viewModelScope.launch without executing the other statements in this block.
             val updatedDay = currentDay.value ?: return@launch
 
             var newEntry = FoodEntry()
@@ -145,7 +145,6 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
             }
             1 -> {
                 addFromState.value = BaseCommand.Manual("Add calories manual")
-                clearEntries()
             }
             2 -> {
                 addFromState.value = BaseCommand.Favorites("Select from favorites")
