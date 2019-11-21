@@ -1,15 +1,16 @@
 package com.example.android.calorietracker.domain
 
-import android.net.ConnectivityManager
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import com.example.android.calorietracker.data.network.CalorieTrackerApiService
+import com.example.android.calorietracker.data.network.dto.CategoryProperty
+import com.example.android.calorietracker.data.network.dto.FoodProperty
+import com.example.android.calorietracker.data.network.dto.NutrientInfo
+import com.example.android.calorietracker.data.network.dto.asDatabaseEntity
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.data.room.EatingDayDao
 import com.example.android.calorietracker.data.room.FoodEntryDao
-import com.example.android.calorietracker.data.room.entities.EatingDayEntity
-import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
-import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.data.room.entities.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -17,18 +18,17 @@ import java.util.*
 /**
  * Repository for fetching data from the database or API.
  *
- * @param database Intsance of the in memory database.
+ * @param database Instance of the in memory database.
  */
-class FoodRepository(private val database: CalorieDatabase, private val apiService: CalorieTrackerApiService, private val connectivityManager: ConnectivityManager) {
+class FoodRepository(private val database: CalorieDatabase, private val apiService: CalorieTrackerApiService) {
 
     private var eatingDayDao: EatingDayDao = database.eatingDayDao
     private var foodEntryDao: FoodEntryDao = database.foodEntryDao
 
-
     /*
      * EatingDay methods
      */
-    private suspend fun insertEatingDay(day: EatingDayEntity) {
+    private suspend fun insertEatingDay(day: EatingDay) {
         withContext(Dispatchers.IO) {
             eatingDayDao.insert(day)
         }
@@ -38,14 +38,14 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
         return withContext(Dispatchers.IO) {
             var day = eatingDayDao.getToday()
             if(day == null) {
-                    val newDay = EatingDayEntity()
+                    val newDay = EatingDay()
                     newDay.date = Calendar.getInstance().time
                     insertEatingDay(newDay)
                     day = getToday()
             }
             else if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
                 // Check if the latest date in the database is from today
-                    val newDay = EatingDayEntity()
+                    val newDay = EatingDay()
                     newDay.date = Calendar.getInstance().time
                     insertEatingDay(newDay)
                     day = getToday()
@@ -69,9 +69,30 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
      * FoodEntry methods
      */
 
-    suspend fun insertFoodEntry(entry: FoodEntryEntity) {
+    suspend fun insertFoodEntry(entry: FoodEntry) {
         withContext(Dispatchers.IO) {
+            entry.ownerId = getToday()!!.eatingDay!!.dayId
             foodEntryDao.insert(entry)
+        }
+    }
+
+    suspend fun insertFoodEntryWithNutrients(entry: FoodProperty) {
+        withContext(Dispatchers.IO) {
+            var nutrientConversion = getNutrientsUtil()
+            var entryDB = entry.asDatabaseEntity()
+            entryDB.ownerId = getToday()!!.eatingDay!!.dayId
+
+            val id = foodEntryDao.insert(entryDB)
+
+            val nutrients = entry.nutrients.map { nutrient ->
+                val nutrientC = nutrientConversion.find { it.attr_id == nutrient.id }
+                ClarifiedNutrient(
+                    name = nutrientC!!.name,
+                    value = nutrient.value,
+                    unit = nutrientC.unit,
+                    parentId = id
+                ) }
+            foodEntryDao.insertAllNutrients(nutrients)
         }
     }
 
@@ -88,7 +109,7 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
         }
     }
 
-    fun getFoodEntries(): LiveData<List<FoodEntryEntity>> {
+    fun getFoodEntries(): LiveData<List<FoodEntry>> {
         return foodEntryDao.getFoodEntries()
     }
 
@@ -96,11 +117,28 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
         return foodEntryDao.getAmountCalories()
     }
 
-    suspend fun getFoodEntry(key: Long): FoodEntryEntity {
-        lateinit var entry: FoodEntryEntity
-        withContext(Dispatchers.IO) {
-            entry = foodEntryDao.getFoodEntry(key)
+    suspend fun getFoodEntry(key: Long): FoodEntry {
+        return withContext(Dispatchers.IO) {
+            foodEntryDao.getFoodEntry(key)
         }
-        return entry
     }
+
+    suspend fun getNutrientsFromEntry(key: Long): FoodEntryWithNutrients {
+        return withContext(Dispatchers.IO) {
+            //foodEntryDao.getNutrientsFromEntry(key)
+            foodEntryDao.getFoodEntryWithNutrients(key)
+        }
+    }
+
+    // API calls
+    suspend fun search(query: String): CategoryProperty {
+        return apiService.getResultsAsync(query, includeCommon = false, includeSelf = false, detailed = true).await()
+    }
+
+    suspend fun getNutrientsUtil(): List<NutrientInfo> {
+        return apiService.getNutrientInformationAsync().await()
+    }
+
+
+
 }

@@ -2,7 +2,9 @@ package com.example.android.calorietracker.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.domain.FoodRepository
+import com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
 import com.example.android.calorietracker.ui.viewModels.SearchViewModel
 import java.lang.IllegalArgumentException
@@ -23,6 +25,16 @@ class ApplicationViewModelFactory(private val foodRepository: FoodRepository) : 
         }
         if(modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             return SearchViewModel(foodRepository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
+
+class FoodEntryDetailViewModelFactory(private val foodRepository: FoodRepository, private val entryId: Long) : ViewModelProvider.Factory  {
+    @Suppress("unchecked_cast")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(FoodEntryDetailViewModel::class.java)) {
+            return FoodEntryDetailViewModel(foodRepository, entryId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

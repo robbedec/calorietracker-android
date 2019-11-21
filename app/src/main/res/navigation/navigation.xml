@@ -7,6 +7,19 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.android.calorietracker.ui.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Today's log"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_foodEntryDetailFragment"
+            app:destination="@id/foodEntryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodEntryDetailFragment"
+        android:name="com.example.android.calorietracker.ui.fragments.FoodEntryDetailFragment"
+        android:label="Detailed product"
+        tools:layout="@layout/fragment_food_entry_detail">
+        <argument
+            android:name="entryId"
+            app:argType="long" />
+    </fragment>
 </navigation>

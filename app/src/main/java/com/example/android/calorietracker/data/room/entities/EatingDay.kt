@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.android.calorietracker.domain.EatingDay
 import com.example.android.calorietracker.utils.DateConverter
 import java.util.*
 
@@ -15,13 +14,13 @@ import java.util.*
  * @property date the date when the entity was created.
  * @property amountCal the amount of calories that the user has registered.
  * @property limitCal number of calories that the user wants to eat in a day.
- * @constructor Creates an [EatingDayEntity] with default properties or with the details provided in the constructor.
+ * @constructor Creates an [EatingDay] with default properties or with the details provided in the constructor.
  *
  * @author Robbe Decorte
  */
 @Entity(tableName = "daily_eating_table")
 @TypeConverters(DateConverter::class)
-data class EatingDayEntity(
+data class EatingDay(
 
     @PrimaryKey(autoGenerate = true)
     var dayId: Long = 0L,
@@ -35,16 +34,3 @@ data class EatingDayEntity(
     @ColumnInfo(name = "limit_calories")
     val limitCal: Int = 5000
 )
-
-/**
- * Extension method to convert a [FoodEntryEntity].
- *
- * @return a [EatindDay].
- */
-fun EatingDayEntity.asDomainModel(): EatingDay {
-    return EatingDay(
-        id = dayId,
-        date = date,
-        amountCal = amountCal,
-        limitCal = limitCal)
-}

@@ -3,13 +3,14 @@ package com.example.android.calorietracker.data.network
 import androidx.annotation.Nullable
 import com.example.android.calorietracker.PusherApplication
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.data.network.dto.CategoryProperty
+import com.example.android.calorietracker.data.network.dto.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -25,13 +26,13 @@ private val moshi = Moshi.Builder()
 private val okHttpClientBuilder = OkHttpClient.Builder()
     .addInterceptor {
         val request = it.request()
-        val newRequest = request.newBuilder().addHeader("x-app-id", PusherApplication.context.getString(R.string.x_app_id)).addHeader("x-app-key", PusherApplication.context.getString(R.string.x_app_key))
+        val newRequest = request.newBuilder().addHeader("x-app-id", PusherApplication.appId).addHeader("x-app-key", PusherApplication.appKey)
         it.proceed(newRequest.build())
     }
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory()) // -> let's you use something else than the default Call class (in this case the coroutine Deferred
+    .addCallAdapterFactory(CoroutineCallAdapterFactory()) // -> let's you use something else than the default Call class (in this case the coroutine Deferred)
     .baseUrl(BASE_URL)
     .client(okHttpClientBuilder.build())
     .build()
@@ -52,7 +53,11 @@ interface CalorieTrackerApiService {
      */
     //@Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
     @GET("search/instant") // -> the api endpoint you want to use
-    fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean): Deferred<CategoryProperty>
+    fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean, @Query("detailed") detailed: Boolean): Deferred<CategoryProperty>
+
+
+    @GET("utils/nutrients")
+    fun getNutrientInformationAsync() : Deferred<List<NutrientInfo>>
 }
 
 /**

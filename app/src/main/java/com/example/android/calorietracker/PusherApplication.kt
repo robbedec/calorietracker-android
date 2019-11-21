@@ -13,8 +13,8 @@ import timber.log.Timber
 class PusherApplication : Application() {
 
     companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var context: Context
+        lateinit var appId: String
+        lateinit var appKey: String
     }
 
     override fun onCreate() {
@@ -23,7 +23,8 @@ class PusherApplication : Application() {
         // Setup timber
         Timber.plant(Timber.DebugTree())
 
-        // Make applicationContext accessible as a static variable.
-        context = applicationContext
+        // Make apiKeys accessible as a static variable.
+        appId = applicationContext.getString(R.string.x_app_id)
+        appKey = applicationContext.getString(R.string.x_app_key)
     }
 }

@@ -4,18 +4,18 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 /**
- * Database entity that embeds an [EatingDayEntity] with the entries from that day.
+ * Database entity that embeds an [EatingDay] with the entries from that day.
  *
- * @property eatingDay the [EatingDayEntity] object.
- * @property entries a [List] of [FoodEntryEntity] from the embedded [EatingDayEntity].
+ * @property eatingDay the [EatingDay] object.
+ * @property entries a [List] of [FoodEntry] from the embedded [EatingDay].
  * @constructor Creates an [EatingDayWithEntries] with default properties or with the properties provided in the constructor.
  *
  * @author Robbe Decorte
  */
 data class EatingDayWithEntries (
     @Embedded
-    var eatingDay: EatingDayEntity? = null,
+    var eatingDay: EatingDay? = null,
 
     @Relation(parentColumn = "dayId", entityColumn = "ownerId")
-    var entries: List<FoodEntryEntity> = ArrayList()
+    var entries: List<FoodEntry> = ArrayList()
 )

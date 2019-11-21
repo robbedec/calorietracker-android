@@ -3,7 +3,7 @@ package com.example.android.calorietracker.ui.viewModels
 import androidx.lifecycle.*
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
-import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import kotlinx.coroutines.*
@@ -54,21 +54,22 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
     private fun getResult() {
         viewModelScope.launch {
             // Let coroutines manage concurrency on the main thread
-            val getResultsDeferred = CalorieTrackerApi.retrofitService.getResultsAsync(searchQuery.value!!, false, false)
             try {
                 _status.value = CalorieTrackerApiStatus.LOADING
 
                 // This will run on a thread managed by Retrofit
-                var result = getResultsDeferred.await() // Await is non blocking
+                var result = foodRepository.search(searchQuery.value!!) // Await is non blocking
+
                 _status.value = CalorieTrackerApiStatus.DONE
                 _searchResult.value = result
-                Timber.i("Request OK: $result")
+
             } catch (t: Throwable) {
                 _status.value = CalorieTrackerApiStatus.ERROR
 
                 // Clear the RecyclerView when an error occurs
                 _searchResult.value = CategoryProperty(ArrayList())
-                Timber.i("Network error: ${t.message}")
+
+                Timber.i(t.message)
             }
         }
     }
@@ -81,9 +82,19 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
         viewModelScope.cancel()
     }
 
-    fun onSearchEntryClicked(id: String, name: String, amountCal: Int) {
+    fun onSearchEntryClicked(entry: FoodProperty) {
         viewModelScope.launch {
-            foodRepository.insertFoodEntry(FoodEntryEntity(entryName = name, entryCalories = amountCal, ownerId = foodRepository.getToday()!!.eatingDay!!.dayId, apiId = id))
+            try {
+                val list = CalorieTrackerApi.retrofitService.getNutrientInformationAsync().await()
+                foodRepository.insertFoodEntryWithNutrients(entry)
+
+
+
+            }catch (t: Throwable) {
+
+                Timber.i(t.message)
+            }
+
         }
     }
  }

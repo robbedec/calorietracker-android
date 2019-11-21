@@ -3,7 +3,7 @@ package com.example.android.calorietracker.ui.viewModels
 import androidx.lifecycle.*
 import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
-import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.data.room.entities.FoodEntry
 import com.example.android.calorietracker.utils.BaseCommand
 import com.example.android.calorietracker.utils.SingleLiveEvent
 import com.example.android.calorietracker.utils.formatAmount
@@ -46,7 +46,6 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     /**
      * List of entries of the current day that get auto updated
      */
-    //var entries = database.getFoodEntries()
     var entries = repository.getFoodEntries()
 
     /**
@@ -88,6 +87,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
         _percentage.addSource(goal) { res ->
             _percentage.value = ((currentCalories.value ?: 0) * 100.0f / (res ?: 5000)).toInt()
         }
+
     }
 
     /**
@@ -113,7 +113,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
         viewModelScope.launch {
             val updatedDay = currentDay.value ?: return@launch
 
-            var newEntry = FoodEntryEntity()
+            var newEntry = FoodEntry()
             newEntry.ownerId = updatedDay.eatingDay!!.dayId
             newEntry.entryName = name
             newEntry.entryCalories = amount
@@ -165,12 +165,13 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
      * @param action Decides which action to trigger.
      */
     fun onFoodEntryClicked(id: Long, action: Int) {
-        _navigateToFoodEntryOverview.value = id
         when(action) {
             0 -> {
                 viewModelScope.launch {
                     val entry = repository.getFoodEntry(id)
-                    Timber.i("Card with id $id clicked: $entry")
+                    if(entry.apiId.isNotEmpty()) {
+                        _navigateToFoodEntryOverview.value = entry.entryId
+                    }
                 }
             }
             1 -> {

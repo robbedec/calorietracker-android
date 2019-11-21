@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.android.calorietracker.data.room.entities.EatingDayEntity
-import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
+import com.example.android.calorietracker.data.room.entities.ClarifiedNutrient
+import com.example.android.calorietracker.data.room.entities.EatingDay
+import com.example.android.calorietracker.data.room.entities.FoodEntry
 
 /**
  * Version needs to increment each time the database schema changes, this creates a versioning system to log schema changes.
@@ -15,7 +16,7 @@ import com.example.android.calorietracker.data.room.entities.FoodEntryEntity
  *
  * @author Robbe Decorte
  */
-@Database(entities = [EatingDayEntity::class, FoodEntryEntity::class], version = 3, exportSchema = false)
+@Database(entities = [EatingDay::class, FoodEntry::class, ClarifiedNutrient::class], version = 5, exportSchema = false)
 abstract class CalorieDatabase : RoomDatabase() {
 
     abstract val eatingDayDao: EatingDayDao

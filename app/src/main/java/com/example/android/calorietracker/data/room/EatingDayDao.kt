@@ -2,7 +2,7 @@ package com.example.android.calorietracker.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.android.calorietracker.data.room.entities.EatingDayEntity
+import com.example.android.calorietracker.data.room.entities.EatingDay
 import com.example.android.calorietracker.data.room.entities.EatingDayWithEntries
 
 /**
@@ -14,25 +14,25 @@ import com.example.android.calorietracker.data.room.entities.EatingDayWithEntrie
 interface EatingDayDao {
 
     @Insert
-    fun insert(entry: EatingDayEntity)
+    fun insert(entry: EatingDay)
 
     @Update
-    fun update(entry: EatingDayEntity)
+    fun update(entry: EatingDay)
 
     @Delete
-    fun delete(entry: EatingDayEntity)
+    fun delete(entry: EatingDay)
 
     /**
-     * Get [EatingDayEntity] by id.
+     * Get [EatingDay] by id.
      *
-     * @param key id of the desired [EatingDayEntity]
-     * @return the corresponding [EatingDayEntity]
+     * @param key id of the desired [EatingDay]
+     * @return the corresponding [EatingDay]
      */
     @Query("SELECT * FROM daily_eating_table WHERE dayId = :key")
-    fun get(key: Long): EatingDayEntity
+    fun get(key: Long): EatingDay
 
     /**
-     * Remove all records from [EatingDayEntity] table
+     * Remove all records from [EatingDay] table
      */
     @Query("DELETE FROM daily_eating_table")
     fun clear()
@@ -40,7 +40,7 @@ interface EatingDayDao {
     /**
      * Remove all food entries from the database
      *
-     * @param key id of the [EatingDayEntity] from who you want to delete the food entries.
+     * @param key id of the [EatingDay] from who you want to delete the food entries.
      */
     @Query("DELETE FROM food_entry_table WHERE ownerId = :key")
     fun clearEntries(key: Long)
@@ -49,13 +49,13 @@ interface EatingDayDao {
      * Get all day records from the table
      * Automatically updates the live data when changes are recorded in the database
      *
-     * @return a [LiveData] object that holds a list of [EatingDayEntity]
+     * @return a [LiveData] object that holds a list of [EatingDay]
      */
     @Query("SELECT * FROM daily_eating_table ORDER BY dayId DESC")
-    fun getAllEntries(): LiveData<List<EatingDayEntity>>
+    fun getAllEntries(): LiveData<List<EatingDay>>
 
     /**
-     * Get the last [EatingDayEntity] and include it's entries.
+     * Get the last [EatingDay] and include it's entries.
      * Nullable in case there are no records in the table (after clearing table ...)
      *
      * @return the last [EatingDayWithEntries] in the database.
@@ -65,7 +65,7 @@ interface EatingDayDao {
     fun getToday(): EatingDayWithEntries?
 
     /**
-     * Gets the calorie intake limit from the last [EatingDayEntity] in the database.
+     * Gets the calorie intake limit from the last [EatingDay] in the database.
      *
      * @return a [LiveData] object that holds the calorie limit.
      */

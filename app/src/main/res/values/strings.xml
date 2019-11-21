@@ -14,7 +14,7 @@
     <string name="cleared_message">Removed all entries from today!</string>
     <string name="edit_text">Edit</string>
     <string name="remove_text">remove</string>
-    <string name="header_text">Todays log</string>
+    <string name="header_text">Today\'s log</string>
     <string name="search_hint">Search</string>
     <string name="app_label">Calorie Tracker</string>
     <string name="add_calories_text">add calories</string>

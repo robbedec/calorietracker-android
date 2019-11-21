@@ -40,13 +40,11 @@ class SearchFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = CalorieDatabase.getInstance(application)
         val apiService = CalorieTrackerApi.retrofitService
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         val viewModelFactory = ApplicationViewModelFactory(
             FoodRepository(
                 database,
-                apiService,
-                connectivityManager
+                apiService
             )
         )
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
@@ -54,9 +52,9 @@ class SearchFragment : Fragment() {
         binding.searchViewModal = viewModel
 
         val adapter = SearchResultAdapter(SearchEntryListener {
-                id: String, name: String, amountCal: Int ->
+                entry ->
             run {
-                viewModel.onSearchEntryClicked(id, name, amountCal)
+                viewModel.onSearchEntryClicked(entry)
                 val intent = Intent(activity, MainActivity::class.java)
                 activity!!.startActivity(intent)
             }
