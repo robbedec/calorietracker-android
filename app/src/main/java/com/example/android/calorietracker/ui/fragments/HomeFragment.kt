@@ -37,10 +37,10 @@ class HomeFragment : Fragment() {
      * Inflates the layout with Data Binding and sets the lifecycle owner to the [HomeFragment] to enable Data Binding and observe [LiveData].
      * Sets up the [RecyclerView] with an adapter.
      *
-     * @param inflater
+     * @param inflater Inflates the layout.
      * @param container
-     * @param savedInstanceState
-     * @return
+     * @param savedInstanceState Previously saved view state.
+     * @return The view that is displayed in the fragment.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate xml in onCreateView
