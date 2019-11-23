@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.calorietracker.R
@@ -12,6 +13,7 @@ import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.data.room.entities.FoodEntry
 import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 /**
@@ -53,14 +55,14 @@ fun TextView.setAmountCalories(item: FoodProperty?) {
 }
 
 /**
- * Bind the list of search results to a [RecyclerView].
+ * Bind a list to the adapter of a [RecyclerView].
  *
  * @param recyclerView the view that should contain the list.
  * @param data the list that should be shown.
  */
 @BindingAdapter("resultListData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<FoodProperty>?) {
-    val adapter = recyclerView.adapter as SearchResultAdapter
+fun <E> bindRecyclerView(recyclerView: RecyclerView, data: List<E>?) {
+    val adapter = recyclerView.adapter as ListAdapter<E, RecyclerView.ViewHolder>
     adapter.submitList(data)
 }
 
@@ -90,6 +92,7 @@ fun bindStatus(statusImageView: ImageView, status: CalorieTrackerApiStatus?) {
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     if(imgUrl.isNullOrEmpty()) {
+        Timber.i("test")
         imgView.setImageResource(R.drawable.broken_image)
     } else {
         imgUrl?.let {
