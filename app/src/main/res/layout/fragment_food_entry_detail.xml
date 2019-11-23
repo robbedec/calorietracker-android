@@ -8,8 +8,68 @@
         <variable
             name="viewModel"
             type="com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel" />
+        <variable
+            name="foodEntry"
+            type="com.example.android.calorietracker.data.room.entities.FoodEntryWithNutrients" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/product_detail_image"
+            imageUrl="@{foodEntry.foodEntry.imageBig}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/broken_image" />
+
+        <TextView
+            android:id="@+id/product_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{foodEntry.foodEntry.entryName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_image"
+            android:layout_margin="8dp"
+            tools:text="Product name" />
+
+        <TextView
+            android:id="@+id/product_detail_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{foodEntry.foodEntry.brandName}"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_name"
+            android:layout_margin="8dp"
+            tools:text="Company name" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_company"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_detail_nutrition_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    resultListData="@{foodEntry.nutrients}"
+
+                     />
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

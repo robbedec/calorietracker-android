@@ -94,6 +94,8 @@ class HomeFragment : Fragment() {
 
         /**
          * Update the [RecyclerView] when the contents of the viewmodel list changes
+         *
+         * Can't use the Generic bindingAdapter because of the custom header
          */
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {

@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentFoodEntryDetailBinding
 import com.example.android.calorietracker.domain.FoodRepository
+import com.example.android.calorietracker.ui.adapters.NutritionAdapter
 import com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel
 import com.example.android.calorietracker.utils.FoodEntryDetailViewModelFactory
 
@@ -39,6 +41,15 @@ class FoodEntryDetailFragment : Fragment() {
             FoodEntryDetailFragmentArgs.fromBundle(requireArguments()).entryId
         )
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FoodEntryDetailViewModel::class.java)
+
+        binding.productDetailNutritionList.adapter = NutritionAdapter()
+
+        /**
+         * Bind the product when it is retrieved from the database.
+         */
+        viewModel.product.observe(this, Observer {
+            binding.foodEntry = viewModel.product.value
+        })
 
         return binding.root
     }

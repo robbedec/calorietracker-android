@@ -30,6 +30,14 @@ data class FoodEntry (
 
     var ownerId: Long = 0L,
 
-    var apiId: String = ""
+    var apiId: String = "",
+
+    var brandName: String = "",
+
+    var image: String = "",
+
+    var imageBig: String = "",
+
+    var weight: Double = 0.0
 
 )

@@ -16,7 +16,7 @@ import com.example.android.calorietracker.data.room.entities.FoodEntry
  *
  * @author Robbe Decorte
  */
-@Database(entities = [EatingDay::class, FoodEntry::class, ClarifiedNutrient::class], version = 5, exportSchema = false)
+@Database(entities = [EatingDay::class, FoodEntry::class, ClarifiedNutrient::class], version = 7, exportSchema = false)
 abstract class CalorieDatabase : RoomDatabase() {
 
     abstract val eatingDayDao: EatingDayDao

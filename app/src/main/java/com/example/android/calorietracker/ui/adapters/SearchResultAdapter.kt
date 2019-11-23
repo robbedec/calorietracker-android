@@ -7,11 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.databinding.RowSearchResultBinding
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.R
-import kotlin.math.roundToInt
 
 
 class SearchResultAdapter(private val clickListener: SearchEntryListener) : ListAdapter<FoodProperty, SearchResultAdapter.FoodPropertyViewHolder>(DiffCallback) {

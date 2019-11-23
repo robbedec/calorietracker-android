@@ -16,6 +16,10 @@ fun FoodProperty.asDatabaseEntity(): FoodEntry {
     return FoodEntry(
         entryName = name,
         entryCalories = amountCal.toInt(),
-        apiId = id
+        apiId = id,
+        brandName = brandName,
+        image = image.thumb,
+        imageBig = image.highres,
+        weight = weight
     )
 }
