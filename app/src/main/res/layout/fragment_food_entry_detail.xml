@@ -50,13 +50,24 @@
             android:layout_margin="8dp"
             tools:text="Company name" />
 
+        <TextView
+            android:id="@+id/product_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_company"
+            tools:text="Nutritional value"
+            app:entryInfo="@{foodEntry.foodEntry}"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_detail_company"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_title"
             android:layout_margin="8dp"
             android:padding="8dp">
 

@@ -10,10 +10,12 @@
         android:layout_height="wrap_content">
 
         <TextView
+            nutrientInfo="@{nutritionLine}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{nutritionLine.name}"
-            />
+            android:background="@drawable/row_search_result_border"
+            android:padding="5sp"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </layout>

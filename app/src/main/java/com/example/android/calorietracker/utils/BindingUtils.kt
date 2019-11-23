@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.calorietracker.R
 import com.example.android.calorietracker.data.network.dto.FoodProperty
+import com.example.android.calorietracker.data.room.entities.ClarifiedNutrient
 import com.example.android.calorietracker.data.room.entities.FoodEntry
 import com.example.android.calorietracker.domain.enums.CalorieTrackerApiStatus
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
@@ -43,7 +44,7 @@ fun TextView.setEntryName(item: FoodEntry?) {
 @BindingAdapter("amountCalories")
 fun TextView.setAmountCalories(item: FoodEntry?) {
     item?.let {
-        text = item.entryCalories.toString() + " cal"
+        text = "${item.entryCalories} cal"
     }
 }
 
@@ -51,6 +52,20 @@ fun TextView.setAmountCalories(item: FoodEntry?) {
 fun TextView.setAmountCalories(item: FoodProperty?) {
     item?.let {
         text = item.amountCal.roundToInt().toString() + " cal"
+    }
+}
+
+@BindingAdapter("entryInfo")
+fun TextView.setEntryInfo(entry: FoodEntry?) {
+    entry?.let {
+        text = "Nutritional value for " + entry.weight.toString() + " g (" + entry.entryCalories + " cal)"
+    }
+}
+
+@BindingAdapter("nutrientInfo")
+fun TextView.setNutrientInfo(nutrient: ClarifiedNutrient) {
+    nutrient.let {
+        text = nutrient.value.toString() + " " + nutrient.unit + " of " + nutrient.name
     }
 }
 
