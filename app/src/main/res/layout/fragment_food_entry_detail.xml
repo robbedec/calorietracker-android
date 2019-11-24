@@ -20,34 +20,35 @@
         <ImageView
             android:id="@+id/product_detail_image"
             imageUrl="@{foodEntry.foodEntry.imageBig}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:layout_constraintEnd_toStartOf="@id/product_detail_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/broken_image" />
 
         <TextView
             android:id="@+id/product_detail_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{foodEntry.foodEntry.entryName}"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_detail_image"
+            app:layout_constraintStart_toEndOf="@id/product_detail_image"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="8dp"
             tools:text="Product name" />
 
         <TextView
             android:id="@+id/product_detail_company"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{foodEntry.foodEntry.brandName}"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_detail_name"
-            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@id/product_detail_image"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="3dp"
             tools:text="Company name" />
 
         <TextView
@@ -57,7 +58,7 @@
             android:textSize="18sp"
             android:layout_margin="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_detail_company"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_image"
             tools:text="Nutritional value"
             app:entryInfo="@{foodEntry.foodEntry}"/>
 
