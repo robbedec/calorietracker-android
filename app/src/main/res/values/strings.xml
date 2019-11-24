@@ -20,4 +20,5 @@
     <string name="app_label">Calorie Tracker</string>
     <string name="add_calories_text">add calories</string>
     <string name="clear_entries_text">Clear today\'s log</string>
+    <string name="how_long">How long would it take to burn those calories?</string>
 </resources>

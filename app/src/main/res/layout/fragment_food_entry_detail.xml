@@ -63,23 +63,55 @@
             app:entryInfo="@{foodEntry.foodEntry}"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/nutrition_list_holder"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toTopOf="@id/product_detail_burning_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_detail_title"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_detail_nutrition_list"
+                resultListData="@{foodEntry.nutrients}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/product_detail_burning_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nutrition_list_holder"
+            app:layout_constraintBottom_toTopOf="@id/calorie_burning_holder"
+            android:text="@string/how_long"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/calorie_burning_holder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_burning_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="8dp"
             android:padding="8dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/product_detail_nutrition_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    resultListData="@{foodEntry.nutrients}"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineHeight="20sp"
+                android:lines="3"
+                tools:text="running" />
 
-                     />
+
         </androidx.cardview.widget.CardView>
 
 
