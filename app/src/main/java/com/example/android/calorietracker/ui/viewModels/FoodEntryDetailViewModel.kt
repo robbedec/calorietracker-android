@@ -1,10 +1,8 @@
 package com.example.android.calorietracker.ui.viewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.android.calorietracker.data.room.entities.FoodEntryWithNutrients
+import com.example.android.calorietracker.domain.CalorieBurningCalculator
 import com.example.android.calorietracker.domain.FoodRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,15 +13,19 @@ class FoodEntryDetailViewModel(private val foodRepository: FoodRepository, entry
     val product: LiveData<FoodEntryWithNutrients>
         get() = _product
 
+    private val _burnCalories = MediatorLiveData<Map<String, Int>>()
+    val burnCalories: LiveData<Map<String, Int>>
+        get() = _burnCalories
+
+
 
     init {
         viewModelScope.launch {
             _product.value = foodRepository.getNutrientsFromEntry(entryId)
-            /*Timber.i(product.value.nutrients.size.toString())
-            product.nutrients.forEach {
-                Timber.i(product.foodEntry!!.entryName)
-                Timber.i(it.name + " " + it.unit + " " + it.value)
-            }*/
+        }
+
+        _burnCalories.addSource(_product) {
+            _burnCalories.value = CalorieBurningCalculator(amountCal = it.foodEntry!!.entryCalories).calculate()
         }
     }
 }

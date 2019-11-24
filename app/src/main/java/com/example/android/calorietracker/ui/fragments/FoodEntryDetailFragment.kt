@@ -16,6 +16,7 @@ import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.ui.adapters.NutritionAdapter
 import com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel
 import com.example.android.calorietracker.utils.FoodEntryDetailViewModelFactory
+import timber.log.Timber
 
 class FoodEntryDetailFragment : Fragment() {
 
@@ -51,6 +52,9 @@ class FoodEntryDetailFragment : Fragment() {
             binding.foodEntry = viewModel.product.value
         })
 
+        viewModel.burnCalories.observe(this, Observer {
+            Timber.i(viewModel.burnCalories.value?.get("running").toString())
+        })
         return binding.root
     }
 }
