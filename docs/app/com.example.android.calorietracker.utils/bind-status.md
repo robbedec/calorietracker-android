@@ -2,7 +2,7 @@
 
 # bindStatus
 
-`fun bindStatus(statusImageView: `[`ImageView`](https://developer.android.com/reference/android/widget/ImageView.html)`, status: `[`CalorieTrackerApiStatus`](../com.example.android.calorietracker.data.models.enums/-calorie-tracker-api-status/index.md)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun bindStatus(statusImageView: `[`ImageView`](https://developer.android.com/reference/android/widget/ImageView.html)`, status: `[`CalorieTrackerApiStatus`](../com.example.android.calorietracker.domain.enums/-calorie-tracker-api-status/index.md)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Visualize the API status.
 

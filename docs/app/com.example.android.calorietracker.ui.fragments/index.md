@@ -6,5 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [HomeFragment](-home-fragment/index.md) | `class HomeFragment : Fragment` |
+| [FoodEntryDetailFragment](-food-entry-detail-fragment/index.md) | `class FoodEntryDetailFragment : Fragment` |
+| [HomeFragment](-home-fragment/index.md) | Fragment shows the main page of the app.`class HomeFragment : Fragment` |
 | [SearchFragment](-search-fragment/index.md) | `class SearchFragment : Fragment` |

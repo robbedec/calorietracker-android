@@ -20,3 +20,10 @@ Robbe Decorte
 | Name | Summary |
 |---|---|
 | [onCreate](on-create.md) | `fun onCreate(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+
+### Companion Object Properties
+
+| Name | Summary |
+|---|---|
+| [appId](app-id.md) | `lateinit var appId: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [appKey](app-key.md) | `lateinit var appKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

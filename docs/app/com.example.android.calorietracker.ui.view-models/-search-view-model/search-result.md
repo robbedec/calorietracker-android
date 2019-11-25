@@ -2,4 +2,4 @@
 
 # searchResult
 
-`val searchResult: LiveData<`[`CategoryProperty`](../../com.example.android.calorietracker.data.models/-category-property/index.md)`>`
+`val searchResult: LiveData<`[`CategoryProperty`](../../com.example.android.calorietracker.data.network.dto/-category-property/index.md)`>`

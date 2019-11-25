@@ -2,4 +2,4 @@
 
 # onClick
 
-`fun onClick(entry: `[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun onClick(entry: `[`FoodEntry`](../../com.example.android.calorietracker.data.room.entities/-food-entry/index.md)`, action: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

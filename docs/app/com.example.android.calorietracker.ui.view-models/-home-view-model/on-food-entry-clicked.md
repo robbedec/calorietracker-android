@@ -2,4 +2,12 @@
 
 # onFoodEntryClicked
 
-`fun onFoodEntryClicked(id: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun onFoodEntryClicked(id: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, action: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+Handles the click events from a [FoodEntry](../../com.example.android.calorietracker.data.room.entities/-food-entry/index.md).
+
+### Parameters
+
+`id` - The id of the entry that was clicked.
+
+`action` - Decides which action to trigger.

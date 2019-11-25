@@ -3,3 +3,9 @@
 # &lt;init&gt;
 
 `HomeFragment()`
+
+Fragment shows the main page of the app.
+
+**Author**
+Robbe Decorte
+

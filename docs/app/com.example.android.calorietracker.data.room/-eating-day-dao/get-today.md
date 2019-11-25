@@ -2,11 +2,11 @@
 
 # getToday
 
-`abstract fun getToday(): `[`EatingDayWithEntries`](../../com.example.android.calorietracker.data.models/-eating-day-with-entries/index.md)`?`
+`abstract fun getToday(): `[`EatingDayWithEntries`](../../com.example.android.calorietracker.data.room.entities/-eating-day-with-entries/index.md)`?`
 
-Get the last [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) and include it's entries.
+Get the last [EatingDay](../../com.example.android.calorietracker.data.room.entities/-eating-day/index.md) and include it's entries.
 Nullable in case there are no records in the table (after clearing table ...)
 
 **Return**
-the last [EatingDayWithEntries](../../com.example.android.calorietracker.data.models/-eating-day-with-entries/index.md) in the database.
+the last [EatingDayWithEntries](../../com.example.android.calorietracker.data.room.entities/-eating-day-with-entries/index.md) in the database.
 

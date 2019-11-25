@@ -4,5 +4,5 @@
 
 `abstract fun clear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Remove all records from [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) table
+Remove all records from [EatingDay](../../com.example.android.calorietracker.data.room.entities/-eating-day/index.md) table
 

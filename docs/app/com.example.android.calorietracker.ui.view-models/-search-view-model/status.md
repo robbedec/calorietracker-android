@@ -2,4 +2,4 @@
 
 # status
 
-`val status: LiveData<`[`CalorieTrackerApiStatus`](../../com.example.android.calorietracker.data.models.enums/-calorie-tracker-api-status/index.md)`>`
+`val status: LiveData<`[`CalorieTrackerApiStatus`](../../com.example.android.calorietracker.domain.enums/-calorie-tracker-api-status/index.md)`>`

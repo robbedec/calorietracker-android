@@ -19,7 +19,7 @@ binding.root returns the constrained layout from the layout file to the ViewHold
 
 | Name | Summary |
 |---|---|
-| [bind](bind.md) | `fun bind(item: `[`FoodEntryEntity`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)`, clickListener: `[`FoodEntryListener`](../../-food-entry-listener/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [bind](bind.md) | `fun bind(item: `[`FoodEntry`](../../../com.example.android.calorietracker.data.room.entities/-food-entry/index.md)`, clickListener: `[`FoodEntryListener`](../../-food-entry-listener/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Companion Object Functions
 

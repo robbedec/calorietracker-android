@@ -8,4 +8,4 @@ Remove all food entries from the database
 
 ### Parameters
 
-`key` - id of the [EatingDay](../../com.example.android.calorietracker.data.models/-eating-day/index.md) from who you want to delete the food entries.
+`key` - id of the [EatingDay](../../com.example.android.calorietracker.data.room.entities/-eating-day/index.md) from who you want to delete the food entries.

@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`SearchViewModel()`
+`SearchViewModel(foodRepository: `[`FoodRepository`](../../com.example.android.calorietracker.domain/-food-repository/index.md)`)`
 
 The [ViewModel](#) that is attached to [SearchFragment](#)
 

@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`HomeViewModel(database: `[`EatingDayDao`](../../com.example.android.calorietracker.data.room/-eating-day-dao/index.md)`, application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)`
+`HomeViewModel(repository: `[`FoodRepository`](../../com.example.android.calorietracker.domain/-food-repository/index.md)`)`

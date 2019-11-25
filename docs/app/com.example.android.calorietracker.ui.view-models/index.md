@@ -6,5 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [HomeViewModel](-home-view-model/index.md) | `class HomeViewModel : AndroidViewModel` |
+| [FoodEntryDetailViewModel](-food-entry-detail-view-model/index.md) | `class FoodEntryDetailViewModel : ViewModel` |
+| [HomeViewModel](-home-view-model/index.md) | `class HomeViewModel : ViewModel` |
 | [SearchViewModel](-search-view-model/index.md) | The [ViewModel](#) that is attached to [SearchFragment](#)`class SearchViewModel : ViewModel` |

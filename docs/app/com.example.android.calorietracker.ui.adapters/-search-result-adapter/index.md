@@ -2,20 +2,20 @@
 
 # SearchResultAdapter
 
-`class SearchResultAdapter : ListAdapter<`[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`, FoodPropertyViewHolder>`
+`class SearchResultAdapter : ListAdapter<`[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`, FoodPropertyViewHolder>`
 
 ### Types
 
 | Name | Summary |
 |---|---|
-| [DiffCallback](-diff-callback/index.md) | `companion object DiffCallback : ItemCallback<`[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`>` |
+| [DiffCallback](-diff-callback/index.md) | `companion object DiffCallback : ItemCallback<`[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`>` |
 | [FoodPropertyViewHolder](-food-property-view-holder/index.md) | `class FoodPropertyViewHolder : ViewHolder` |
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `SearchResultAdapter()` |
+| [&lt;init&gt;](-init-.md) | `SearchResultAdapter(clickListener: `[`SearchEntryListener`](../-search-entry-listener/index.md)`)` |
 
 ### Functions
 
@@ -28,5 +28,5 @@
 
 | Name | Summary |
 |---|---|
-| [areContentsTheSame](are-contents-the-same.md) | `fun areContentsTheSame(oldItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`, newItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
-| [areItemsTheSame](are-items-the-same.md) | `fun areItemsTheSame(oldItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`, newItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.models/-food-property/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [areContentsTheSame](are-contents-the-same.md) | `fun areContentsTheSame(oldItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`, newItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [areItemsTheSame](are-items-the-same.md) | `fun areItemsTheSame(oldItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`, newItem: `[`FoodProperty`](../../com.example.android.calorietracker.data.network.dto/-food-property/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |

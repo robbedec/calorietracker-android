@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`SearchResultAdapter()`
+`SearchResultAdapter(clickListener: `[`SearchEntryListener`](../-search-entry-listener/index.md)`)`

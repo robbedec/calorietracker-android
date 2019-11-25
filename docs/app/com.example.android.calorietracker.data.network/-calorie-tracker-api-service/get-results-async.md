@@ -2,7 +2,7 @@
 
 # getResultsAsync
 
-`@Headers(["x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0"]) @GET("search/instant") abstract fun getResultsAsync(@Query("query") query: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, @Query("common") includeCommon: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, @Query("self") includeSelf: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): Deferred<`[`CategoryProperty`](../../com.example.android.calorietracker.data.models/-category-property/index.md)`>`
+`@GET("search/instant") abstract fun getResultsAsync(@Query("query") query: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, @Query("common") includeCommon: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, @Query("self") includeSelf: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, @Query("detailed") detailed: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): Deferred<`[`CategoryProperty`](../../com.example.android.calorietracker.data.network.dto/-category-property/index.md)`>`
 
 Request a collection of data based on a search query.
 
@@ -12,9 +12,11 @@ Request a collection of data based on a search query.
 
 `includeCommon` - should the category 'common' be included in the response.
 
-`includeSelf` -
+`includeSelf` - should the category 'self' be included in the response.
 
-should the category 'self' be included in the response.
+**Return**
+
+a coroutine job that returns the value from the api.
 
 
 

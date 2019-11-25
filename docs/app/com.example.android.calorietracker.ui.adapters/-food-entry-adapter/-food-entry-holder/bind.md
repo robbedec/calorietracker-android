@@ -2,4 +2,4 @@
 
 # bind
 
-`fun bind(item: `[`FoodEntryEntity`](../../../com.example.android.calorietracker.data.models/-food-entry/index.md)`, clickListener: `[`FoodEntryListener`](../../-food-entry-listener/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun bind(item: `[`FoodEntry`](../../../com.example.android.calorietracker.data.room.entities/-food-entry/index.md)`, clickListener: `[`FoodEntryListener`](../../-food-entry-listener/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

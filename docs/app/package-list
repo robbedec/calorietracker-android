@@ -1,12 +1,17 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
-$dokka.location:com.example.android.calorietracker.utils$setAmountCalories(android.widget.TextView, com.example.android.calorietracker.data.models.FoodEntryEntity)com.example.android.calorietracker.utils/android.widget.-text-view/set-amount-calories.md
-$dokka.location:com.example.android.calorietracker.utils$setEntryName(android.widget.TextView, com.example.android.calorietracker.data.models.FoodEntryEntity)com.example.android.calorietracker.utils/android.widget.-text-view/set-entry-name.md
+$dokka.location:com.example.android.calorietracker.utils$setAmountCalories(android.widget.TextView, com.example.android.calorietracker.data.network.dto.FoodProperty)com.example.android.calorietracker.utils/android.widget.-text-view/set-amount-calories.md
+$dokka.location:com.example.android.calorietracker.utils$setAmountCalories(android.widget.TextView, com.example.android.calorietracker.data.room.entities.FoodEntry)com.example.android.calorietracker.utils/android.widget.-text-view/set-amount-calories.md
+$dokka.location:com.example.android.calorietracker.utils$setEntryInfo(android.widget.TextView, com.example.android.calorietracker.data.room.entities.FoodEntry)com.example.android.calorietracker.utils/android.widget.-text-view/set-entry-info.md
+$dokka.location:com.example.android.calorietracker.utils$setEntryName(android.widget.TextView, com.example.android.calorietracker.data.room.entities.FoodEntry)com.example.android.calorietracker.utils/android.widget.-text-view/set-entry-name.md
+$dokka.location:com.example.android.calorietracker.utils$setNutrientInfo(android.widget.TextView, com.example.android.calorietracker.data.room.entities.ClarifiedNutrient)com.example.android.calorietracker.utils/android.widget.-text-view/set-nutrient-info.md
 com.example.android.calorietracker
-com.example.android.calorietracker.data.models
-com.example.android.calorietracker.data.models.enums
 com.example.android.calorietracker.data.network
+com.example.android.calorietracker.data.network.dto
 com.example.android.calorietracker.data.room
+com.example.android.calorietracker.data.room.entities
+com.example.android.calorietracker.domain
+com.example.android.calorietracker.domain.enums
 com.example.android.calorietracker.ui
 com.example.android.calorietracker.ui.adapters
 com.example.android.calorietracker.ui.fragments

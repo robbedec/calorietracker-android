@@ -2,4 +2,4 @@
 
 # get
 
-`abstract fun get(key: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`FoodEntryEntity`](../../com.example.android.calorietracker.data.models/-food-entry/index.md)
+`abstract fun get(key: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`FoodEntry`](../../com.example.android.calorietracker.data.room.entities/-food-entry/index.md)

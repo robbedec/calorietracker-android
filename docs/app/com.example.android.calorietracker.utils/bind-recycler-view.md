@@ -2,9 +2,9 @@
 
 # bindRecyclerView
 
-`fun bindRecyclerView(recyclerView: RecyclerView, data: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`FoodProperty`](../com.example.android.calorietracker.data.models/-food-property/index.md)`>?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun <E> bindRecyclerView(recyclerView: RecyclerView, data: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<E>?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Bind the list of search results to a [RecyclerView](#).
+Bind a list to the adapter of a [RecyclerView](#).
 
 ### Parameters
 

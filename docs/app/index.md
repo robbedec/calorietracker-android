@@ -5,10 +5,12 @@
 | Name | Summary |
 |---|---|
 | [com.example.android.calorietracker](com.example.android.calorietracker/index.md) |  |
-| [com.example.android.calorietracker.data.models](com.example.android.calorietracker.data.models/index.md) |  |
-| [com.example.android.calorietracker.data.models.enums](com.example.android.calorietracker.data.models.enums/index.md) |  |
 | [com.example.android.calorietracker.data.network](com.example.android.calorietracker.data.network/index.md) |  |
+| [com.example.android.calorietracker.data.network.dto](com.example.android.calorietracker.data.network.dto/index.md) |  |
 | [com.example.android.calorietracker.data.room](com.example.android.calorietracker.data.room/index.md) |  |
+| [com.example.android.calorietracker.data.room.entities](com.example.android.calorietracker.data.room.entities/index.md) |  |
+| [com.example.android.calorietracker.domain](com.example.android.calorietracker.domain/index.md) |  |
+| [com.example.android.calorietracker.domain.enums](com.example.android.calorietracker.domain.enums/index.md) |  |
 | [com.example.android.calorietracker.ui](com.example.android.calorietracker.ui/index.md) |  |
 | [com.example.android.calorietracker.ui.adapters](com.example.android.calorietracker.ui.adapters/index.md) |  |
 | [com.example.android.calorietracker.ui.fragments](com.example.android.calorietracker.ui.fragments/index.md) |  |
