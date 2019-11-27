@@ -69,6 +69,18 @@ fun TextView.setNutrientInfo(nutrient: ClarifiedNutrient) {
     }
 }
 
+@BindingAdapter("burnCalories")
+fun TextView.setCalorieBurningInfo(info: Map<String, Int>?) {
+    info?.let {
+        var res = ""
+        for((key, value) in info) {
+            res += "${key.capitalize()}"
+        }
+        text = res
+        text = "test"
+    }
+}
+
 /**
  * Bind a list to the adapter of a [RecyclerView].
  *

@@ -107,9 +107,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineHeight="20sp"
-                android:lines="3"
-                tools:text="running" />
+                tools:text="running"
+                app:burnCalories="@{viewModel.burnCalories}"/>
 
 
         </androidx.cardview.widget.CardView>

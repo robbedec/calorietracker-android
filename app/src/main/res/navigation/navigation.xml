@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_foodEntryDetailFragment"
-            app:destination="@id/foodEntryDetailFragment" />
+            app:destination="@id/foodEntryDetailFragment"
+            app:enterAnim="@anim/slide_in_right" />
     </fragment>
     <fragment
         android:id="@+id/foodEntryDetailFragment"
