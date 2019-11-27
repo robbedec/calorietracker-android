@@ -15,8 +15,6 @@ import com.example.android.calorietracker.R
 import com.example.android.calorietracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // One time initializations, layout inflation

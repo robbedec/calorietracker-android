@@ -116,6 +116,12 @@ fun bindStatus(statusImageView: ImageView, status: CalorieTrackerApiStatus?) {
     }
 }
 
+/**
+ * Loads the image from a link and displays it in the [ImageView].
+ *
+ * @param imgView view that contains the image.
+ * @param imgUrl the url of the image.
+ */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     if(imgUrl.isNullOrEmpty()) {

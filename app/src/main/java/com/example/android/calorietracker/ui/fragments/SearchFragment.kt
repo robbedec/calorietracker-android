@@ -94,10 +94,10 @@ class SearchFragment : Fragment() {
             }
         })
 
-        var searchView = searchItem.actionView as SearchView
+        val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(query!!.isNotEmpty() && query!!.isNotBlank()){
+                if(query!!.isNotEmpty() && query.isNotBlank()){
                     viewModel.searchQuery.value = query
                 } else {
                     viewModel.searchQuery.value = ""
@@ -107,7 +107,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText!!.isNotEmpty() && newText!!.isNotBlank()){
+                if(newText!!.isNotEmpty() && newText.isNotBlank()){
                     viewModel.searchQuery.value = newText
                 } else {
                     viewModel.searchQuery.value = ""
