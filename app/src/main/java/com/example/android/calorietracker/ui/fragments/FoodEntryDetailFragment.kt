@@ -13,6 +13,7 @@ import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentFoodEntryDetailBinding
 import com.example.android.calorietracker.domain.FoodRepository
+import com.example.android.calorietracker.ui.MainActivity
 import com.example.android.calorietracker.ui.adapters.NutritionAdapter
 import com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel
 import com.example.android.calorietracker.utils.FoodEntryDetailViewModelFactory
@@ -45,16 +46,30 @@ class FoodEntryDetailFragment : Fragment() {
 
         binding.productDetailNutritionList.adapter = NutritionAdapter()
 
-        /**
-         * Bind the product when it is retrieved from the database.
-         */
+        return binding.root
+    }
+
+    /**
+     * Initialized when the fragment pops on the screen.
+     * Enables the back button and implements the observers.
+     */
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         viewModel.product.observe(this, Observer {
             binding.foodEntry = viewModel.product.value
         })
+    }
 
-        viewModel.burnCalories.observe(this, Observer {
-            Timber.i(viewModel.burnCalories.value?.get("running").toString())
-        })
-        return binding.root
+    /**
+     * Initialized when moving away from the screen.
+     * Disable the back button and deallocate observers to free up unused memory.
+     */
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        viewModel.product.removeObservers(this)
     }
 }
