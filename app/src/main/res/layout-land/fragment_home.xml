@@ -9,27 +9,15 @@
             type="com.example.android.calorietracker.ui.viewModels.HomeViewModel" />
     </data>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <!-- CIRCULAR PROGRESS BAR: https://stackoverflow.com/a/37160724 -->
-
-        <Button
-            android:id="@+id/add_button"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/add_calories_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/entry_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_text"
-            app:layout_constraintVertical_bias="0.75" />
-
-
         <ProgressBar
             android:id="@+id/circle_progressbar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -42,7 +30,7 @@
             android:progress="@{homeViewModal.currentCalories}"
             android:progressDrawable="@drawable/circular"
             android:secondaryProgress="100"
-            app:layout_constraintBottom_toTopOf="@id/add_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/entry_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -86,4 +74,15 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
