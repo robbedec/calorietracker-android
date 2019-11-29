@@ -74,10 +74,9 @@ fun TextView.setCalorieBurningInfo(info: Map<String, Int>?) {
     info?.let {
         var res = ""
         for((key, value) in info) {
-            res += "${key.capitalize()}"
+            res += "${key}"
         }
         text = res
-        text = "test"
     }
 }
 

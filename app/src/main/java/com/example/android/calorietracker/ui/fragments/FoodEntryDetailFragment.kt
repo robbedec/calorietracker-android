@@ -60,6 +60,10 @@ class FoodEntryDetailFragment : Fragment() {
         viewModel.product.observe(this, Observer {
             binding.foodEntry = viewModel.product.value
         })
+
+        viewModel.burnCalories.observe(this, Observer {
+            binding.calorieBurnString = viewModel.burnCalories.value
+        })
     }
 
     /**

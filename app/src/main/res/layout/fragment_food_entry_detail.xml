@@ -11,6 +11,9 @@
         <variable
             name="foodEntry"
             type="com.example.android.calorietracker.data.room.entities.FoodEntryWithNutrients" />
+        <variable
+            name="calorieBurnString"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +28,8 @@
             app:layout_constraintEnd_toStartOf="@id/product_detail_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/broken_image" />
+            tools:srcCompat="@drawable/broken_image"
+            android:contentDescription="@{foodEntry.foodEntry.entryName}" />
 
         <TextView
             android:id="@+id/product_detail_name"
@@ -47,7 +51,7 @@
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/product_detail_name"
             app:layout_constraintStart_toEndOf="@id/product_detail_image"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="3dp"
             tools:text="Company name" />
 
@@ -87,7 +91,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nutrition_list_holder"
             app:layout_constraintBottom_toTopOf="@id/calorie_burning_holder"
@@ -106,13 +110,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 tools:text="running"
-                app:burnCalories="@{viewModel.burnCalories}"/>
-
-
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:text="@{calorieBurnString}" />
         </androidx.cardview.widget.CardView>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

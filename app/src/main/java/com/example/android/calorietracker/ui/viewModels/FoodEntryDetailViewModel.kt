@@ -13,8 +13,8 @@ class FoodEntryDetailViewModel(private val foodRepository: FoodRepository, entry
     val product: LiveData<FoodEntryWithNutrients>
         get() = _product
 
-    private val _burnCalories = MediatorLiveData<Map<String, Int>>()
-    val burnCalories: LiveData<Map<String, Int>>
+    private val _burnCalories = MediatorLiveData<String>()
+    val burnCalories: LiveData<String>
         get() = _burnCalories
 
 
@@ -25,7 +25,11 @@ class FoodEntryDetailViewModel(private val foodRepository: FoodRepository, entry
         }
 
         _burnCalories.addSource(_product) {
-            _burnCalories.value = CalorieBurningCalculator(amountCal = it.foodEntry!!.entryCalories).calculate()
+            val calorieMap = CalorieBurningCalculator(amountCal = it.foodEntry!!.entryCalories).calculate()
+            _burnCalories.value = ""
+            for((key, value) in calorieMap) {
+                _burnCalories.value += "${key.capitalize()} takes $value minutes \n\n"
+            }
         }
     }
 }
