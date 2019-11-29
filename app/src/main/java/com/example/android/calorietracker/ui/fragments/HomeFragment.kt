@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var adapter: FoodEntryAdapter
 
     /**
      * Inflates the layout with Data Binding and sets the lifecycle owner to the [HomeFragment] to enable Data Binding and observe [LiveData].
@@ -67,7 +68,7 @@ class HomeFragment : Fragment() {
         binding.homeViewModal = viewModel
 
         // Fill the recyclerview and trigger navigation when an item is clicked
-        val adapter = FoodEntryAdapter(FoodEntryListener {
+        adapter = FoodEntryAdapter(FoodEntryListener {
             foodEntryId: Long, action: Int ->  viewModel.onFoodEntryClicked(foodEntryId, action)
         })
         binding.entryList.adapter = adapter
@@ -78,6 +79,36 @@ class HomeFragment : Fragment() {
         binding.addButton.setOnClickListener {
             createEntrySourceDialog()
         }
+
+        return binding.root
+    }
+
+    /**
+     * Inflates the overflow menu
+     *
+     * @param menu [Menu] that contains the overflow menu.
+     * @param inflater The [MenuInflater].
+     */
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.overflow_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    /**
+     * Checks which item of the overflow menu was selected and triggers the action in [HomeViewModel].
+     *
+     * @param item The item that was clicked.
+     * @return true if the overflow menu should close after clicking an item.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.clear_entries_menu -> viewModel.clearEntries()
+        }
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         /**
          * Update the [RecyclerView] when the contents of the viewmodel list changes
@@ -101,7 +132,6 @@ class HomeFragment : Fragment() {
                     activity!!.startActivity(intent)
                 }
                 is BaseCommand.Manual -> {
-                    // TODO: navigate
                     createAddDialog()
                 }
                 is BaseCommand.Favorites -> {
@@ -131,32 +161,18 @@ class HomeFragment : Fragment() {
                 viewModel.onFoodEntryNavigated()
             }
         })
-
-        return binding.root
     }
 
     /**
-     * Inflates the overflow menu
-     *
-     * @param menu [Menu] that contains the overflow menu.
-     * @param inflater The [MenuInflater].
+     * Deallocate the observers when the fragment is not displayed on screen.
      */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+    override fun onPause() {
+        super.onPause()
 
-    /**
-     * Checks which item of the overflow menu was selected and triggers the action in [HomeViewModel].
-     *
-     * @param item The item that was clicked.
-     * @return true if the overflow menu should close after clicking an item.
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.clear_entries_menu -> viewModel.clearEntries()
-        }
-        return true
+        viewModel.entries.removeObservers(this)
+        viewModel.addFromState.removeObservers(this)
+        viewModel.showSnackbarEvent.removeObservers(this)
+        viewModel.navigateToFoodEntryOverview.removeObservers(this)
     }
 
     /**
