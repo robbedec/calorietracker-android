@@ -108,7 +108,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
         }
     }
 
-    private fun addEntry(name: String, amount: Int){
+    fun addEntry(name: String, amount: Int){
         viewModelScope.launch {
             // If updatedDay == null, return to viewModelScope.launch without executing the other statements in this block.
             val updatedDay = currentDay.value ?: return@launch
@@ -135,9 +135,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     /**
      * Method that gets called when a user wants to add calories to the counter
      */
-    fun addCalories(checkedId: Int) {
-        Timber.i("Value: %d", checkedId)
-
+    fun addCaloriesSource(checkedId: Int) {
         when (checkedId) {
             0 -> {
                 addFromState.value = BaseCommand.ApiSearch("Search with api")

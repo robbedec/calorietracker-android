@@ -21,4 +21,6 @@
     <string name="add_calories_text">add calories</string>
     <string name="clear_entries_text">Clear today\'s log</string>
     <string name="how_long">How long would it take to burn those calories?</string>
+    <string name="calorie_amount">Calorie amount</string>
+    <string name="entry_name">Entry name</string>
 </resources>

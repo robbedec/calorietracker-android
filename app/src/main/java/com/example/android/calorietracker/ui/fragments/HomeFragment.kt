@@ -4,6 +4,7 @@ package com.example.android.calorietracker.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -75,21 +76,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.addButton.setOnClickListener {
-            val listItems = viewModel.dialogList
-            val mBuilder = AlertDialog.Builder(this.context!!)
-            mBuilder.setTitle("Where do you want to search?")
-            mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
-                viewModel.addCalories(i)
-                dialogInterface.dismiss()
-            }
-            // Set the neutral/cancel button click listener
-            mBuilder.setNeutralButton("Cancel") { dialog, _ ->
-                // Do something when the neutral button is clicked
-                dialog.cancel()
-            }
-
-            val mDialog = mBuilder.create()
-            mDialog.show()
+            createEntrySourceDialog()
         }
 
         /**
@@ -115,6 +102,7 @@ class HomeFragment : Fragment() {
                 }
                 is BaseCommand.Manual -> {
                     // TODO: navigate
+                    createAddDialog()
                 }
                 is BaseCommand.Favorites -> {
                     // TODO: navigate
@@ -169,5 +157,52 @@ class HomeFragment : Fragment() {
             R.id.clear_entries_menu -> viewModel.clearEntries()
         }
         return true
+    }
+
+    /**
+     * Create and display a dialog where the uses can select from which source they want to add a new entry.
+     */
+    private fun createEntrySourceDialog() {
+        val listItems = viewModel.dialogList
+        val mBuilder = AlertDialog.Builder(this.context!!)
+        mBuilder.setTitle("Where do you want to search?")
+        mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
+            viewModel.addCaloriesSource(i)
+            dialogInterface.dismiss()
+        }
+        // Set the neutral/cancel button click listener
+        mBuilder.setNeutralButton("Cancel") { dialog, _ ->
+            // Do something when the neutral button is clicked
+            dialog.cancel()
+        }
+
+        val mDialog = mBuilder.create()
+        mDialog.show()
+    }
+
+    /**
+     * Create a dialog where the uses can enter a new entry manually.
+     * Contains the name and the amount of calories.
+     */
+    private fun createAddDialog() {
+        val builder = AlertDialog.Builder(this.context!!)
+        val inflater = layoutInflater
+        builder.setTitle("Manually add an entry")
+        val dialogLayout = inflater.inflate(R.layout.alert_dialog_edittext, null)
+        builder.setView(dialogLayout)
+
+        val dialogEntryName = dialogLayout.findViewById<EditText>(R.id.dialog_entry_name)
+        val dialogEntryAmount = dialogLayout.findViewById<EditText>(R.id.dialog_entry_amount)
+
+        builder.setPositiveButton("OK") { dialogInterface, _ ->
+            viewModel.addEntry(dialogEntryName.text.toString().capitalize(), dialogEntryAmount.text.toString().toInt())
+            dialogInterface.dismiss()
+        }
+
+        builder.setNeutralButton("Cancel") { dialogInterface, _ ->
+            // Do something when the neutral button is clicked
+            dialogInterface.cancel()
+        }
+        builder.show()
     }
 }
