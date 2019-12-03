@@ -32,7 +32,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
      */
     private val _percentage = MediatorLiveData<Int>()
     val percentage: LiveData<Int>
-    get() = _percentage
+        get() = _percentage
 
     /**
      * The options that are shown in de "add calories from" dialog
@@ -54,15 +54,23 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
      */
     private var _showSnackbarEvent = MutableLiveData<Boolean>()
     val showSnackbarEvent: LiveData<Boolean>
-    get() = _showSnackbarEvent
+        get() = _showSnackbarEvent
 
     /**
      * Navigation trigger
      * Contains the foodEntryId of the item you want to place in the overview
      */
     private val _navigateToFoodEntryOverview = MutableLiveData<Long>()
-    val navigateToFoodEntryOverview
-    get() = _navigateToFoodEntryOverview
+    val navigateToFoodEntryOverview: LiveData<Long>
+        get() = _navigateToFoodEntryOverview
+
+    /**
+     * Should the fragment display an error alert if and entry in the list.
+     * Is true if apiId is empty.
+     */
+    private val _showErrorAlert = MutableLiveData<Boolean>()
+    val showErrorAlert: LiveData<Boolean>
+        get() = _showErrorAlert
 
     init {
         initializeCurrentDay()
@@ -113,7 +121,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
             // If updatedDay == null, return to viewModelScope.launch without executing the other statements in this block.
             val updatedDay = currentDay.value ?: return@launch
 
-            var newEntry = FoodEntry()
+            val newEntry = FoodEntry()
             newEntry.ownerId = updatedDay.eatingDay!!.dayId
             newEntry.entryName = name
             newEntry.entryCalories = amount
@@ -167,6 +175,8 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
                     val entry = repository.getFoodEntry(id)
                     if(entry.apiId.isNotEmpty()) {
                         _navigateToFoodEntryOverview.value = entry.entryId
+                    } else {
+                        _showErrorAlert.value = true
                     }
                 }
             }
@@ -179,9 +189,16 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     }
 
     /**
-     * Reset to null to prevent bugs when configuration changes happen
+     * Reset to null to prevent bugs when configuration changes happen.
      */
     fun onFoodEntryNavigated() {
         _navigateToFoodEntryOverview.value = null
+    }
+
+    /**
+     * Reset property to prevent bugs when configuration changes happen.
+     */
+    fun onErrorAlertShown() {
+        _showErrorAlert.value = null
     }
 }

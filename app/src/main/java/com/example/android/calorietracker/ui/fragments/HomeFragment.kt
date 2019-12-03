@@ -1,6 +1,7 @@
 package com.example.android.calorietracker.ui.fragments
 
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -161,6 +162,13 @@ class HomeFragment : Fragment() {
                 viewModel.onFoodEntryNavigated()
             }
         })
+
+        viewModel.showErrorAlert.observe(this, Observer {
+            if(it != null && it) {
+                createErrorDialog()
+                viewModel.onErrorAlertShown()
+            }
+        })
     }
 
     /**
@@ -173,6 +181,7 @@ class HomeFragment : Fragment() {
         viewModel.addFromState.removeObservers(this)
         viewModel.showSnackbarEvent.removeObservers(this)
         viewModel.navigateToFoodEntryOverview.removeObservers(this)
+        viewModel.showErrorAlert.removeObservers(this)
     }
 
     /**
@@ -180,19 +189,21 @@ class HomeFragment : Fragment() {
      */
     private fun createEntrySourceDialog() {
         val listItems = viewModel.dialogList
-        val mBuilder = AlertDialog.Builder(this.context!!)
-        mBuilder.setTitle("Where do you want to search?")
-        mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
+        val builder = AlertDialog.Builder(this.context!!)
+
+        builder.setTitle(R.string.alert_search_text)
+        builder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             viewModel.addCaloriesSource(i)
             dialogInterface.dismiss()
         }
         // Set the neutral/cancel button click listener
-        mBuilder.setNeutralButton("Cancel") { dialog, _ ->
+        builder.setNeutralButton(R.string.alert_cancel_text) { dialog, _ ->
             // Do something when the neutral button is clicked
+            // .cancel() makes sure onCancelledPressed is called and then dismisses the dialog. Not explicitly uses in this example.
             dialog.cancel()
         }
 
-        val mDialog = mBuilder.create()
+        val mDialog = builder.create()
         mDialog.show()
     }
 
@@ -201,24 +212,40 @@ class HomeFragment : Fragment() {
      * Contains the name and the amount of calories.
      */
     private fun createAddDialog() {
-        val builder = AlertDialog.Builder(this.context!!)
         val inflater = layoutInflater
-        builder.setTitle("Manually add an entry")
+        val builder = AlertDialog.Builder(this.context!!)
+
+        builder.setTitle(R.string.alert_add_title_text)
         val dialogLayout = inflater.inflate(R.layout.alert_dialog_edittext, null)
         builder.setView(dialogLayout)
 
         val dialogEntryName = dialogLayout.findViewById<EditText>(R.id.dialog_entry_name)
         val dialogEntryAmount = dialogLayout.findViewById<EditText>(R.id.dialog_entry_amount)
 
-        builder.setPositiveButton("OK") { dialogInterface, _ ->
+        builder.setPositiveButton(R.string.alert_ok_text) { dialogInterface, _ ->
             viewModel.addEntry(dialogEntryName.text.toString().capitalize(), dialogEntryAmount.text.toString().toInt())
             dialogInterface.dismiss()
         }
 
-        builder.setNeutralButton("Cancel") { dialogInterface, _ ->
+        builder.setNeutralButton(R.string.alert_cancel_text) { dialogInterface, _ ->
             // Do something when the neutral button is clicked
+            // .cancel() makes sure onCancelledPressed is called and then dismisses the dialog. Not explicitly uses in this example.
             dialogInterface.cancel()
         }
         builder.show()
+    }
+
+    private fun createErrorDialog() {
+        val builder = AlertDialog.Builder(this.context!!)
+
+        builder.setTitle(R.string.alert_error_title_text)
+        builder.setMessage(R.string.alert_error_message_text)
+
+        builder.setPositiveButton(R.string.alert_ok_text) { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+
+        val mDialog = builder.create()
+        mDialog.show()
     }
 }
