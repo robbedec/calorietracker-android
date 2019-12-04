@@ -17,6 +17,7 @@ buildscript {
         runtime_version = "1.1.0"
         junit_version = "4.12"
         mockk_version = "1.9.3"
+        koin_version = "2.0.1"
     }
     repositories {
         google()
