@@ -1,7 +1,6 @@
 package com.example.android.calorietracker.ui.viewModels
 
 import androidx.lifecycle.*
-import com.example.android.calorietracker.data.network.CalorieTrackerApi
 import com.example.android.calorietracker.data.network.dto.CategoryProperty
 import com.example.android.calorietracker.data.network.dto.FoodProperty
 import com.example.android.calorietracker.domain.FoodRepository
@@ -85,7 +84,7 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
     fun onSearchEntryClicked(entry: FoodProperty) {
         viewModelScope.launch {
             try {
-                val list = CalorieTrackerApi.retrofitService.getNutrientInformationAsync().await()
+                //val list = CalorieTrackerApi.retrofitService.getNutrientInformationAsync().await()
                 foodRepository.insertFoodEntryWithNutrients(entry)
 
 

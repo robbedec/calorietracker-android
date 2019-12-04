@@ -9,7 +9,6 @@ import com.example.android.calorietracker.utils.SingleLiveEvent
 import com.example.android.calorietracker.utils.formatAmount
 import com.example.android.calorietracker.utils.formatGoal
 import kotlinx.coroutines.*
-import timber.log.Timber
 
 class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
 

@@ -10,20 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.domain.FoodRepository
-import com.example.android.calorietracker.data.network.CalorieTrackerApi
-import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentHomeBinding
 import com.example.android.calorietracker.ui.SearchableActivity
 import com.example.android.calorietracker.ui.adapters.FoodEntryAdapter
 import com.example.android.calorietracker.ui.adapters.FoodEntryListener
 import com.example.android.calorietracker.ui.viewModels.HomeViewModel
-import com.example.android.calorietracker.utils.ApplicationViewModelFactory
 import com.example.android.calorietracker.utils.BaseCommand
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Fragment shows the main page of the app.
@@ -33,7 +29,7 @@ import com.google.android.material.snackbar.Snackbar
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var adapter: FoodEntryAdapter
 
     /**
@@ -51,20 +47,6 @@ class HomeFragment : Fragment() {
             R.layout.fragment_home, container, false)
 
         setHasOptionsMenu(true)
-
-        // Request the ViewModal
-        val application = requireNotNull(this.activity).application
-
-        val database = CalorieDatabase.getInstance(application)
-        val apiService = CalorieTrackerApi.retrofitService
-
-        val viewModelFactory = ApplicationViewModelFactory(
-            FoodRepository(
-                database,
-                apiService
-            )
-        )
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
 
         binding.homeViewModal = viewModel
 

@@ -7,7 +7,9 @@ import com.example.android.calorietracker.di.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
+
 
 /**
  *  A base class that holds application wide logic.
@@ -33,7 +35,7 @@ class PusherApplication : Application() {
 
         // Setup koin
         startKoin {
-            androidLogger()
+            androidLogger(Level.INFO)
             androidContext(this@PusherApplication)
             modules(mainModule)
         }

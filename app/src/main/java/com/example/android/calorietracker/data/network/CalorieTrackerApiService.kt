@@ -12,25 +12,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://trackapi.nutritionix.com/v2/"
+const val BASE_URL = "https://trackapi.nutritionix.com/v2/"
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
 
-private val okHttpClientBuilder = OkHttpClient.Builder()
-    .addInterceptor {
-        val request = it.request()
-        val newRequest = request.newBuilder().addHeader("x-app-id", PusherApplication.appId).addHeader("x-app-key", PusherApplication.appKey)
-        it.proceed(newRequest.build())
-    }
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory()) // -> let's you use something else than the default Call class (in this case the coroutine Deferred)
-    .baseUrl(BASE_URL)
-    .client(okHttpClientBuilder.build())
-    .build()
 
 interface CalorieTrackerApiService {
 
@@ -65,15 +49,3 @@ interface CalorieTrackerApiService {
     @GET("utils/nutrients")
     fun getNutrientInformationAsync() : Deferred<List<NutrientInfo>>
 }
-
-/**
- * [Retrofit] instance to make API calls.
- * This instance is a singleton
- */
-object CalorieTrackerApi {
-    val retrofitService: CalorieTrackerApiService by lazy {
-        retrofit.create(CalorieTrackerApiService::class.java)
-    }
-}
-
-

@@ -1,25 +1,17 @@
 package com.example.android.calorietracker.ui.fragments
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.data.network.CalorieTrackerApi
-import com.example.android.calorietracker.data.room.CalorieDatabase
 import com.example.android.calorietracker.databinding.FragmentSearchBinding
-import com.example.android.calorietracker.domain.FoodRepository
 import com.example.android.calorietracker.ui.MainActivity
-import com.example.android.calorietracker.ui.SearchableActivity
 import com.example.android.calorietracker.ui.adapters.SearchEntryListener
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
 import com.example.android.calorietracker.ui.viewModels.SearchViewModel
-import com.example.android.calorietracker.utils.ApplicationViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class SearchFragment : Fragment() {
@@ -27,7 +19,7 @@ class SearchFragment : Fragment() {
     /**
      * Lazily initialize our [SearchViewModel]
      */
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel: SearchViewModel by viewModel()
 
     /**
      * Inflate layout with data binding, set the lifecycle owner to enable
@@ -36,18 +28,6 @@ class SearchFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentSearchBinding.inflate(inflater)
-
-        val application = requireNotNull(this.activity).application
-        val database = CalorieDatabase.getInstance(application)
-        val apiService = CalorieTrackerApi.retrofitService
-
-        val viewModelFactory = ApplicationViewModelFactory(
-            FoodRepository(
-                database,
-                apiService
-            )
-        )
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
 
         binding.searchViewModal = viewModel
 
