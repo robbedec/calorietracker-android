@@ -1,15 +1,9 @@
 package com.example.android.calorietracker.ui
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.android.calorietracker.R
-import com.example.android.calorietracker.databinding.ActivityMainBinding
 import com.example.android.calorietracker.databinding.ActivitySearchBinding
 
 // Documentation searchActivity: https://developer.android.com/guide/topics/search/search-dialog

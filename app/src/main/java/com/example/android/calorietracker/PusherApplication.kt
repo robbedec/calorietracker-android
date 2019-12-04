@@ -1,8 +1,6 @@
 package com.example.android.calorietracker
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import com.example.android.calorietracker.di.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

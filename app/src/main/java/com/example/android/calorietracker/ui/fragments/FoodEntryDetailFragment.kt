@@ -40,11 +40,11 @@ class FoodEntryDetailFragment : Fragment() {
         super.onResume()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.product.observe(this, Observer {
+        viewModel.product.observe(viewLifecycleOwner, Observer {
             binding.foodEntry = viewModel.product.value
         })
 
-        viewModel.burnCalories.observe(this, Observer {
+        viewModel.burnCalories.observe(viewLifecycleOwner, Observer {
             binding.calorieBurnString = viewModel.burnCalories.value
         })
     }
@@ -57,6 +57,6 @@ class FoodEntryDetailFragment : Fragment() {
         super.onPause()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
-        viewModel.product.removeObservers(this)
+        //viewModel.product.removeObservers(this)
     }
 }

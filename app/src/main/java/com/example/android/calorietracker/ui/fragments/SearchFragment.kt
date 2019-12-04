@@ -23,7 +23,7 @@ class SearchFragment : Fragment() {
 
     /**
      * Inflate layout with data binding, set the lifecycle owner to enable
-     * data binding to observe [LiveData]
+     * data binding to observe LiveData.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

@@ -1,6 +1,5 @@
 package com.example.android.calorietracker.data.network.dto
 
-import com.example.android.calorietracker.data.room.entities.FoodEntry
 import com.squareup.moshi.Json
 
 /**
