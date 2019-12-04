@@ -10,11 +10,14 @@ import kotlin.math.roundToInt
  * @property weight The weight of the person you want to base the calculation on. Defaults to 70kg.
  * @property amountCal The amount of calories that need to be burned.
  */
-data class CalorieBurningCalculator(private val weight: Double = 70.0, private val amountCal: Int) {
+data class CalorieBurningCalculator(private val _weight: Double = 70.0, private val amountCal: Int) {
 
     companion object {
         private val MET_VALUES = mapOf("cycling" to 6.0, "running" to 10.0, "walking" to 3.5)
     }
+
+    val weight : Double
+        get() = _weight
 
     /**
      * Calculates how many minutes it takes to burn the amount of calories.
@@ -25,7 +28,7 @@ data class CalorieBurningCalculator(private val weight: Double = 70.0, private v
         val calculationsMap = mutableMapOf<String, Int>()
 
         for((key, value) in MET_VALUES) {
-            calculationsMap[key] = (amountCal / (0.0175 * value * weight)).roundToInt()
+            calculationsMap[key] = (amountCal / (0.0175 * value * _weight)).roundToInt()
         }
         return calculationsMap
     }

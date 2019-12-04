@@ -13,11 +13,10 @@ class FoodRepositoryTest {
     private lateinit var repository: FoodRepository
     private val database = mockk<CalorieDatabase>()
     private val apiService = mockk<CalorieTrackerApiService>()
-    private val connectivityManager = mockk<ConnectivityManager>()
 
     @Before
     fun setUp() {
-        repository = FoodRepository(database, apiService, connectivityManager)
+        repository = FoodRepository(database, apiService)
     }
 
     @After
