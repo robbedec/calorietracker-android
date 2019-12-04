@@ -3,6 +3,10 @@ package com.example.android.calorietracker
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.example.android.calorietracker.di.mainModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 /**
@@ -26,5 +30,12 @@ class PusherApplication : Application() {
         // Make apiKeys accessible as a static variable.
         appId = applicationContext.getString(R.string.x_app_id)
         appKey = applicationContext.getString(R.string.x_app_key)
+
+        // Setup koin
+        startKoin {
+            androidLogger()
+            androidContext(this@PusherApplication)
+            modules(mainModule)
+        }
     }
 }
