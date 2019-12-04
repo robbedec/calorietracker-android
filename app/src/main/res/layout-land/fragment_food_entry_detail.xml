@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.calorietracker.ui.fragments.FoodEntryDetailFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel" />
+        <variable
+            name="foodEntry"
+            type="com.example.android.calorietracker.data.room.entities.FoodEntryWithNutrients" />
+        <variable
+            name="calorieBurnString"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/product_detail_image"
+            imageUrl="@{foodEntry.foodEntry.imageBig}"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:layout_constraintEnd_toStartOf="@id/product_detail_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/broken_image"
+            android:contentDescription="@{foodEntry.foodEntry.entryName}" />
+
+        <TextView
+            android:id="@+id/product_detail_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@{foodEntry.foodEntry.entryName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/product_detail_image"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="8dp"
+            tools:text="Product name" />
+
+        <TextView
+            android:id="@+id/product_detail_company"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{foodEntry.foodEntry.brandName}"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_name"
+            app:layout_constraintStart_toEndOf="@id/product_detail_image"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            tools:text="Company name" />
+
+        <TextView
+            android:id="@+id/product_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_image"
+            app:layout_constraintEnd_toStartOf="@id/product_detail_burning_title"
+            tools:text="Nutritional value"
+            app:entryInfo="@{foodEntry.foodEntry}"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/nutrition_list_holder"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/calorie_burning_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_detail_nutrition_list"
+                resultListData="@{foodEntry.nutrients}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/product_detail_burning_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@id/product_detail_title"
+            app:layout_constraintEnd_toEndOf="@id/calorie_burning_holder"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_image"
+            app:layout_constraintBottom_toTopOf="@id/calorie_burning_holder"
+            android:text="@string/how_long"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/calorie_burning_holder"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/product_detail_burning_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nutrition_list_holder"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="running"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:text="@{calorieBurnString}" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
