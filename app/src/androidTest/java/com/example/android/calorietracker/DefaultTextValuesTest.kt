@@ -4,6 +4,7 @@ import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -59,7 +60,13 @@ class DefaultTextValuesTest {
 
         for(x in 0..2) {
             onView(withId(R.id.add_button)).perform(click())
-            onView(withText("From favorites")).inRoot(RootMatchers.isDialog()).perform(click())
+            onView(withText("Manually")).inRoot(RootMatchers.isDialog()).perform(click())
+
+            onView(withHint("Entry name")).perform(replaceText("Pizza"))
+            onView(withHint("Calorie amount")).perform(replaceText("500"))
+            onView(withText("OK")).perform(click())
+
+            SystemClock.sleep(1000)
         }
 
         onView(withId(R.id.percentage_text)).check(matches(withText(percentage)))
