@@ -98,7 +98,7 @@ class HomeFragment : Fragment() {
          *
          * Can't use the Generic bindingAdapter because of the custom header
          */
-        viewModel.entries.observe(viewLifecycleOwner, Observer {
+        viewModel.entries.observe(this, Observer {
             it?.let {
                 adapter.addHeaderAndSubmitList(it)
             }
@@ -107,7 +107,7 @@ class HomeFragment : Fragment() {
         /**
          * Observe state and navigate to the right screen
          */
-        viewModel.addFromState.observe(viewLifecycleOwner, Observer {
+        viewModel.addFromState.observe(this, Observer {
             when(it) {
                 is BaseCommand.ApiSearch -> {
                     // Navigate to Search activity
@@ -126,7 +126,7 @@ class HomeFragment : Fragment() {
         /**
          * Show snackbar when the entries get cleared
          */
-        viewModel.showSnackbarEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.showSnackbarEvent.observe(this, Observer {
             if(it) {
                 Snackbar.make(
                     activity!!.findViewById(android.R.id.content),
@@ -138,32 +138,19 @@ class HomeFragment : Fragment() {
         })
 
 
-        viewModel.navigateToFoodEntryOverview.observe(viewLifecycleOwner, Observer { entry ->
+        viewModel.navigateToFoodEntryOverview.observe(this, Observer { entry ->
             entry?.let {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFoodEntryDetailFragment(entry))
                 viewModel.onFoodEntryNavigated()
             }
         })
 
-        viewModel.showErrorAlert.observe(viewLifecycleOwner, Observer {
+        viewModel.showErrorAlert.observe(this, Observer {
             if(it != null && it) {
                 createErrorDialog()
                 viewModel.onErrorAlertShown()
             }
         })
-    }
-
-    /**
-     * Deallocate the observers when the fragment is not displayed on screen.
-     */
-    override fun onPause() {
-        super.onPause()
-/*
-        viewModel.entries.removeObservers(this)
-        viewModel.addFromState.removeObservers(this)
-        viewModel.showSnackbarEvent.removeObservers(this)
-        viewModel.navigateToFoodEntryOverview.removeObservers(this)
-        viewModel.showErrorAlert.removeObservers(this)*/
     }
 
     /**

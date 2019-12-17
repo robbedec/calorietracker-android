@@ -40,23 +40,20 @@ class FoodEntryDetailFragment : Fragment() {
         super.onResume()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.product.observe(viewLifecycleOwner, Observer {
+        viewModel.product.observe(this, Observer {
             binding.foodEntry = viewModel.product.value
         })
 
-        viewModel.burnCalories.observe(viewLifecycleOwner, Observer {
+        viewModel.burnCalories.observe(this, Observer {
             binding.calorieBurnString = viewModel.burnCalories.value
         })
     }
 
     /**
      * Initialized when moving away from the screen.
-     * Disable the back button and deallocate observers to free up unused memory.
      */
     override fun onPause() {
         super.onPause()
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-
-        //viewModel.product.removeObservers(this)
     }
 }
