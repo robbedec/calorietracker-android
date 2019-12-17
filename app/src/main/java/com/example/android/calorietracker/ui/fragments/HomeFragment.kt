@@ -117,9 +117,6 @@ class HomeFragment : Fragment() {
                 is BaseCommand.Manual -> {
                     createAddDialog()
                 }
-                is BaseCommand.Favorites -> {
-                    // TODO: navigate
-                }
             }
         })
 

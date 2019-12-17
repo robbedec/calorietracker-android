@@ -74,7 +74,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     init {
         initializeCurrentDay()
 
-        dialogList = arrayOf("Search online", "Manually", "From favorites")
+        dialogList = arrayOf("Search online", "Manually")
 
         /**
          * Check for updates in the liveData and adapt the value of the [MediatorLiveData], provide default values
@@ -149,10 +149,6 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
             }
             1 -> {
                 addFromState.value = BaseCommand.Manual("Add calories manual")
-            }
-            2 -> {
-                addFromState.value = BaseCommand.Favorites("Select from favorites")
-                addEntry("Banaan", 500)
             }
         }
     }

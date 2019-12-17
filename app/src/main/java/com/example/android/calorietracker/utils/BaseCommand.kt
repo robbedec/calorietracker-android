@@ -13,6 +13,4 @@ sealed class BaseCommand {
     class ApiSearch(val errorString : String) : BaseCommand()
 
     class Manual(val finishString : String): BaseCommand()
-
-    class Favorites(val correctString: String): BaseCommand()
 }
