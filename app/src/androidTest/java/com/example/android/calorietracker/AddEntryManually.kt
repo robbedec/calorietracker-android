@@ -1,8 +1,10 @@
 package com.example.android.calorietracker
 
 
+import android.os.SystemClock
 import android.view.View
 import android.view.ViewGroup
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
@@ -11,6 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.android.calorietracker.ui.MainActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -36,55 +39,17 @@ class AddEntryManually {
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         Thread.sleep(340)
 
-        val overflowMenuButton = onView(
-            allOf(
-                withContentDescription("Meer opties"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.action_bar),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        overflowMenuButton.perform(click())
+        Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().targetContext)
+        onView(withText(R.string.clear_entries_text)).perform(click())
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(250)
-
-        val appCompatTextView = onView(
-            allOf(
-                withId(R.id.title), withText("Clear today's log"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.content),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatTextView.perform(click())
+        SystemClock.sleep(3000)
 
         val floatingActionButton = onView(
-            allOf(
-                withId(R.id.add_button),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.myNavHostFragment),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
+            withId(R.id.add_button)
         )
         floatingActionButton.perform(click())
+
+        SystemClock.sleep(2000)
 
         val appCompatCheckedTextView = onData(anything())
             .inAdapterView(
@@ -190,46 +155,7 @@ class AddEntryManually {
         )
         cardView.perform(click())
 
-        val frameLayout = onView(
-            allOf(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java), isDisplayed())
-        )
-        frameLayout.check(matches(isDisplayed()))
-
-        val textView = onView(
-            allOf(
-                withId(R.id.alertTitle), withText("Product detail error!"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.title_template),
-                        childAtPosition(
-                            withId(R.id.topPanel),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Product detail error!")))
-
-        val textView2 = onView(
-            allOf(
-                withId(R.id.alertTitle), withText("Product detail error!"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.title_template),
-                        childAtPosition(
-                            withId(R.id.topPanel),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView2.check(matches(withText("Product detail error!")))
+        SystemClock.sleep(1000)
 
         val appCompatButton2 = onView(
             allOf(
@@ -348,17 +274,7 @@ class AddEntryManually {
         appCompatButton3.perform(scrollTo(), click())
 
         val appCompatButton4 = onView(
-            allOf(
-                withId(R.id.remove_button), withText("remove"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("androidx.cardview.widget.CardView")),
-                        0
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
+            withIndex(withId(R.id.remove_button), 1)
         )
         appCompatButton4.perform(click())
 
@@ -381,236 +297,28 @@ class AddEntryManually {
         textView3.check(matches(withText("150 / 5000")))
 
         val textView4 = onView(
-            allOf(
-                withId(R.id.percentage_text), withText("3%"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.titleConstraint),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.view.ViewGroup::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
+                withId(R.id.percentage_text)
         )
         textView4.check(matches(withText("3%")))
 
-        val textView5 = onView(
-            allOf(
-                withId(R.id.percentage_text), withText("3%"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.titleConstraint),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.view.ViewGroup::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView5.check(matches(withText("3%")))
+        Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().targetContext)
+        onView(withText(R.string.clear_entries_text)).perform(click())
+    }
 
-        val floatingActionButton3 = onView(
-            allOf(
-                withId(R.id.add_button),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.myNavHostFragment),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        floatingActionButton3.perform(click())
+    private fun withIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
+        return object : TypeSafeMatcher<View>() {
+            var currentIndex = 0
 
-        val appCompatCheckedTextView3 = onData(anything())
-            .inAdapterView(
-                allOf(
-                    withId(R.id.select_dialog_listview),
-                    childAtPosition(
-                        withId(R.id.contentPanel),
-                        0
-                    )
-                )
-            )
-            .atPosition(1)
-        appCompatCheckedTextView3.perform(click())
+            override fun describeTo(description: Description) {
+                description.appendText("with index: ")
+                description.appendValue(index)
+                matcher.describeTo(description)
+            }
 
-        val appCompatEditText9 = onView(
-            allOf(
-                withId(R.id.dialog_entry_name),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.custom),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText9.perform(click())
-
-        val appCompatEditText10 = onView(
-            allOf(
-                withId(R.id.dialog_entry_name),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.custom),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText10.perform(replaceText("banaan"), closeSoftKeyboard())
-
-        val appCompatEditText11 = onView(
-            allOf(
-                withId(R.id.dialog_entry_amount),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.custom),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText11.perform(click())
-
-        val appCompatEditText12 = onView(
-            allOf(
-                withId(R.id.dialog_entry_amount),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.custom),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatEditText12.perform(replaceText("20"), closeSoftKeyboard())
-
-        val appCompatButton5 = onView(
-            allOf(
-                withId(android.R.id.button1), withText("OK"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.buttonPanel),
-                        0
-                    ),
-                    3
-                )
-            )
-        )
-        appCompatButton5.perform(scrollTo(), click())
-
-        val textView6 = onView(
-            allOf(
-                withId(R.id.progress_text), withText("170 / 5000"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.titleConstraint),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.view.ViewGroup::class.java),
-                            0
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        textView6.check(matches(withText("170 / 5000")))
-
-        val textView7 = onView(
-            allOf(
-                withId(R.id.percentage_text), withText("3%"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.titleConstraint),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.view.ViewGroup::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView7.check(matches(withText("3%")))
-
-        val textView8 = onView(
-            allOf(
-                withId(R.id.percentage_text), withText("3%"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.titleConstraint),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.view.ViewGroup::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView8.check(matches(withText("3%")))
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(340)
-
-        val overflowMenuButton2 = onView(
-            allOf(
-                withContentDescription("Meer opties"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.action_bar),
-                        1
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        overflowMenuButton2.perform(click())
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(250)
-
-        val appCompatTextView2 = onView(
-            allOf(
-                withId(R.id.title), withText("Clear today's log"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.content),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatTextView2.perform(click())
+            public override fun matchesSafely(view: View): Boolean {
+                return matcher.matches(view) && currentIndex++ == index
+            }
+        }
     }
 
     private fun childAtPosition(
