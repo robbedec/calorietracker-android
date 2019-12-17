@@ -6,5 +6,10 @@
 
 | Name | Summary |
 |---|---|
-| [CalorieTrackerApi](-calorie-tracker-api/index.md) | [Retrofit](#) instance to make API calls. This instance is a singleton`object CalorieTrackerApi` |
 | [CalorieTrackerApiService](-calorie-tracker-api-service/index.md) | `interface CalorieTrackerApiService` |
+
+### Properties
+
+| Name | Summary |
+|---|---|
+| [BASE_URL](-b-a-s-e_-u-r-l.md) | `const val BASE_URL: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

@@ -4,5 +4,5 @@
 
 `fun onFoodEntryNavigated(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Reset to null to prevent bugs when configuration changes happen
+Reset to null to prevent bugs when configuration changes happen.
 

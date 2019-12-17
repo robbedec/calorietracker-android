@@ -2,4 +2,4 @@
 
 # navigateToFoodEntryOverview
 
-`val navigateToFoodEntryOverview: MutableLiveData<`[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`>`
+`val navigateToFoodEntryOverview: LiveData<`[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`>`

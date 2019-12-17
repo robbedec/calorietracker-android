@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`CalorieBurningCalculator(weight: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)` = 70.0, amountCal: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`)`
+`CalorieBurningCalculator(_weight: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)` = 70.0, amountCal: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`)`
 
 Estimates the amount of time needed (in minutes) to burn an amount of calories.
 This class calculates running (9.5km/h), cycling (16km/h) and walking (4.8km/h).

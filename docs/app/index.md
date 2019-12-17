@@ -9,6 +9,7 @@
 | [com.example.android.calorietracker.data.network.dto](com.example.android.calorietracker.data.network.dto/index.md) |  |
 | [com.example.android.calorietracker.data.room](com.example.android.calorietracker.data.room/index.md) |  |
 | [com.example.android.calorietracker.data.room.entities](com.example.android.calorietracker.data.room.entities/index.md) |  |
+| [com.example.android.calorietracker.di](com.example.android.calorietracker.di/index.md) |  |
 | [com.example.android.calorietracker.domain](com.example.android.calorietracker.domain/index.md) |  |
 | [com.example.android.calorietracker.domain.enums](com.example.android.calorietracker.domain.enums/index.md) |  |
 | [com.example.android.calorietracker.ui](com.example.android.calorietracker.ui/index.md) |  |

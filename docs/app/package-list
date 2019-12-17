@@ -10,6 +10,7 @@ com.example.android.calorietracker.data.network
 com.example.android.calorietracker.data.network.dto
 com.example.android.calorietracker.data.room
 com.example.android.calorietracker.data.room.entities
+com.example.android.calorietracker.di
 com.example.android.calorietracker.domain
 com.example.android.calorietracker.domain.enums
 com.example.android.calorietracker.ui

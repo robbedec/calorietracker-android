@@ -11,14 +11,6 @@
 
 |
 
-##### [com.example.android.calorietracker.utils.ApplicationViewModelFactory](../com.example.android.calorietracker.utils/-application-view-model-factory/index.md)
-
-Create a [ViewModel](#) and check if it needs to use a database instance.
-A [ViewModel](#) can only be created with a no-argument constructor, we use a ViewModel Factory initializing with arguments.
-
-
-|
-
 ##### [com.example.android.calorietracker.utils.BaseCommand](../com.example.android.calorietracker.utils/-base-command/index.md)
 
 Used to translate user intentions when adding entries.
@@ -40,14 +32,6 @@ More information about the formula or exercises can be found [here](https://www.
 
 Version needs to increment each time the database schema changes, this creates a versioning system to log schema changes.
 To disable versioning use: exportSchema = false.
-
-
-|
-
-##### [com.example.android.calorietracker.data.network.CalorieTrackerApi](../com.example.android.calorietracker.data.network/-calorie-tracker-api/index.md)
-
-[Retrofit](#) instance to make API calls.
-This instance is a singleton
 
 
 |
@@ -132,11 +116,6 @@ Represents a [FoodEntry](../com.example.android.calorietracker.data.room.entitie
 |
 
 ##### [com.example.android.calorietracker.ui.viewModels.FoodEntryDetailViewModel](../com.example.android.calorietracker.ui.view-models/-food-entry-detail-view-model/index.md)
-
-
-|
-
-##### [com.example.android.calorietracker.utils.FoodEntryDetailViewModelFactory](../com.example.android.calorietracker.utils/-food-entry-detail-view-model-factory/index.md)
 
 
 |
