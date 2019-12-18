@@ -21,6 +21,18 @@ Open the project in Android Studio and build
 
 ## Running tests
 
+Run the following commands in the terminal or run the designated gradle tasks in Android Studio.
+
+To run unit tests:
+```
+./gradlew test
+```
+
+To run instrumented unit tests (i.e. ui tests):
+```
+./gradlew connectedAndroidTest
+```
+
 ## Documentation
 
 Generate documentation by executing the following command in the root of the project or run the
