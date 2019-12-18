@@ -14,7 +14,6 @@ import timber.log.Timber
  */
 class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() {
 
-
     /**
      * The current status of the Api request
      * LOADING - ERROR - DONE
@@ -57,7 +56,7 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
                 _status.value = CalorieTrackerApiStatus.LOADING
 
                 // This will run on a thread managed by Retrofit
-                var result = foodRepository.search(searchQuery.value!!) // Await is non blocking
+                val result = foodRepository.search(searchQuery.value!!) // Await is non blocking
 
                 _status.value = CalorieTrackerApiStatus.DONE
                 _searchResult.value = result
@@ -68,7 +67,7 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
                 // Clear the RecyclerView when an error occurs
                 _searchResult.value = CategoryProperty(ArrayList())
 
-                Timber.i(t.message)
+                Timber.i(t)
             }
         }
     }
@@ -84,14 +83,9 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
     fun onSearchEntryClicked(entry: FoodProperty) {
         viewModelScope.launch {
             try {
-                //val list = CalorieTrackerApi.retrofitService.getNutrientInformationAsync().await()
                 foodRepository.insertFoodEntryWithNutrients(entry)
-
-
-
             }catch (t: Throwable) {
-
-                Timber.i(t.message)
+                Timber.i(t)
             }
 
         }

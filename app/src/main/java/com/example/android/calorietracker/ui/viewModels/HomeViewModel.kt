@@ -98,7 +98,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
     }
 
     /**
-     * ViewModal is destroyed and all current jobs will be cancelled
+     * ViewModel is destroyed and all current jobs will be cancelled
      */
     override fun onCleared() {
         super.onCleared()
