@@ -49,6 +49,7 @@ the dokka generated Markdown (in github-flavored-markdown).
 ## Built with
 
 * [Gradle](https://gradle.org) - Dependency Management
+* [Koin](https://insert-koin.io/) - Dependency Injection
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - Persistence library for onboard database
 * [Timber](https://github.com/JakeWharton/timber) - Logging tool
 * [Retrofit](https://github.com/square/retrofit) - Http client
