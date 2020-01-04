@@ -276,7 +276,12 @@ class AddEntryManually {
         val appCompatButton4 = onView(
             withIndex(withId(R.id.remove_button), 1)
         )
+
+        SystemClock.sleep(1000)
+
         appCompatButton4.perform(click())
+
+        SystemClock.sleep(1000)
 
         val textView3 = onView(
             allOf(

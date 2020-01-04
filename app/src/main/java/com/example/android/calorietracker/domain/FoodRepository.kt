@@ -43,7 +43,7 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
                     insertEatingDay(newDay)
                     day = getToday()
             }
-            else if(!DateUtils.isToday(day?.eatingDay?.date!!.time)){
+            else if(!DateUtils.isToday(day.eatingDay?.date!!.time)){
                 // Check if the latest date in the database is from today
                     val newDay = EatingDay()
                     newDay.date = Calendar.getInstance().time
@@ -78,8 +78,8 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
 
     suspend fun insertFoodEntryWithNutrients(entry: FoodProperty) {
         withContext(Dispatchers.IO) {
-            var nutrientConversion = getNutrientsUtil()
-            var entryDB = entry.asDatabaseEntity()
+            val nutrientConversion = getNutrientsUtil()
+            val entryDB = entry.asDatabaseEntity()
             entryDB.ownerId = getToday()!!.eatingDay!!.dayId
 
             val id = foodEntryDao.insert(entryDB)
@@ -98,7 +98,7 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
 
     suspend fun removeEntry(key: Long) {
         withContext(Dispatchers.IO) {
-            var entry = getFoodEntry(key)
+            val entry = getFoodEntry(key)
             foodEntryDao.delete(entry)
         }
     }
@@ -125,7 +125,6 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
 
     suspend fun getNutrientsFromEntry(key: Long): FoodEntryWithNutrients {
         return withContext(Dispatchers.IO) {
-            //foodEntryDao.getNutrientsFromEntry(key)
             foodEntryDao.getFoodEntryWithNutrients(key)
         }
     }
@@ -135,7 +134,7 @@ class FoodRepository(private val database: CalorieDatabase, private val apiServi
         return apiService.getResultsAsync(query, includeCommon = false, includeSelf = false, detailed = true).await()
     }
 
-    suspend fun getNutrientsUtil(): List<NutrientInfo> {
+    private suspend fun getNutrientsUtil(): List<NutrientInfo> {
         return apiService.getNutrientInformationAsync().await()
     }
 

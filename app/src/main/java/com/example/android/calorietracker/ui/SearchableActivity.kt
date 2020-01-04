@@ -12,7 +12,7 @@ import com.example.android.calorietracker.databinding.ActivitySearchBinding
 class SearchableActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivitySearchBinding>(this,
+        DataBindingUtil.setContentView<ActivitySearchBinding>(this,
             R.layout.activity_search
         )
     }

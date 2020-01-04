@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.calorietracker.data.room.entities.ClarifiedNutrient
 import com.example.android.calorietracker.databinding.RowNutritionInfoBinding
 
-class NutritionAdapter(): ListAdapter<ClarifiedNutrient, NutritionAdapter.NutritionViewHolder>(DiffCallback) {
+class NutritionAdapter : ListAdapter<ClarifiedNutrient, NutritionAdapter.NutritionViewHolder>(DiffCallback) {
 
     class NutritionViewHolder(private var binding: RowNutritionInfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(nutrient: ClarifiedNutrient) {
@@ -31,7 +31,6 @@ class NutritionAdapter(): ListAdapter<ClarifiedNutrient, NutritionAdapter.Nutrit
         override fun areContentsTheSame(oldItem: ClarifiedNutrient, newItem: ClarifiedNutrient): Boolean {
             return oldItem.nutId == newItem.nutId
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NutritionViewHolder {

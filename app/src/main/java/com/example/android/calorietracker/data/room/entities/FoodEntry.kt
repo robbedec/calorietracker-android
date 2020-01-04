@@ -39,5 +39,4 @@ data class FoodEntry (
     var imageBig: String = "",
 
     var weight: Double = 0.0
-
 )

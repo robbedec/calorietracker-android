@@ -7,8 +7,6 @@ import retrofit2.http.Query
 
 const val BASE_URL = "https://trackapi.nutritionix.com/v2/"
 
-
-
 interface CalorieTrackerApiService {
 
     /**
@@ -24,10 +22,8 @@ interface CalorieTrackerApiService {
      *
      * @author Robbe Decorte
      */
-    //@Headers("x-app-id: 21736d33", "x-app-key: 43931edd450bfcbe13ffe4439eb186c0")
-    @GET("search/instant") // -> the api endpoint you want to use
+    @GET("search/instant")
     fun getResultsAsync(@Query("query") query: String, @Query("common") includeCommon: Boolean, @Query("self") includeSelf: Boolean, @Query("detailed") detailed: Boolean): Deferred<CategoryProperty>
-
 
     /**
      * Request a nutrition transformation utility

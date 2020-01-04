@@ -33,8 +33,8 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: FoodEntryAdapter
 
     /**
-     * Inflates the layout with Data Binding and sets the lifecycle owner to the [HomeFragment] to enable Data Binding and observe [LiveData].
-     * Sets up the [RecyclerView] with an adapter.
+     * Inflates the layout with Data Binding and sets the lifecycle owner to the [HomeFragment] to enable Data Binding and observe LiveData.
+     * Sets up the RecyclerView with an adapter.
      *
      * @param inflater Inflates the layout.
      * @param container
@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
         super.onResume()
 
         /**
-         * Update the [RecyclerView] when the contents of the viewmodel list changes
+         * Update the RecyclerView when the contents of the viewmodel list changes
          *
          * Can't use the Generic bindingAdapter because of the custom header
          */

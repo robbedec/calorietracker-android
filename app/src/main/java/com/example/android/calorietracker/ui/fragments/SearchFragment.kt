@@ -12,7 +12,6 @@ import com.example.android.calorietracker.ui.adapters.SearchEntryListener
 import com.example.android.calorietracker.ui.adapters.SearchResultAdapter
 import com.example.android.calorietracker.ui.viewModels.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class SearchFragment : Fragment() {
 
@@ -54,8 +53,8 @@ class SearchFragment : Fragment() {
      */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        val inflater = activity!!.menuInflater
-        inflater.inflate(R.menu.menu_main_search, menu)
+        val menuInflater = activity!!.menuInflater
+        menuInflater.inflate(R.menu.menu_main_search, menu)
 
         val searchItem = menu.findItem(R.id.menu_search)
         searchItem.expandActionView()
@@ -82,7 +81,6 @@ class SearchFragment : Fragment() {
                 } else {
                     viewModel.searchQuery.value = ""
                 }
-                Timber.i(query)
                 return false
             }
 
@@ -92,10 +90,8 @@ class SearchFragment : Fragment() {
                 } else {
                     viewModel.searchQuery.value = ""
                 }
-                Timber.i(newText)
                 return false
             }
-
         })
     }
 }

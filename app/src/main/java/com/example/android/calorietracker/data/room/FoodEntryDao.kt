@@ -22,13 +22,13 @@ interface FoodEntryDao {
     @Delete
     fun delete(entry: FoodEntry)
 
-    /*
+    /**
      * Get entry by id
      */
     @Query("SELECT * FROM food_entry_table WHERE entryId = :key")
     fun get(key: Long): FoodEntry
 
-    /*
+    /**
      * Remove all entries from the table
      */
     @Query("DELETE FROM food_entry_table")

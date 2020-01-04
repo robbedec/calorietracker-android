@@ -33,7 +33,6 @@ class SearchResultAdapter(private val clickListener: SearchEntryListener) : List
         override fun areContentsTheSame(oldItem: FoodProperty, newItem: FoodProperty): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodPropertyViewHolder {

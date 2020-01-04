@@ -20,11 +20,7 @@ class DateConverter {
      */
     @TypeConverter
     fun toDate(dateLong: Long): Date? {
-        return if(dateLong == null) {
-            null
-        } else {
-            Date(dateLong)
-        }
+        return Date(dateLong)
     }
 
     /**
@@ -35,6 +31,6 @@ class DateConverter {
      */
     @TypeConverter
     fun fromDate(date: Date): Long? {
-        return date?.time
+        return date.time
     }
 }

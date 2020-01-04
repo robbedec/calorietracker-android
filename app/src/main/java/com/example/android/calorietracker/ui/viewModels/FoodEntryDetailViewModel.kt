@@ -5,7 +5,6 @@ import com.example.android.calorietracker.data.room.entities.FoodEntryWithNutrie
 import com.example.android.calorietracker.domain.CalorieBurningCalculator
 import com.example.android.calorietracker.domain.FoodRepository
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class FoodEntryDetailViewModel(private val foodRepository: FoodRepository, entryId: Long) : ViewModel() {
 

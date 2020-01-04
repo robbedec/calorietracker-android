@@ -66,8 +66,6 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
 
                 // Clear the RecyclerView when an error occurs
                 _searchResult.value = CategoryProperty(ArrayList())
-
-                Timber.i(t)
             }
         }
     }
@@ -87,7 +85,6 @@ class SearchViewModel(private val foodRepository: FoodRepository) : ViewModel() 
             }catch (t: Throwable) {
                 Timber.i(t)
             }
-
         }
     }
  }

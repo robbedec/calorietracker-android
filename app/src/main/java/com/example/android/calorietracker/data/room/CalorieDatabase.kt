@@ -22,10 +22,8 @@ abstract class CalorieDatabase : RoomDatabase() {
     abstract val eatingDayDao: EatingDayDao
     abstract val foodEntryDao: FoodEntryDao
 
-
     // Allows clients to access methods to create or get the database without instantiating the class
     companion object {
-
 
         // @Volatile: value will never be cached, in other words: always up to date
         // Used for multithreading

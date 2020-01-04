@@ -1,5 +1,6 @@
 package com.example.android.calorietracker.utils
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,6 +42,7 @@ fun TextView.setEntryName(item: FoodEntry?) {
  *
  * @param item contains the amount you want to bind.
  */
+@SuppressLint("SetTextI18n")
 @BindingAdapter("amountCalories")
 fun TextView.setAmountCalories(item: FoodEntry?) {
     item?.let {
@@ -48,6 +50,7 @@ fun TextView.setAmountCalories(item: FoodEntry?) {
     }
 }
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("amountCal")
 fun TextView.setAmountCalories(item: FoodProperty?) {
     item?.let {
@@ -55,6 +58,7 @@ fun TextView.setAmountCalories(item: FoodProperty?) {
     }
 }
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("entryInfo")
 fun TextView.setEntryInfo(entry: FoodEntry?) {
     entry?.let {
@@ -62,6 +66,7 @@ fun TextView.setEntryInfo(entry: FoodEntry?) {
     }
 }
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("nutrientInfo")
 fun TextView.setNutrientInfo(nutrient: ClarifiedNutrient) {
     nutrient.let {
@@ -116,7 +121,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         Timber.i("test")
         imgView.setImageResource(R.drawable.broken_image)
     } else {
-        imgUrl?.let {
+        imgUrl.let {
             val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
             Glide.with(imgView.context)
                 .load(imgUri)

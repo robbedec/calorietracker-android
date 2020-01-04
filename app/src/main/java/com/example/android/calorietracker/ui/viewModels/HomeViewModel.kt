@@ -77,7 +77,7 @@ class HomeViewModel(private val repository: FoodRepository) : ViewModel() {
         dialogList = arrayOf("Search online", "Manually")
 
         /**
-         * Check for updates in the liveData and adapt the value of the [MediatorLiveData], provide default values
+         * Check for updates in the liveData and adapt the value of the MediatorLiveData, provide default values
          * for calculations before the real data is loaded from the database
          *
          * Calculates the ratio between currentCalories and the goals
