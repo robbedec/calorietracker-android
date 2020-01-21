@@ -14,10 +14,24 @@ Android Studio
 Clone the repository
 
 ```
-git clone git@github.com:HoGentTIN/native-apps-groep-c-robbedec.git
+git clone git@github.com:robbedec/calorietracker-android.git
 ```
 
 Open the project in Android Studio and build
+
+### Unlock API searches
+
+Register a developer account (free) on the [Nutritionix website](https://developer.nutritionix.com/signup) and generate your api keys.
+
+Create **keys.xml** in **res/values/**. The contents of the file should look like this:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="x_app_id">yourAppId</string>
+    <string name="x_app_key">yourAppKey</string>
+</resources>
+```
 
 ## Running tests
 
