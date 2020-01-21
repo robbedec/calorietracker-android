@@ -1,4 +1,7 @@
 # Calorie tracker for Android
+
+The tracker resets everyday, history is saved on a Room database (onboard). A user can manually add or search the API for food entries. The details from an API entry are also saved and requestable in the app. 
+
 ## Getting started
 
 These instruction will allow you to run a copy of the project on your local machine for development and testing
@@ -59,6 +62,10 @@ dokka gradle task in Android Studio.
 This will generate the docs/ folder in the root of the project. This folder contains
 the dokka generated Markdown (in github-flavored-markdown).
 
+## Main features
+<img src="https://github.com/robbedec/calorietracker-android/blob/master/docs/images/overview.png" width="40%" /> <img src="https://github.com/robbedec/calorietracker-android/blob/master/docs/images/detail.png" width="40%" align="right" />
+
+<img src="https://github.com/robbedec/calorietracker-android/blob/master/docs/images/search.png" width="40%" /> <img src="https://github.com/robbedec/calorietracker-android/blob/master/docs/images/manual-add.png" width="40%" align="right" />
 
 ## Built with
 
